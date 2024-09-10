@@ -2,11 +2,13 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Catalog from './pages/Catalog';
-import Cart from './pages/Cart';
+import Orders from './pages/Orders';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import MainLayout from './components/MainLayout';
-import './App.css';
+import Login from './pages/Login';
+import Basket from './pages/Basket';
+import './sass/main.scss';
 
 function App() {
   return (
@@ -16,9 +18,11 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="catalog" element={<Catalog />} />
-          <Route path="cart" element={<Cart />} />
+          <Route path="orders" element={<Orders />} />
           <Route path="contact" element={<Contact />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="login" element={<Login />} />
+          <Route path="basket" element={<Basket />} />
         </Route>
       </Routes>
     </>

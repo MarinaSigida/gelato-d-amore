@@ -1,0 +1,72 @@
+@use '../utils/placeholders';
+@use '../utils/variables' as var;
+@use '../utils/functions' as fn;
+@use '../utils/mixins' as mx;
+
+.header {
+  text-align: center;
+  align-items: center;
+  //padding: 55px;
+  color: fn.get-color('dark');
+  @include mx.media-query('lg') {
+    grid-area: header;
+    padding: 24px 56px 10px 56px;
+  }
+}
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  @include mx.media-query('lg') {
+    justify-content: space-between;
+  }
+}
+
+.header-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  transition: color 0.3s ease;
+  &:hover,
+  &:focus {
+    color: fn.get-color('dark-red');
+  }
+}
+
+.header-navigation {
+  @include mx.media-query('lg') {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  a {
+    color: fn.get-color('dark');
+    transition: color 0.3s ease, background-color 0.3s ease;
+
+    &:hover,
+    &:focus {
+      color: fn.get-color('dark-red');
+    }
+
+    &.active {
+      color: fn.get-color('dark-red');
+    }
+  }
+}
+
+.basket-and-login {
+  flex-direction: row;
+  gap: 18px;
+  .icon {
+    width: 24px;
+    height: 24px;
+    stroke: fn.get-color('dark');
+    fill: fn.get-color('white');
+    transition: stroke 0.3s ease, fill 0.3s ease;
+    &:hover,
+    &:focus {
+      stroke: fn.get-color('dark-red');
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.banner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 32px;
+  padding: 20px;
+  height: 480px;
+  border-radius: 30px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.banner-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 40%;
+
+  h1 {
+    font-size: 20px;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/assets/images/banner-home.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}

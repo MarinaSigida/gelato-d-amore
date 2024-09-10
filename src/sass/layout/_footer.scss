@@ -1,0 +1,73 @@
+@use '../utils/placeholders';
+@use '../utils/variables' as var;
+@use '../utils/functions' as fn;
+@use '../utils/mixins' as mx;
+
+.footer {
+  //@error: fixed;
+  padding: 50px 32px;
+  // bottom: 0; /* Stick it to the bottom of the viewport */
+  // left: 0;
+  // width: 100%;
+  background-color: fn.get-color('very-dark-red');
+  color: fn.get-color('white');
+  @include mx.media-query('lg') {
+    grid-area: footer;
+  }
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.social-media {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  .icon {
+    width: 24px;
+    height: 24px;
+    stroke: fn.get-color('white');
+    fill: fn.get-color('white');
+    transition: stroke 0.3s ease, fill 0.3s ease;
+    &:hover,
+    &:focus {
+      stroke: fn.get-color('light-red');
+      fill: fn.get-color('light-red');
+    }
+  }
+}
+
+.footer-text {
+  font-size: 34px;
+  margin: 28px 0;
+}
+
+.footer-contact {
+  h3 {
+    margin-bottom: 14px;
+  }
+}
+
+.footer-line {
+  height: 1px;
+  background-color: rgba($color: fn.get-color('white'), $alpha: 0.1);
+  margin: 42px 0 24px;
+}
+
+.footer-navigation {
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  a {
+    color: fn.get-color('white');
+    transition: color 0.3s ease, background-color 0.3s ease;
+
+    &:hover,
+    &:focus {
+      color: fn.get-color('dark-red');
+    }
+  }
+}

@@ -1,5 +1,9 @@
 const Catalog = () => {
-  return <h1>Catalog</h1>;
+  return (
+    <div className="main">
+      <h1>Catalog</h1>
+    </div>
+  );
 };
 
 export default Catalog;

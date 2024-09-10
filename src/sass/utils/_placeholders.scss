@@ -1,0 +1,59 @@
+@use 'mixins' as mx;
+
+%main-title {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.66;
+  letter-spacing: 0.013em; // 0,5 / 24
+}
+
+%text-xl {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.66;
+  letter-spacing: 0.018em;
+}
+
+%header-h2 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.66;
+  letter-spacing: 0.02em;
+}
+
+%header-h3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.66;
+  letter-spacing: 0.02em;
+}
+
+%main-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.66;
+  letter-spacing: 0.03em;
+}
+
+%nav-text {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.66;
+  letter-spacing: 0.03em;
+}
+
+%details-bold {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.66;
+  letter-spacing: 0.04em;
+}
+
+%section-frame {
+  padding: 16px;
+  border-radius: 12px;
+
+  @include mx.media-query('lg') {
+    padding: 24px;
+  }
+}

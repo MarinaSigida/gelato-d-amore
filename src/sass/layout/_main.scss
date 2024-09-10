@@ -1,0 +1,15 @@
+@use '../utils/placeholders';
+@use '../utils/variables' as var;
+@use '../utils/functions' as fn;
+@use '../utils/mixins' as mx;
+
+.main {
+  background-color: fn.get-color('light');
+
+  @include mx.media-query('md') {
+  }
+
+  @include mx.media-query('lg') {
+    grid-area: main;
+  }
+}
