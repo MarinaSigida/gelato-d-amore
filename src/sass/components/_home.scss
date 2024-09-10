@@ -1,3 +1,9 @@
+@use '../utils/functions' as fn;
+@use '../utils/mixins' as mx;
+@use '../utils/variables' as var;
+
+// Banner
+
 .banner {
   position: relative;
   display: flex;
@@ -8,7 +14,7 @@
   height: 480px;
   border-radius: 30px;
   overflow: hidden;
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 }
 
 .banner-text {
@@ -36,4 +42,209 @@
   background-size: cover;
   background-position: center;
   z-index: 0;
+}
+
+//Features
+
+.features {
+  display: flex;
+  flex-direction: row;
+  gap: 70px;
+  justify-content: space-around;
+  background-color: fn.get-color('very-dark-red');
+  color: white;
+  padding: 50px;
+  margin-bottom: 116px;
+}
+
+.feature {
+  text-align: left;
+  h3 {
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+  p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 22px;
+  background-color: rgba($color: fn.get-color('white'), $alpha: 0.15);
+  border-radius: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 33px;
+  }
+}
+
+//ShortInfo
+
+.short-info {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 128px;
+
+  h1 {
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 28px;
+    span {
+      color: fn.get-color('dark-red');
+    }
+  }
+  .short-text {
+    font-size: 16px;
+    line-height: normal;
+    padding: 0 260px;
+    margin-bottom: 24px;
+  }
+  .images {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 18px;
+  }
+}
+
+.short-info-image-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 270px;
+  padding: 20px;
+  background-color: fn.get-color('white');
+  border: 2px solid fn.get-color('dark-red');
+  border-radius: 30px;
+  transition: background-color 0.3s ease, border 0.3s ease;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background-color: fn.get-color('dark-red');
+    border: 2px solid fn.get-color('white');
+  }
+  img {
+    border-radius: 30px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+//How Its made
+.how-its-made {
+  text-align: center;
+  margin-bottom: 128px;
+
+  h1 {
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 28px;
+    span {
+      color: fn.get-color('dark-red');
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+}
+
+.video-box {
+  border-radius: 30px;
+  background-color: fn.get-color('dark');
+  width: 45%;
+}
+
+.video-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: fn.get-color('dark-red');
+
+  padding: 20px;
+  border-radius: 30px;
+
+  img {
+    border-radius: 30px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+//Flavors
+
+.flavors {
+  text-align: center;
+  margin-bottom: 128px;
+
+  h1 {
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 28px;
+    span {
+      color: fn.get-color('dark-red');
+    }
+  }
+}
+
+.flavors-list {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  justify-content: center;
+}
+
+.flavor-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 270px;
+  padding: 32px 20px;
+  background-color: fn.get-color('white');
+  border-radius: 10px;
+  border: 1px solid rgba(fn.get-color('grey'), 0.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  h2 {
+    margin-bottom: 5px;
+    font-size: 24px;
+  }
+  .category {
+    margin-bottom: 18px;
+    p {
+      font-size: 14px;
+      color: fn.get-color('grey');
+    }
+  }
+}
+
+.price {
+  padding: 8px 40px;
+  background-color: rgba(fn.get-color('grey'), 0.05);
+  border: 1px solid rgba(fn.get-color('grey'), 0.05);
+  border-radius: 20px;
+  p {
+    color: fn.get-color('dark');
+    font-size: 16px;
+    font-weight: 500;
+  }
 }
