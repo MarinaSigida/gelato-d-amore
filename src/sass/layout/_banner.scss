@@ -1,0 +1,72 @@
+@use '../utils/functions' as fn;
+@use '../utils/mixins' as mx;
+@use '../utils/variables' as var;
+
+// Banner
+
+.banner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 32px;
+  padding: 20px;
+  height: 480px;
+  border-radius: 30px;
+  overflow: hidden;
+  margin-bottom: 60px;
+
+  &.left {
+    .banner-text {
+      position: absolute;
+      left: 100px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &.right {
+    .banner-text {
+      position: absolute;
+      right: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &.center {
+    .banner-text {
+      position: relative;
+    }
+  }
+}
+
+.banner-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 50%;
+
+  h1 {
+    font-weight: 600;
+    font-size: 36px;
+    span {
+      color: fn.get-color('dark-red');
+    }
+  }
+
+  button {
+    margin-top: 10px;
+  }
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}

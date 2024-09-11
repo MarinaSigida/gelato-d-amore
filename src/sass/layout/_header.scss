@@ -53,6 +53,55 @@
       color: fn.get-color('dark-red');
     }
   }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+
+    .dropdown-toggle {
+      cursor: pointer; // Make it clear this is clickable or non-clickable as needed
+      color: fn.get-color('dark');
+      padding: 12px 16px;
+
+      &:hover,
+      &:focus {
+        color: fn.get-color('dark-red');
+      }
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: fn.get-color('light');
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+
+      a {
+        display: block;
+        padding: 12px 16px;
+        color: fn.get-color('dark');
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          background-color: fn.get-color('light-grey');
+          color: fn.get-color('dark');
+        }
+
+        &.active {
+          background-color: fn.get-color('dark-red');
+          color: #fff;
+        }
+      }
+    }
+
+    &:hover .dropdown-content {
+      display: block;
+    }
+  }
 }
 
 .basket-and-login {

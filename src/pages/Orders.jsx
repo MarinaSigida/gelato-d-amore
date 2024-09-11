@@ -1,7 +1,17 @@
+import Banner from '../components/Shared/Banner';
+//import bannerOrders from '/assets/images/banner-orders.png';
+import bannerOrders from '/assets/images/banner-orders.png';
+
 const Orders = () => {
   return (
     <div className="main">
-      <h1>Mes commandes</h1>
+      <Banner
+        image={bannerOrders}
+        title="Voici vos "
+        titleSpan="commandes"
+        textColor="white"
+        textPosition="left"
+      />
     </div>
   );
 };

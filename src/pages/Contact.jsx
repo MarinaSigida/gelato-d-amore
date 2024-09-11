@@ -1,7 +1,10 @@
+import Banner from '../components/Shared/Banner';
+import bannerContact from '/assets/images/banner-contact.png';
+
 const Contact = () => {
   return (
     <div className="main">
-      <h1>Contact</h1>
+      <Banner image={bannerContact} />
     </div>
   );
 };

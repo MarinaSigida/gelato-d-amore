@@ -1,8 +1,15 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
 import sprite from '../assets/images/sprite.svg';
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleDashboardClick = (e) => {
+    e.preventDefault();
+    navigate('/dashboard/products');
+  };
+
   return (
     <div>
       <nav className="header">
@@ -25,7 +32,23 @@ const Header = () => {
             <NavLink to="/catalog">Catalogue</NavLink>
             <NavLink to="/orders">Mes commandes</NavLink>
             <NavLink to="/contact">Contact</NavLink>
-            <NavLink to="/dashboard">Tableau de bord</NavLink>
+            <div className="dropdown">
+              {/* <NavLink>Tableau de bord</NavLink> */}
+              <NavLink
+                to="/dashboard"
+                className={({ isActive, isPartiallyActive }) =>
+                  isActive || isPartiallyActive ? 'active' : ''
+                }
+                onClick={handleDashboardClick}
+              >
+                Tableau de bord
+              </NavLink>
+              <div className="dropdown-content">
+                <NavLink to="/dashboard/products">Stocks</NavLink>
+                <NavLink to="/dashboard/users">Utilisateurs</NavLink>
+                <NavLink to="/dashboard/orders">Commandes</NavLink>
+              </div>
+            </div>
           </div>
           <div className="basket-and-login">
             <NavLink to="/basket">

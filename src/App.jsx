@@ -8,6 +8,9 @@ import Dashboard from './pages/Dashboard';
 import MainLayout from './components/MainLayout';
 import Login from './pages/Login';
 import Basket from './pages/Basket';
+import DashboardUsers from './pages/DashboardUsers';
+import DashboardProducts from './pages/DashboardProducts';
+import DashboardOrders from './pages/DashboardOrders';
 import './sass/main.scss';
 
 function App() {
@@ -20,7 +23,11 @@ function App() {
           <Route path="catalog" element={<Catalog />} />
           <Route path="orders" element={<Orders />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />}>
+            <Route path="products" element={<DashboardProducts />} />
+            <Route path="users" element={<DashboardUsers />} />
+            <Route path="orders" element={<DashboardOrders />} />
+          </Route>
           <Route path="login" element={<Login />} />
           <Route path="basket" element={<Basket />} />
         </Route>

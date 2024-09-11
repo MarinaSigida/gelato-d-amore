@@ -1,7 +1,10 @@
+import Banner from '../components/Shared/Banner';
+import bannerBasket from '/assets/images/banner-basket.png';
+
 const Basket = () => {
   return (
     <div className="main">
-      <h1>Panier</h1>
+      <Banner image={bannerBasket} />
     </div>
   );
 };
