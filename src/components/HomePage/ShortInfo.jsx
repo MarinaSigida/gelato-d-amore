@@ -17,7 +17,7 @@ const ShortInfo = () => {
         France pour réaliser leur rêve. Tomber amoureux de la Côte d'Azur depuis
         2 ans, ils souhaitaient s'y installer pour apporter leur savoir faire. 
       </div>
-      <div className="images">
+      <div className="short-info-images">
         <div className="short-info-image-box">
           <img src={shortInfo1} alt="Ice Cream Shop" />
         </div>

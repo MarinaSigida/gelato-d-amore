@@ -25,7 +25,6 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
-
             <div className="footer-text">
               <p>Bisous, I love you!</p>
             </div>

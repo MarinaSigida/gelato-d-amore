@@ -12,6 +12,7 @@ const Flavors = () => {
         <Flavor />
         <Flavor />
       </div>
+      <div className="slider"></div>
     </section>
   );
 };

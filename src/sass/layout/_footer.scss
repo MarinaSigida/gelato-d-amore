@@ -4,21 +4,23 @@
 @use '../utils/mixins' as mx;
 
 .footer {
-  //@error: fixed;
-  padding: 50px 32px;
-  // bottom: 0; /* Stick it to the bottom of the viewport */
-  // left: 0;
-  // width: 100%;
+  padding: 40px 20px;
   background-color: fn.get-color('very-dark-red');
   color: fn.get-color('white');
   @include mx.media-query('lg') {
     grid-area: footer;
+    padding: 50px 32px;
   }
 }
 
 .footer-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+
+  @include mx.media-query('lg') {
+    justify-content: space-between;
+    flex-direction: row;
+  }
 }
 
 .social-media {
@@ -40,13 +42,24 @@
 }
 
 .footer-text {
-  font-size: 34px;
-  margin: 28px 0;
+  font-size: 28px;
+  margin: 10px 0;
+  @include mx.media-query('lg') {
+    font-size: 34px;
+    margin: 28px 0;
+  }
 }
 
 .footer-contact {
   h3 {
+    margin-top: 10px;
+    font-size: 20px;
     margin-bottom: 14px;
+  }
+  @include mx.media-query('lg') {
+    h3 {
+      margin-top: 0;
+    }
   }
 }
 
@@ -59,8 +72,8 @@
 .footer-navigation {
   font-size: 16px;
   display: flex;
-  flex-direction: row;
-  gap: 24px;
+  flex-direction: column;
+  gap: 10px;
   a {
     color: fn.get-color('white');
     transition: color 0.3s ease, background-color 0.3s ease;
@@ -69,5 +82,10 @@
     &:focus {
       color: fn.get-color('dark-red');
     }
+  }
+
+  @include mx.media-query('lg') {
+    flex-direction: row;
+    gap: 24px;
   }
 }
