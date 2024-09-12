@@ -1,0 +1,97 @@
+@use '../utils/functions' as fn;
+@use '../utils/mixins' as mx;
+
+.modal-burger-menu-container {
+  background: fn.get-color('light');
+  width: 80%;
+  height: 100%;
+  max-width: 400px;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  right: -100%; /* Hidden initially */
+
+  &.open {
+    right: 0; /* Slide in */
+  }
+
+  &.closed {
+    right: -100%; /* Slide out */
+  }
+}
+
+.burger-menu-btn {
+  display: none;
+  cursor: pointer;
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    transition: scale 0.3s ease;
+    &:hover,
+    &:focus {
+      scale: 1.1;
+    }
+  }
+
+  @include mx.media-query('md', max) {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.icon-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 24px;
+  &:hover,
+  &:focus {
+    scale: 1.1;
+  }
+}
+
+.burger-menu-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-left: 50px;
+  margin-top: 130px;
+
+  a {
+    color: fn.get-color('dark');
+    transition: color 0.3s ease, background-color 0.3s ease;
+
+    &:hover,
+    &:focus {
+      color: fn.get-color('dark-red');
+    }
+
+    &.active {
+      color: fn.get-color('dark-red');
+    }
+  }
+}
+
+.burger-menu-basket-and-login {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  margin-left: 50px;
+  gap: 18px;
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    stroke: fn.get-color('dark');
+    fill: fn.get-color('white');
+    transition: stroke 0.3s ease, fill 0.3s ease;
+    &:hover,
+    &:focus {
+      stroke: fn.get-color('dark-red');
+    }
+  }
+}

@@ -1,12 +1,20 @@
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import logo from '../assets/images/logo.png';
+import BurgerMenuBtn from './BurgerMenu/BurgerMenuBtn';
+import ModalBurgerMenu from './BurgerMenu/ModalBurgerMenu';
 
 const Header = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleDashboardClick = (e) => {
     e.preventDefault();
     navigate('/dashboard/products');
+  };
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
@@ -64,8 +72,12 @@ const Header = () => {
               </svg>
             </NavLink>
           </div>
+          <BurgerMenuBtn onClick={toggleModal} />
         </div>
       </nav>
+      {isModalOpen && (
+        <ModalBurgerMenu isModalOpen={isModalOpen} closeModal={toggleModal} />
+      )}
     </div>
   );
 };

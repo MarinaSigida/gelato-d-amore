@@ -160,7 +160,7 @@
   width: 270px;
   padding: 20px;
   background-color: fn.get-color('white');
-  border: 2px solid fn.get-color('dark-red');
+  border: 1px solid fn.get-color('dark-red');
   border-radius: 30px;
   transition: background-color 0.3s ease, border 0.3s ease;
   cursor: pointer;
