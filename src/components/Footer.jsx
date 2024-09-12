@@ -24,6 +24,11 @@ const Footer = () => {
                   <use xlinkHref={`${sprite}#facebook`}></use>
                 </svg>
               </a>
+              <svg className="icon" alt="basket">
+                <use
+                  xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#basket`}
+                ></use>
+              </svg>
             </div>
             <div className="footer-text">
               <p>Bisous, I love you!</p>
