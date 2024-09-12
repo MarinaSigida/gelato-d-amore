@@ -1,0 +1,53 @@
+@use '../utils/functions' as fn;
+
+// .swiper-pagination {
+//   bottom: 10px !important; /* Ensure position is applied */
+//   left: 50% !important; /* Ensure horizontal centering */
+//   transform: translateX(-50%) !important; /* Ensure centering */
+//   background-color: yellow; /* Debugging background */
+// }
+
+// .swiper-pagination-bullet {
+//   background-color: #000 !important; /* Ensure bullet color */
+//   width: 10px !important; /* Ensure size */
+//   height: 10px !important; /* Ensure size */
+//   border-radius: 50% !important; /* Ensure round shape */
+//   opacity: 0.7 !important; /* Ensure default opacity */
+// }
+
+// .swiper-pagination-bullet-active {
+//   background-color: #f00 !important; /* Ensure active color */
+//   opacity: 1 !important; /* Ensure active opacity */
+// }
+
+// .swiper-button-next,
+// .swiper-button-prev {
+//   color: #000 !important; /* Ensure arrow color */
+//   width: 44px !important; /* Ensure button size */
+//   height: 44px !important; /* Ensure button size */
+//   background-color: rgba(
+//     255,
+//     255,
+//     255,
+//     0.7
+//   ) !important; /* Ensure button background */
+//   border-radius: 50% !important; /* Ensure round shape */
+//   display: flex !important; /* Ensure flex layout */
+//   justify-content: center !important; /* Center content */
+//   align-items: center !important; /* Center content */
+//   z-index: 10 !important; /* Ensure button visibility */
+// }
+
+// .swiper-button-next {
+//   right: 10px !important; /* Ensure right position */
+// }
+
+// .swiper-button-prev {
+//   left: 10px !important; /* Ensure left position */
+// }
+
+// .swiper-button-next::after,
+// .swiper-button-prev::after {
+//   font-family: 'swiper-icons' !important; /* Ensure correct font */
+//   font-size: 20px !important; /* Ensure icon size */
+// }

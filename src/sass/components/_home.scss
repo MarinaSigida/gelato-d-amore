@@ -235,6 +235,7 @@
 
 .flavors {
   text-align: center;
+
   margin-bottom: 60px;
   padding: 0 20px;
 
@@ -247,8 +248,10 @@
     }
   }
   @include mx.media-query('lg') {
-    padding: 0 32px;
     margin-bottom: 128px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     h1 {
       font-size: 24px;
       margin-bottom: 28px;
@@ -259,8 +262,11 @@
 .flavors-list {
   display: flex;
   flex-direction: row;
-  gap: 18px;
   justify-content: center;
+  gap: 18px;
+  @include mx.media-query('lg') {
+    max-width: 1200px;
+  }
 }
 
 .flavor-card {
@@ -269,12 +275,20 @@
   justify-content: center;
   align-items: center;
   width: 270px;
-  padding: 32px 20px;
+  padding: 32px 20px 40px;
   background-color: fn.get-color('white');
   border-radius: 10px;
   border: 1px solid rgba(fn.get-color('grey'), 0.05);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  cursor: pointer;
+  transition: scale 0.3s ease;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  &:hover,
+  &:focus {
+    scale: 1.05;
+  }
 
   img {
     width: 100%;
