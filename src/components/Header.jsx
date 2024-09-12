@@ -33,7 +33,6 @@ const Header = () => {
             <NavLink to="/orders">Mes commandes</NavLink>
             <NavLink to="/contact">Contact</NavLink>
             <div className="dropdown">
-              {/* <NavLink>Tableau de bord</NavLink> */}
               <NavLink
                 to="/dashboard"
                 className={({ isActive, isPartiallyActive }) =>
