@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import sprite from '../assets/images/sprite.svg';
 
 const Footer = () => {
   return (
@@ -13,7 +12,11 @@ const Footer = () => {
                 target="_blank"
               >
                 <svg className="icon" alt="instagram">
-                  <use xlinkHref={`${sprite}#instagram`}></use>
+                  <use
+                    xlinkHref={`${
+                      import.meta.env.BASE_URL
+                    }sprite.svg#instagram`}
+                  ></use>
                 </svg>
               </a>
               <a
@@ -21,14 +24,11 @@ const Footer = () => {
                 target="_blank"
               >
                 <svg className="icon" alt="facebook">
-                  <use xlinkHref={`${sprite}#facebook`}></use>
+                  <use
+                    xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#facebook`}
+                  ></use>
                 </svg>
               </a>
-              <svg className="icon" alt="basket">
-                <use
-                  xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#basket`}
-                ></use>
-              </svg>
             </div>
             <div className="footer-text">
               <p>Bisous, I love you!</p>

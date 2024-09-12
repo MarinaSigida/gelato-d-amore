@@ -1,6 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
-import sprite from '../assets/images/sprite.svg';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -52,12 +51,16 @@ const Header = () => {
           <div className="basket-and-login">
             <NavLink to="/basket">
               <svg className="icon" alt="basket">
-                <use xlinkHref={`${sprite}#basket`}></use>
+                <use
+                  xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#basket`}
+                ></use>
               </svg>
             </NavLink>
             <NavLink to="/login">
               <svg className="icon" alt="login">
-                <use xlinkHref={`${sprite}#user`}></use>
+                <use
+                  xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#user`}
+                ></use>
               </svg>
             </NavLink>
           </div>
