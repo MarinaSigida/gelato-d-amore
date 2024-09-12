@@ -235,7 +235,6 @@
 
 .flavors {
   text-align: center;
-
   margin-bottom: 60px;
   padding: 0 20px;
 
@@ -379,6 +378,13 @@
   margin-bottom: 128px;
   padding: 0 20px;
 
+  @include mx.media-query('lg') {
+    margin-bottom: 128px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   h1 {
     font-weight: 500;
     font-size: 24px;
@@ -397,6 +403,9 @@
   flex-direction: row;
   gap: 28px;
   justify-content: center;
+  @include mx.media-query('lg') {
+    max-width: 1190px;
+  }
 }
 
 .testimonial-card {
@@ -404,12 +413,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 270px;
   padding: 32px 20px;
   background-color: fn.get-color('white');
   border-radius: 10px;
   border: 1px solid rgba(fn.get-color('grey'), 0.05);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  @include mx.media-query('lg') {
+    min-width: 360px;
+  }
 
   .testimonial-image {
     width: 80px;
@@ -425,7 +440,10 @@
 
   h2 {
     margin-bottom: 5px;
-    font-size: 24px;
+    font-size: 20px;
+    @include mx.media-query('lg') {
+      font-size: 24px;
+    }
   }
   .category {
     margin-bottom: 18px;

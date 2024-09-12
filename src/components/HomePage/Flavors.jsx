@@ -18,6 +18,8 @@ const Flavors = () => {
             '--swiper-pagination-color': '#9F233E',
             '--swiper-pagination-bottom': '0',
             '--swiper-theme-color': '#9F233E',
+            '--swiper-navigation-size': '20px',
+            '--swiper-navigation-top-offset': '30%',
           }}
         >
           <swiper-slide>
