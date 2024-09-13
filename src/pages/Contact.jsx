@@ -8,7 +8,7 @@ const Contact = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 375) {
+      if (window.innerWidth <= 430) {
         setBannerImage(bannerContactMobile);
       } else {
         setBannerImage(bannerContact);

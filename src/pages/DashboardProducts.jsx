@@ -8,7 +8,7 @@ const DashboardProducts = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 375) {
+      if (window.innerWidth <= 430) {
         setBannerImage(bannerDashboardProductsMobile);
       } else {
         setBannerImage(bannerDashboardProducts);

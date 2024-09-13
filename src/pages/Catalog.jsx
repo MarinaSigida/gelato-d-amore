@@ -8,7 +8,7 @@ const Catalog = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 375) {
+      if (window.innerWidth <= 430) {
         setBannerImage(bannerCatalogMobile);
       } else {
         setBannerImage(bannerCatalog);

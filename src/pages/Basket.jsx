@@ -8,7 +8,7 @@ const Basket = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 375) {
+      if (window.innerWidth <= 430) {
         setBannerImage(bannerBasketMobile);
       } else {
         setBannerImage(bannerBasket);

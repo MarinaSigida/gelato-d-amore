@@ -10,7 +10,7 @@ const DashboardUsers = () => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      if (width <= 375) {
+      if (width <= 430) {
         setBannerImage(bannerDashboardUsersMobile);
       } else if (width <= 768) {
         setBannerImage(bannerDashboardUsersTablet);
