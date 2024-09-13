@@ -3,8 +3,9 @@ const BannerHome = () => {
     <section className="banner-home">
       <div className="banner-home-text">
         <h1>
-          On aime vivre! On a la passion! À l'amour! Et ça se voit dans tout ce
-          qu'on fait!
+          On aime vivre! On a la passion! À l'amour!
+          <br />
+          Et ça se voit dans tout ce qu'on fait!
         </h1>
         <button>
           <a href="catalog">Acheter maintenant</a>

@@ -1,6 +1,24 @@
+import { useState, useEffect } from 'react';
 import Flavor from './Flavor';
 
 const Flavors = () => {
+  const [swiperThemeColor, setSwiperThemeColor] = useState(
+    'rgba(255, 255, 255, 0)'
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setSwiperThemeColor('rgba(255, 255, 255, 0)');
+      } else {
+        setSwiperThemeColor('#9F233E');
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section className="flavors">
       <h1>
@@ -17,7 +35,7 @@ const Flavors = () => {
             padding: '0 30px',
             '--swiper-pagination-color': '#9F233E',
             '--swiper-pagination-bottom': '0',
-            '--swiper-theme-color': '#9F233E',
+            '--swiper-theme-color': swiperThemeColor,
             '--swiper-navigation-size': '20px',
             '--swiper-navigation-top-offset': '30%',
           }}

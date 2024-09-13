@@ -1,6 +1,23 @@
+import { useState, useEffect } from 'react';
 import Review from './Review';
 
 const Reviews = () => {
+  const [swiperThemeColor, setSwiperThemeColor] = useState(
+    'rgba(255, 255, 255, 0)'
+  );
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setSwiperThemeColor('rgba(255, 255, 255, 0)');
+      } else {
+        setSwiperThemeColor('#9F233E');
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section className="testimonials">
       <h1>
@@ -17,7 +34,7 @@ const Reviews = () => {
             padding: '0 30px',
             '--swiper-pagination-color': '#9F233E',
             '--swiper-pagination-bottom': '0',
-            '--swiper-theme-color': '#9F233E',
+            '--swiper-theme-color': swiperThemeColor,
             '--swiper-navigation-size': '20px',
             '--swiper-navigation-top-offset': '30%',
           }}
