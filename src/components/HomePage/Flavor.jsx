@@ -12,6 +12,7 @@ const Flavor = () => {
       <div className="price">
         <p>5 €</p>
       </div>
+      <button className="buy-btn">Ajouter au panier</button>
     </div>
   );
 };
