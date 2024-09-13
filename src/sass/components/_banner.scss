@@ -9,9 +9,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 32px;
+  margin: 0 20px;
   padding: 20px;
-  height: 480px;
+  height: 620px;
   border-radius: 30px;
   overflow: hidden;
   margin-bottom: 60px;
@@ -38,6 +38,11 @@
     .banner-text {
       position: relative;
     }
+  }
+  @include mx.media-query('lg') {
+    height: 480px;
+    margin: 0 32px;
+    margin-bottom: 60px;
   }
 }
 

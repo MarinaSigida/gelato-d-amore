@@ -7,8 +7,7 @@ const Orders = () => {
     <div className="main">
       <Banner
         image={bannerOrders}
-        title="Voici vos "
-        titleSpan="commandes"
+        title="Voici vos commandes"
         textColor="white"
         textPosition="left"
       />
