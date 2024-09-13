@@ -3,16 +3,6 @@
 @use '../utils/functions' as fn;
 @use '../utils/mixins' as mx;
 
-// :root {
-//   --swiper-theme-color: fn.get-color('dark-red');
-// }
-
-// @media (max-width: 768px) {
-//   :root {
-//     --swiper-theme-color: rgba(255, 255, 255, 0);
-//   }
-// }
-
 body {
   @extend %main-text;
   font-family: var.$main-font, sans-serif;

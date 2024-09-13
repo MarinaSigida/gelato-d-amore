@@ -1,24 +1,23 @@
 import { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
-import loginImage from '/assets/images/login-background.png';
-import loginImageMobile from '/assets/images/login-background-mobile.png';
+import signupImage from '/assets/images/signup-background.jpg';
+import signupImageMobile from '/assets/images/signup-background-mobile.png';
 
-const Login = () => {
-  const [backgroundImage, setBackgroundImage] = useState(loginImageMobile);
+const Signup = () => {
+  const [backgroundImage, setBackgroundImage] = useState(signupImageMobile);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 430) {
-        setBackgroundImage(loginImageMobile);
+        setBackgroundImage(signupImageMobile);
       } else {
-        setBackgroundImage(loginImage);
+        setBackgroundImage(signupImage);
       }
     };
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
   return (
     <div className="main">
       <div className="login-container">
@@ -39,6 +38,22 @@ const Login = () => {
                 <div className="login-inputs">
                   <div className="login-input">
                     <Field
+                      type="text"
+                      name="name"
+                      placeholder="Votre nom"
+                      required
+                    />
+                  </div>
+                  <div className="login-input">
+                    <Field
+                      type="text"
+                      name="name"
+                      placeholder="Votre prénom"
+                      required
+                    />
+                  </div>
+                  <div className="login-input">
+                    <Field
                       type="email"
                       name="email"
                       placeholder="Votre adresse email"
@@ -53,13 +68,21 @@ const Login = () => {
                       required
                     />
                   </div>
+                  <div className="login-input">
+                    <Field
+                      type="password"
+                      name="confirmPassword"
+                      placeholder="Confirmez votre mot de passe"
+                      required
+                    />
+                  </div>
                 </div>
-                <button type="submit">Connexion</button>
+                <button type="submit">Créer un compte</button>
               </Form>
             )}
           </Formik>
           <div className="signup-link">
-            <a href="signup">Créer un compte</a>
+            <a href="login">J'ai déja un compte</a>
           </div>
         </div>
       </div>
@@ -67,4 +90,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

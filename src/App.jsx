@@ -11,6 +11,7 @@ import Basket from './pages/Basket';
 import DashboardUsers from './pages/DashboardUsers';
 import DashboardProducts from './pages/DashboardProducts';
 import DashboardOrders from './pages/DashboardOrders';
+import Signup from './pages/Signup';
 import './sass/main.scss';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="basket" element={<Basket />} />
+          <Route path="signup" element={<Signup />} />
         </Route>
       </Routes>
     </>
