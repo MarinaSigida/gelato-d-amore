@@ -1,0 +1,193 @@
+@use '../utils/functions' as fn;
+@use '../utils/mixins' as mx;
+
+.basket {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 50px;
+
+  .basket-title {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 50px;
+    span {
+      color: fn.get-color('dark-red');
+    }
+  }
+  @include mx.media-query('lg') {
+    padding: 0 32px;
+    .basket-title {
+      font-size: 24px;
+    }
+  }
+}
+
+.basket-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  @include mx.media-query('lg') {
+    flex-direction: row;
+  }
+}
+
+.basket-items-total {
+  min-width: 45%;
+}
+
+.basket-total {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+  background-color: fn.get-color('white');
+  border-radius: 10px;
+  border: 1px solid rgba(fn.get-color('grey'), 0.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.basket-total-price .price {
+  margin-right: 0;
+}
+
+.basket-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  @include mx.media-query('lg') {
+    flex-direction: row;
+  }
+}
+
+.basket-item-card {
+  margin-bottom: 0;
+}
+.basket-form {
+  min-width: 45%;
+}
+
+// Order Form
+
+.order-form-wrapper {
+  padding: 40px 30px;
+  background-color: fn.get-color('white');
+  border: 1px solid rgba(fn.get-color('grey'), 0.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.order-form {
+  h3 {
+    font-size: 20px;
+    margin-bottom: 30px;
+    @include mx.media-query('lg') {
+      font-size: 24px;
+    }
+  }
+}
+
+.order-inputs {
+  margin-bottom: 40px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+
+  @include mx.media-query('lg') {
+    text-align: left;
+  }
+}
+
+.order-inputs label {
+  margin-bottom: 10px;
+}
+
+.order-input {
+  text-align: left;
+  margin-bottom: 20px;
+  color: fn.get-color('dark');
+  background-color: fn.get-color('light');
+  border-radius: 30px;
+  border: 1px solid rgba(fn.get-color('grey'), 0.5);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+  input,
+  textarea {
+    padding: 10px 16px;
+    width: 100%;
+    font-size: 14px;
+    @include mx.media-query('lg') {
+      padding: 16px 24px;
+      font-size: 18px;
+    }
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: fn.get-color('grey');
+  }
+
+  &:hover,
+  &:focus {
+    border: 1px solid rgba(fn.get-color('dark-red'), 0.5);
+    box-shadow: 0px 2px 5px rgba(fn.get-color('dark-red'), 0.4);
+  }
+}
+.order-input-name {
+  display: flex;
+  flex-direction: column;
+
+  .order-input {
+    min-width: 48%;
+  }
+
+  @include mx.media-query('lg') {
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+  }
+}
+
+.order-input textarea {
+  width: 100%;
+  border-radius: 30px;
+  resize: vertical;
+}
+
+.order-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type='checkbox'] {
+  margin-right: 10px;
+  width: 20px;
+  background-color: red;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(fn.get-color('grey'), 0.5);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  background-color: fn.get-color('light');
+  color: #000;
+  cursor: pointer;
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none; /* Remove default arrow in Safari */
+  -moz-appearance: none; /* Remove default arrow in Firefox */
+
+  option {
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
+  }
+}
