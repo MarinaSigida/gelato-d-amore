@@ -7,10 +7,22 @@ const Flavor = () => {
   return (
     <div className="flavor-card">
       <img src={caramel} alt="Caramel" />
-      <h2>CARAMEL</h2>
-      <p className="category">Crème</p>
-      <div className="price">
-        <p>5 €</p>
+      <h3>CARAMEL</h3>
+      <p className="flavor-category">Crème</p>
+      <div className="flavor-size">
+        <p>Poids : 450 g</p>
+      </div>
+      <div className="price-and-quantity">
+        <div className="price">
+          <p>10 €</p>
+        </div>
+        <div className="quantity">
+          <p>1</p>
+        </div>
+        <div className="quantity-btn-container">
+          <button className="quantity-btn">+</button>
+          <button className="quantity-btn">-</button>
+        </div>
       </div>
       <button className="buy-btn">Ajouter au panier</button>
     </div>

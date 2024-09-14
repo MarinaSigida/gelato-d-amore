@@ -279,57 +279,6 @@
   }
 }
 
-.flavor-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 270px;
-  padding: 32px 20px 40px;
-  background-color: fn.get-color('white');
-  border-radius: 10px;
-  border: 1px solid rgba(fn.get-color('grey'), 0.05);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  cursor: pointer;
-  transition: scale 0.3s ease;
-  margin-top: 10px;
-  margin-bottom: 40px;
-  &:hover,
-  &:focus {
-    scale: 1.05;
-  }
-
-  img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
-  }
-  h2 {
-    margin-bottom: 5px;
-    font-size: 24px;
-  }
-  .category {
-    margin-bottom: 18px;
-    p {
-      font-size: 14px;
-      color: fn.get-color('grey');
-    }
-  }
-}
-
-.price {
-  padding: 8px 40px;
-  background-color: rgba(fn.get-color('grey'), 0.05);
-  border: 1px solid rgba(fn.get-color('grey'), 0.05);
-  border-radius: 20px;
-  p {
-    color: fn.get-color('dark');
-    font-size: 16px;
-    font-weight: 500;
-  }
-}
-
 //Best Sellers
 
 .bestSellers {
@@ -456,7 +405,7 @@
       font-size: 24px;
     }
   }
-  .category {
+  .flavor-category {
     margin-bottom: 18px;
     p {
       font-size: 14px;
