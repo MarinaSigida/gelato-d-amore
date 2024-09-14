@@ -22,6 +22,33 @@ const Contact = () => {
   return (
     <div className="main">
       <Banner image={bannerImage} />
+      <section className="contacts">
+        <div className="contacts-info">
+          <h2>
+            Le moment quand vous allez venir nous connaître, <br /> c’est la que{' '}
+            <span>notre histoire d’amour</span> commence! 
+          </h2>
+          <div className="contacts-info-container">
+            <div className="contacts-info-box">
+              <p>
+                Ouvert tous les jours <br />
+                De 10h à 19h
+              </p>
+            </div>
+            <div className="contacts-info-box">
+              <address>
+                125 Rue de France, Nice
+                <br />
+                <a href="mailto:gelatodanice@gmail.com">
+                  gelatodanice@gmail.com
+                </a>
+                <br />
+                <a href="tel:+33763458358">07 63 45 83 58</a>
+              </address>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
