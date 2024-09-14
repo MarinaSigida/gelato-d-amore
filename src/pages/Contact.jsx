@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Banner from '../components/Shared/Banner';
+import Map from '../components/ContactPage/Map';
 import bannerContact from '/assets/images/banner-contact.png';
 import bannerContactMobile from '/assets/images/banner-contact-mobile.png';
 
@@ -48,6 +49,10 @@ const Contact = () => {
             </div>
           </div>
         </div>
+        <h2>
+          COMMENT NOUS <span>TROUVER</span> ?
+        </h2>
+        <Map />
       </section>
     </div>
   );

@@ -8,7 +8,7 @@
   h2 {
     font-weight: 500;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     span {
       color: fn.get-color('dark-red');
     }
@@ -23,4 +23,8 @@
 }
 address a {
   color: fn.get-color('dark-red');
+}
+
+.contacts-info {
+  margin-bottom: 30px;
 }

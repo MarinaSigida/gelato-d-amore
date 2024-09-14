@@ -37,10 +37,12 @@ const Footer = () => {
 
           <div className="footer-contact">
             <h3>Contactez-nous</h3>
-            <p>125 Rue de France, Nice</p>
-            <p>Ouvert tous les jours</p>
-            <p>De 10h à 19h</p>
-            <p>07 63 45 83 58</p>
+            <adress>
+              <p>125 Rue de France, Nice</p>
+              <p>Ouvert tous les jours</p>
+              <p>De 10h à 19h</p>
+              <a href="tel:+33763458358">07 63 45 83 58</a>
+            </adress>
           </div>
         </div>
 
