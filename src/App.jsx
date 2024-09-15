@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Catalog from './pages/Catalog';
 import Orders from './pages/Orders';
+import OrderDetail from './pages/OrderDetail';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import MainLayout from './components/MainLayout';
@@ -23,6 +24,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="catalog" element={<Catalog />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="orders/:id" element={<OrderDetail />} />
           <Route path="contact" element={<Contact />} />
           <Route path="dashboard" element={<Dashboard />}>
             <Route path="products" element={<DashboardProducts />} />

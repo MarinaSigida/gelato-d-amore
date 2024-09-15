@@ -43,17 +43,6 @@
   }
 }
 
-.icon-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 24px;
-  &:hover,
-  &:focus {
-    scale: 1.1;
-  }
-}
-
 .burger-menu-navigation {
   display: flex;
   flex-direction: column;

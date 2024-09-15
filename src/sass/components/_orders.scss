@@ -1,0 +1,60 @@
+@use '../utils/functions' as fn;
+@use '../utils/mixins' as mx;
+
+.orders {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  h3 {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  @include mx.media-query('lg') {
+    padding: 0 32px;
+    h3 {
+      font-size: 24px;
+    }
+  }
+}
+
+.order-container {
+  position: relative;
+  padding: 30px;
+  text-align: left;
+  background-color: fn.get-color('white');
+  border-radius: 10px;
+  border: 1px solid rgba(fn.get-color('grey'), 0.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: scale 0.3s ease;
+  @include mx.media-query('lg') {
+    padding: 30px 100px;
+  }
+  &:hover,
+  &:focus {
+    scale: 1.05;
+  }
+}
+.order-number {
+  margin-bottom: 20px;
+}
+
+.order-main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  @include mx.media-query('lg') {
+    flex-direction: row;
+    gap: 160px;
+  }
+}
+
+.order-total {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
