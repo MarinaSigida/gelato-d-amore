@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Banner from '../components/Shared/Banner';
 import BasketItem from '../components/BasketPage/BasketItem';
-import OrderForm from '../components/BasketPage/OrderForm';
+import BasketForm from '../components/BasketPage/BasketForm';
 import bannerBasket from '/assets/images/banner-basket.png';
 import bannerBasketMobile from '/assets/images/banner-basket-mobile.png';
 
@@ -51,7 +51,7 @@ const Basket = () => {
             </div>
           </div>
           <div className="basket-form">
-            <OrderForm />
+            <BasketForm />
           </div>
         </div>
       </section>

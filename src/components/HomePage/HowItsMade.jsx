@@ -1,5 +1,3 @@
-import weLoveYou from '../../assets/images/we-love-you.png';
-
 const HowItsMade = () => {
   return (
     <section className="how-its-made">
@@ -18,9 +16,6 @@ const HowItsMade = () => {
             allowFullScreen
           ></iframe>
         </div>
-        {/* <div className="video-image">
-          <img src={weLoveYou} alt="We love you" />
-        </div> */}
       </div>
     </section>
   );

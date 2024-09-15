@@ -124,7 +124,7 @@
     font-size: 14px;
     @include mx.media-query('lg') {
       padding: 16px 24px;
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 
@@ -157,6 +157,7 @@
 .order-input textarea {
   width: 100%;
   border-radius: 30px;
+  min-height: 160px;
   resize: vertical;
 }
 
@@ -173,13 +174,13 @@ input[type='checkbox'] {
 
 select {
   width: 100%;
+  font-size: 14px;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid rgba(fn.get-color('grey'), 0.5);
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  font-size: 16px;
   background-color: fn.get-color('light');
-  color: #000;
+  color: fn.get-color('grey');
   cursor: pointer;
   appearance: none; /* Remove default arrow */
   -webkit-appearance: none; /* Remove default arrow in Safari */
@@ -188,6 +189,9 @@ select {
   option {
     padding: 10px;
     background-color: #fff;
-    color: #000;
+  }
+  @include mx.media-query('lg') {
+    padding: 8px 24px;
+    font-size: 16px;
   }
 }

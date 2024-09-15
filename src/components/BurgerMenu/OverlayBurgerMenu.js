@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const OverlayModalBurgerMenu = styled.div`
+export const OverlayBurgerMenu = styled.div`
   position: fixed;
   top: 0;
   left: 0;

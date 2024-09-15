@@ -1,6 +1,14 @@
 import { Formik, Form, Field } from 'formik';
+import { useState } from 'react';
+import BasketPopup from './BasketPopup';
 
 const OrderForm = () => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
+
   return (
     <div className="order-form-wrapper">
       <Formik
@@ -24,16 +32,16 @@ const OrderForm = () => {
                 <div className="order-input">
                   <Field
                     type="text"
-                    name="firstName"
-                    placeholder="Prénom"
+                    name="lastName"
+                    placeholder="Nom"
                     required
                   />
                 </div>
                 <div className="order-input">
                   <Field
                     type="text"
-                    name="lastName"
-                    placeholder="Nom"
+                    name="firstName"
+                    placeholder="Prénom"
                     required
                   />
                 </div>
@@ -84,6 +92,10 @@ const OrderForm = () => {
           </Form>
         )}
       </Formik>
+      <button onClick={togglePopup}>Popup</button>
+      {isPopupOpen && (
+        <BasketPopup isPopupOpen={isPopupOpen} closePopup={togglePopup} />
+      )}
     </div>
   );
 };

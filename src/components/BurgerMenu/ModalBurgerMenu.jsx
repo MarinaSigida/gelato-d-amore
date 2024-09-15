@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { OverlayModalBurgerMenu } from './OverlayBurgerMenu';
+import { OverlayBurgerMenu } from './OverlayBurgerMenu';
 import cross from '../../assets/images/close.png';
 
 const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
@@ -10,7 +10,7 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
   };
   return (
     <>
-      <OverlayModalBurgerMenu onClick={handleBackdropClick}>
+      <OverlayBurgerMenu onClick={handleBackdropClick}>
         <div
           className={`modal-burger-menu-container ${
             isModalOpen ? 'open' : 'closed'
@@ -62,7 +62,7 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
             </NavLink>
           </div>
         </div>
-      </OverlayModalBurgerMenu>
+      </OverlayBurgerMenu>
     </>
   );
 };

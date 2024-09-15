@@ -12,7 +12,7 @@ const Map = () => {
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker position={position}>
-        <Popup>This is the location.</Popup>
+        <Popup>Gelato D'Amore</Popup>
       </Marker>
     </MapContainer>
   );
