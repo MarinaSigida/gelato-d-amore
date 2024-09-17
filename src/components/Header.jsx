@@ -10,7 +10,7 @@ const Header = () => {
 
   const handleDashboardClick = (e) => {
     e.preventDefault();
-    navigate('/dashboard/products');
+    navigate('/dashboard/stock');
   };
 
   const toggleModal = () => {
@@ -50,7 +50,7 @@ const Header = () => {
                 Tableau de bord
               </NavLink>
               <div className="dropdown-content">
-                <NavLink to="/dashboard/products">Stocks</NavLink>
+                <NavLink to="/dashboard/stock">Stocks</NavLink>
                 <NavLink to="/dashboard/users">Utilisateurs</NavLink>
                 <NavLink to="/dashboard/orders">Commandes</NavLink>
               </div>

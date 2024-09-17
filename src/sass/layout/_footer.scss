@@ -51,6 +51,10 @@
 }
 
 .footer-contact {
+  address a {
+    color: fn.get-color('white');
+  }
+
   h3 {
     margin-top: 10px;
     font-size: 20px;

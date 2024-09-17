@@ -11,14 +11,12 @@ const OrderPopup = ({ isPopupOpen, closePopup }) => {
   return (
     <>
       <OverlayPopup onClick={handleBackdropClick}>
-        <div
-          className={`order-popup-container ${isPopupOpen ? 'open' : 'closed'}`}
-        >
+        <div className={`popup-container ${isPopupOpen ? 'open' : 'closed'}`}>
           <div onClick={closePopup} className="icon-close">
             <img src={cross} alt="close" />
           </div>
-          <div className="order-popup-content">
-            <div className="order-popup-content-img">
+          <div className="popup-content">
+            <div className="popup-content-img">
               <img src={weLoveYou} alt="Thank you for the order" />
             </div>
             <h4>Merci pour votre commande </h4>

@@ -1,12 +1,19 @@
 import { Formik, Form, Field } from 'formik';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import BasketPopup from './BasketPopup';
 
 const OrderForm = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const navigate = useNavigate();
 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
+  };
+
+  const handleCancelClick = (e) => {
+    e.preventDefault();
+    navigate(`/catalog`);
   };
 
   return (
@@ -84,9 +91,7 @@ const OrderForm = () => {
               </div>
             </div>
             <div className="order-buttons">
-              <button>
-                <a href="catalog">Annuler</a>
-              </button>
+              <button onClick={handleCancelClick}>Annuler</button>
               <button type="submit">Commander</button>
             </div>
           </Form>
