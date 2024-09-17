@@ -12,6 +12,7 @@ const DashboardStock = () => {
   const [isStockListOpen, setIsStockListOpen] = useState(true);
   const [isAddStockItemOpen, setIsAddStockItemOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+  const [selectedItemTitle, setSelectedItemTitle] = useState('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,6 +40,11 @@ const DashboardStock = () => {
   };
   const toggleDeleteStockItemPopup = () => {
     setIsDeletePopupOpen(!isDeletePopupOpen);
+  };
+
+  const handleDeleteClick = (title) => {
+    setSelectedItemTitle(title);
+    toggleDeleteStockItemPopup();
   };
 
   return (
@@ -72,7 +78,7 @@ const DashboardStock = () => {
                   pricePerUnit={item.pricePerUnit}
                   category={item.category}
                   status={item.status}
-                  toggleDeleteStockItemPopup={toggleDeleteStockItemPopup}
+                  onDeleteClick={() => handleDeleteClick(item.title)}
                 />
               ))}
             </div>
@@ -83,6 +89,7 @@ const DashboardStock = () => {
         <DeleteStockItemPopup
           isPopupOpen={isDeletePopupOpen}
           closePopup={toggleDeleteStockItemPopup}
+          itemTitle={selectedItemTitle}
         />
       </section>
     </div>

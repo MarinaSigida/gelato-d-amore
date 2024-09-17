@@ -9,7 +9,7 @@ const StockItem = ({
   pricePerUnit,
   category,
   status,
-  toggleDeleteStockItemPopup,
+  onDeleteClick,
 }) => {
   const navigate = useNavigate();
   const handleStockItemClick = (e) => {
@@ -34,7 +34,7 @@ const StockItem = ({
       </div>
       <div className="stock-item-buttons">
         <button onClick={handleStockItemClick}>Modifier</button>
-        <button onClick={toggleDeleteStockItemPopup}>Supprimer</button>
+        <button onClick={() => onDeleteClick(title)}>Supprimer</button>
       </div>
     </div>
   );

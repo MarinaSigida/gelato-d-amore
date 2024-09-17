@@ -35,7 +35,7 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
             <NavLink to="/contact" onClick={closeModal}>
               Contact
             </NavLink>
-            <NavLink to="/dashboard/products" onClick={closeModal}>
+            <NavLink to="/dashboard/stock" onClick={closeModal}>
               Stocks
             </NavLink>
             <NavLink to="/dashboard/users" onClick={closeModal}>
