@@ -34,11 +34,6 @@
 .modify-user-form-image {
   margin-bottom: 30px;
 }
-// .modify-user-form {
-//   display: flex;
-//   text-align: center;
-//   flex-direction: column;
-// }
 
 .modify-user-input {
   text-align: left;
@@ -76,4 +71,9 @@
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
+}
+
+.modify-user-form-image {
+  height: 120px;
+  margin-bottom: 20px;
 }
