@@ -5,6 +5,7 @@ import AddStockItemForm from '../components/DashboardStockPage/AddStockItemForm'
 import DeleteStockItemPopup from '../components/DashboardStockPage/DeleteStockItemPopup';
 import bannerDashboardProducts from '/assets/images/banner-dashboard-products.png';
 import bannerDashboardProductsMobile from '/assets/images/banner-dashboard-products-mobile.png';
+import searhIcon from '../assets/images/search.png';
 import stockItems from '../resources/stockItems.json';
 
 const DashboardStock = () => {
@@ -66,6 +67,7 @@ const DashboardStock = () => {
             <p>Nombre d'articles: 35</p>
             <div className="search-bar">
               <input placeholder="Rechercher" type="text" name="title" />
+              <img src={searhIcon} className="search-icon" alt="search icon" />
             </div>
 
             <div className="stock-list">

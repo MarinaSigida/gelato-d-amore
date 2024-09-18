@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import placeholderUser from '../../assets/images/placeholder-user.png';
+import placeholderAdmin from '../../assets/images/userNew.png';
 
 const UserCard = ({
   id,
@@ -12,21 +14,31 @@ const UserCard = ({
   role,
   onDeleteClick,
 }) => {
+  const navigate = useNavigate();
+  const handleUserClick = (e) => {
+    e.preventDefault();
+    navigate(`/dashboard/users/${id}`);
+  };
   return (
     <div className="user-card">
-      <div className="user-card-image">
-        <img src={placeholderUser} alt="default user picture" />
-      </div>
-      <div className="user-card-content">
-        <h3>
-          {firstName} {lastName}
-        </h3>
-        <p>{email}</p>
-        <p>{mobilePhone}</p>
-        <p>{address}</p>
+      <div>
+        <div className="user-card-image">
+          <img
+            src={role === 'admin' ? placeholderAdmin : placeholderUser}
+            alt={role === 'admin' ? 'Admin picture' : 'User picture'}
+          />
+        </div>
+        <div className="user-card-content">
+          <h3>
+            {firstName} {lastName}
+          </h3>
+          <p>{email}</p>
+          <p>{mobilePhone}</p>
+          <p>{address}</p>
+        </div>
       </div>
       <div className="user-card-buttons">
-        <button>Modifier</button>
+        <button onClick={handleUserClick}>Modifier</button>
         <button onClick={() => onDeleteClick(firstName, lastName)}>
           Supprimer
         </button>

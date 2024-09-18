@@ -1,0 +1,79 @@
+@use '../utils/functions' as fn;
+@use '../utils/mixins' as mx;
+
+.modify-user {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 60px;
+
+  h3 {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  @include mx.media-query('lg') {
+    padding: 0 32px;
+    h3 {
+      font-size: 24px;
+    }
+  }
+}
+
+.modify-user-form-wrapper {
+  padding: 40px 30px;
+  background-color: fn.get-color('white');
+  border: 1px solid rgba(fn.get-color('grey'), 0.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  @include mx.media-query('md') {
+    width: 660px;
+  }
+}
+.modify-user-form-image {
+  margin-bottom: 30px;
+}
+// .modify-user-form {
+//   display: flex;
+//   text-align: center;
+//   flex-direction: column;
+// }
+
+.modify-user-input {
+  text-align: left;
+  margin-bottom: 20px;
+  color: fn.get-color('dark');
+  background-color: fn.get-color('light');
+  border-radius: 30px;
+  border: 1px solid rgba(fn.get-color('grey'), 0.5);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+  input,
+  textarea {
+    padding: 10px 16px;
+    width: 100%;
+    font-size: 14px;
+    @include mx.media-query('lg') {
+      padding: 16px 24px;
+      font-size: 16px;
+    }
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: fn.get-color('grey');
+  }
+
+  &:hover,
+  &:focus {
+    border: 1px solid rgba(fn.get-color('dark-red'), 0.5);
+    box-shadow: 0px 2px 5px rgba(fn.get-color('dark-red'), 0.4);
+  }
+}
+
+.modify-user-form-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}

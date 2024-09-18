@@ -15,6 +15,7 @@ import DashboardOrders from './pages/DashboardOrders';
 import Signup from './pages/Signup';
 import './sass/main.scss';
 import DashboardStockModifyItem from './pages/DashboardStockModifyItem';
+import DashboardUserModify from './pages/DashboardUserModify';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="stock" element={<DashboardStock />} />
             <Route path="stock/:id" element={<DashboardStockModifyItem />} />
             <Route path="users" element={<DashboardUsers />} />
+            <Route path="users/:id" element={<DashboardUserModify />} />
             <Route path="orders" element={<DashboardOrders />} />
           </Route>
           <Route path="login" element={<Login />} />

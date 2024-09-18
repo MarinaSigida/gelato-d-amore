@@ -1,15 +1,15 @@
 [
   {
     "id": 1,
-    "firstName": "Jean",
-    "lastName": "Dupont",
-    "email": "jean.dupont@example.com",
+    "firstName": "Marina",
+    "lastName": "Sihida",
+    "email": "example@example.com",
     "password": "hashedPassword1",
     "createdAt": "2024-09-16T10:00:00",
     "updatedAt": "2024-09-16T10:00:00",
-    "role": "client",
-    "address": "123 Rue de la République, Nice",
-    "mobilePhone": "+33 6 12 34 56 78"
+    "role": "admin",
+    "address": "111 Rue de la République, Nice",
+    "mobilePhone": "+33 6 11 33 44 78"
   },
   {
     "id": 2,
@@ -94,5 +94,17 @@
     "role": "client",
     "address": "147 Avenue de la Mer, Cagnes-sur-Mer",
     "mobilePhone": "+33 6 89 01 23 45"
+  },
+  {
+    "id": 9,
+    "firstName": "Jean",
+    "lastName": "Dupont",
+    "email": "jean.dupont@example.com",
+    "password": "hashedPassword1",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "role": "client",
+    "address": "123 Rue de la République, Nice",
+    "mobilePhone": "+33 6 12 34 56 78"
   }
 ]

@@ -33,7 +33,7 @@ const DashboardStockModifyItem = () => {
     <div className="main">
       <Banner
         image={bannerImage}
-        titleSpan="Gestion des stocks"
+        titleSpan="Modifiez l'article"
         textColorExtra="white"
         textPosition="left"
       />
