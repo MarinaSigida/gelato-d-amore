@@ -60,6 +60,53 @@ button {
   }
 }
 
+.dashboard-order-modify-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  button {
+    padding: 10px 10px;
+    font-size: 12px;
+    @include mx.media-query('lg') {
+      padding: 14px 40px;
+      font-size: 16px;
+    }
+  }
+
+  @include mx.media-query('lg') {
+    gap: 20px;
+  }
+
+  #confirm-btn {
+    background-color: fn.get-color('green');
+    &:hover,
+    &:focus {
+      background-color: fn.get-color('white');
+      color: fn.get-color('green');
+      border: 2px solid fn.get-color('green');
+    }
+  }
+  #modify-btn {
+    background-color: fn.get-color('yellow');
+    &:hover,
+    &:focus {
+      background-color: fn.get-color('white');
+      color: fn.get-color('yellow');
+      border: 2px solid fn.get-color('yellow');
+    }
+  }
+  #cancel-btn {
+    background-color: fn.get-color('red');
+    &:hover,
+    &:focus {
+      background-color: fn.get-color('white');
+      color: fn.get-color('red');
+      border: 2px solid fn.get-color('red');
+    }
+  }
+}
+
 .icon-open,
 .icon-close {
   position: absolute;

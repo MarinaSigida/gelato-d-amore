@@ -12,10 +12,11 @@ import Basket from './pages/Basket';
 import DashboardUsers from './pages/DashboardUsers';
 import DashboardStock from './pages/DashboardStock.jsx';
 import DashboardOrders from './pages/DashboardOrders';
-import Signup from './pages/Signup';
-import './sass/main.scss';
 import DashboardStockModifyItem from './pages/DashboardStockModifyItem';
 import DashboardUserModify from './pages/DashboardUserModify';
+import DashboardOrderModify from './pages/DashboardOrderModify';
+import Signup from './pages/Signup';
+import './sass/main.scss';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="users" element={<DashboardUsers />} />
             <Route path="users/:id" element={<DashboardUserModify />} />
             <Route path="orders" element={<DashboardOrders />} />
+            <Route path="orders/:id" element={<DashboardOrderModify />} />
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="basket" element={<Basket />} />
