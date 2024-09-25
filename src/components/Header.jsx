@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import logo from '../assets/images/logo.png';
+import dashboardIcon from '../assets/images/dashboard.png';
 import BurgerMenuBtn from './BurgerMenu/BurgerMenuBtn';
 import ModalBurgerMenu from './BurgerMenu/ModalBurgerMenu';
 
@@ -47,6 +48,11 @@ const Header = () => {
                 }
                 onClick={handleDashboardClick}
               >
+                {/* <img
+                  src={dashboardIcon}
+                  className="dashboard-icon"
+                  alt="dashboard icon"
+                /> */}
                 Tableau de bord
               </NavLink>
               <div className="dropdown-content">
@@ -56,6 +62,7 @@ const Header = () => {
               </div>
             </div>
           </div>
+          <div></div>
           <div className="basket-and-login">
             <NavLink to="/basket">
               <svg className="icon" alt="basket">

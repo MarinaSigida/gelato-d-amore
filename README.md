@@ -33,4 +33,19 @@ input:-webkit-autofill {
   border-radius: 30px;
 }
 
+BACKEND
+express: A minimal web framework for Node.js.
+mongoose: A MongoDB object modeling tool.
+dotenv: To manage environment variables (for storing MongoDB connection URI).
+cors: To allow cross-origin requests from your React frontend.
+
+backend deployment:
+Small backend API or serverless functions: Use Vercel (doesn't support WebSockets).
+Simple app, minimal traffic: Use Render.com or Heroku.
+
+app.js: Focuses on setting up the Express application, including middleware, routes, and any other configurations.
+Acts as a module that exports the configured Express app for use elsewhere.
+server.js: Responsible for starting the server, connecting to the database, and handling server-level configurations (like port settings).
+
+to test connection to mongoDB: node server.js
  -->

@@ -1,0 +1,252 @@
+[
+  {
+    "title": "Vanille",
+    "description": "Une crème glacée onctueuse et douce, faite avec des gousses de vanille naturelle.",
+    "quantity": 12,
+    "pricePerUnit": 12,
+    "category": "Crème",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Chocolat",
+    "description": "Une crème glacée riche au chocolat, faite avec du cacao pur pour une saveur intense.",
+    "quantity": 15,
+    "pricePerUnit": 14,
+    "category": "Crème",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Fraise",
+    "description": "Une crème glacée savoureuse à la fraise avec des morceaux de fruits frais.",
+    "quantity": 14,
+    "pricePerUnit": 13,
+    "category": "Fruits rouges",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Noisette",
+    "description": "Une délicieuse crème glacée aux noisettes grillées, crémeuse et légèrement croquante.",
+    "quantity": 11,
+    "pricePerUnit": 15,
+    "category": "Noix",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Mangue",
+    "description": "Un sorbet rafraîchissant à la mangue, parfait pour une journée d'été.",
+    "quantity": 13,
+    "pricePerUnit": 12,
+    "category": "Fruits",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Pistache",
+    "description": "Une crème glacée crémeuse aux pistaches, avec une texture riche et onctueuse.",
+    "quantity": 10,
+    "pricePerUnit": 14,
+    "category": "Noix",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Citron",
+    "description": "Un sorbet acidulé et rafraîchissant au citron, idéal pour les amateurs de saveurs acidulées.",
+    "quantity": 14,
+    "pricePerUnit": 11,
+    "category": "Fruits",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Framboise",
+    "description": "Un sorbet à la framboise riche en goût, fait avec des fruits rouges frais.",
+    "quantity": 15,
+    "pricePerUnit": 13,
+    "category": "Fruits rouges",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Noix de coco",
+    "description": "Une crème glacée à la noix de coco exquise, avec une texture douce et crémeuse.",
+    "quantity": 10,
+    "pricePerUnit": 12,
+    "category": "Noix",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "not available"
+  },
+  {
+    "title": "Myrtille",
+    "description": "Un sorbet léger et fruité aux myrtilles, parfait pour une pause rafraîchissante.",
+    "quantity": 11,
+    "pricePerUnit": 14,
+    "category": "Fruits rouges",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Amande",
+    "description": "Une crème glacée délicate aux amandes grillées, offrant une saveur douce et équilibrée.",
+    "quantity": 12,
+    "pricePerUnit": 13,
+    "category": "Noix",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "not available"
+  },
+  {
+    "title": "Cerise",
+    "description": "Un sorbet à la cerise au goût intense, parfait pour une touche sucrée et acidulée.",
+    "quantity": 13,
+    "pricePerUnit": 11,
+    "category": "Fruits rouges",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Pêche",
+    "description": "Un sorbet fruité à la pêche, léger et rafraîchissant pour les journées chaudes.",
+    "quantity": 14,
+    "pricePerUnit": 12,
+    "category": "Fruits",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Caramel",
+    "description": "Une crème glacée onctueuse au caramel, parfaite pour les amateurs de douceur.",
+    "quantity": 11,
+    "pricePerUnit": 15,
+    "category": "Crème",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Banane",
+    "description": "Une crème glacée à la banane délicatement sucrée avec une texture lisse et crémeuse.",
+    "quantity": 10,
+    "pricePerUnit": 13,
+    "category": "Fruits",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "not available"
+  },
+  {
+    "title": "Cassis",
+    "description": "Un sorbet au cassis, au goût puissant et acidulé, idéal pour les amateurs de fruits rouges.",
+    "quantity": 12,
+    "pricePerUnit": 11,
+    "category": "Fruits rouges",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Café",
+    "description": "Une crème glacée au café riche et parfumée, parfaite pour les amateurs de café.",
+    "quantity": 12,
+    "pricePerUnit": 14,
+    "category": "Crème",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Ananas",
+    "description": "Un sorbet tropical à l'ananas, idéal pour se rafraîchir avec une touche exotique.",
+    "quantity": 14,
+    "pricePerUnit": 13,
+    "category": "Fruits",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Noix",
+    "description": "Une crème glacée douce aux noix croquantes, parfaite pour un moment gourmand.",
+    "quantity": 15,
+    "pricePerUnit": 14,
+    "category": "Noix",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Mûre",
+    "description": "Un sorbet à la mûre, riche en saveurs et plein de fraîcheur fruitée.",
+    "quantity": 14,
+    "pricePerUnit": 11,
+    "category": "Fruits rouges",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "not available"
+  },
+  {
+    "title": "Beurre de Cacahuète",
+    "description": "Une crème glacée gourmande au beurre de cacahuète, idéale pour les amateurs de saveurs riches.",
+    "quantity": 12,
+    "pricePerUnit": 13,
+    "category": "Noix",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Noix de Cajou",
+    "description": "Une crème glacée onctueuse aux noix de cajou, avec une touche légèrement croquante.",
+    "quantity": 11,
+    "pricePerUnit": 14,
+    "category": "Noix",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Figue",
+    "description": "Un sorbet à la figue, avec une saveur douce et légèrement acidulée, parfait pour les amateurs de fruits.",
+    "quantity": 10,
+    "pricePerUnit": 12,
+    "category": "Fruits",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Tiramisu",
+    "description": "Une crème glacée inspirée du célèbre dessert italien, au goût de café et de mascarpone.",
+    "quantity": 15,
+    "pricePerUnit": 15,
+    "category": "Crème",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  },
+  {
+    "title": "Chocolat Blanc",
+    "description": "Une crème glacée veloutée au chocolat blanc, douce et crémeuse.",
+    "quantity": 14,
+    "pricePerUnit": 14,
+    "category": "Crème",
+    "createdAt": "2024-09-16T10:00:00",
+    "updatedAt": "2024-09-16T10:00:00",
+    "status": "available"
+  }
+]

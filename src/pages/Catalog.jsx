@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchStockItems } from '../features/stockItemsSlice';
 import Banner from '../components/Shared/Banner';
 import CatalogFilter from '../components/CatalogPage/CatalogFilter';
 import Flavor from '../components/HomePage/Flavor';
@@ -7,6 +9,12 @@ import bannerCatalogMobile from '/assets/images/banner-catalog-mobile.png';
 
 const Catalog = () => {
   const [bannerImage, setBannerImage] = useState(bannerCatalogMobile);
+  const dispatch = useDispatch();
+  const { items, loading, error } = useSelector((state) => state.stockItems);
+
+  useEffect(() => {
+    dispatch(fetchStockItems());
+  }, [dispatch]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,6 +28,14 @@ const Catalog = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="main">
@@ -41,18 +57,20 @@ const Catalog = () => {
           <CatalogFilter category={'Fruits rouges'} />
         </div>
         <div className="catalog-list">
-          <Flavor />
-          <Flavor />
-          <Flavor />
-          <Flavor />
-          <Flavor />
-          <Flavor />
-          <Flavor />
-          <Flavor />
-          <Flavor />
-          <Flavor />
-          <Flavor />
-          <Flavor />
+          {items.map((item) => (
+            <Flavor
+              key={item._id}
+              id={item._id}
+              title={item.title}
+              description={item.description}
+              pricePerUnit={item.pricePerUnit}
+              quantity={item.quantity}
+              category={item.category}
+              createdAt={item.createdAt}
+              updatedAt={item.updatedAt}
+              status={item.status}
+            />
+          ))}
         </div>
       </section>
     </div>
