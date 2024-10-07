@@ -38,6 +38,12 @@ button {
   }
 }
 
+.catalog-filter-btn.active {
+  background-color: fn.get-color('white');
+  color: fn.get-color('dark-red');
+  border: 2px solid fn.get-color('dark-red');
+}
+
 .buy-btn {
   margin-top: 20px;
   padding: 10px 20px;

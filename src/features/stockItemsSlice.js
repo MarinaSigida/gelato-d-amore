@@ -11,6 +11,16 @@ export const fetchStockItems = createAsyncThunk(
   }
 );
 
+export const fetchStockItemsByCategory = createAsyncThunk(
+  'stockItems/fetchStockItemsByCategory',
+  async (category) => {
+    const response = await axios.get(
+      `${API_BASE_URL}/stockItems/filter/${category}`
+    );
+    return response.data;
+  }
+);
+
 const stockItemsSlice = createSlice({
   name: 'stockItems',
   initialState: {
@@ -39,6 +49,18 @@ const stockItemsSlice = createSlice({
         state.items = action.payload;
       })
       .addCase(fetchStockItems.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(fetchStockItemsByCategory.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchStockItemsByCategory.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+      })
+      .addCase(fetchStockItemsByCategory.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

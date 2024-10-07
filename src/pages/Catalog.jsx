@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchStockItems,
+  fetchStockItemsByCategory,
   selectItem,
   clearSelectedItem,
 } from '../features/stockItemsSlice';
@@ -14,6 +15,7 @@ import bannerCatalogMobile from '/assets/images/banner-catalog-mobile.png';
 
 const Catalog = () => {
   const [bannerImage, setBannerImage] = useState(bannerCatalogMobile);
+  const [activeFilter, setActiveFilter] = useState('Tous');
   const dispatch = useDispatch();
   const { items, loading, error, selectedItem } = useSelector(
     (state) => state.stockItems
@@ -36,6 +38,14 @@ const Catalog = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleFilterClick = (category) => {
+    setActiveFilter(category);
+    if (category === 'Tous') {
+      dispatch(fetchStockItems());
+    } else {
+      dispatch(fetchStockItemsByCategory(category));
+    }
+  };
   const handleItemClick = (itemId) => {
     dispatch(selectItem(itemId));
   };
@@ -64,11 +74,31 @@ const Catalog = () => {
           NOS <span>GOÛTS</span>
         </h2>
         <div className="catalog-filters-bar">
-          <CatalogFilter category={'Tous'} />
-          <CatalogFilter category={'Crème'} />
-          <CatalogFilter category={'Fruits'} />
-          <CatalogFilter category={'Noix'} />
-          <CatalogFilter category={'Fruits rouges'} />
+          <CatalogFilter
+            category={'Tous'}
+            isActive={activeFilter === 'Tous'}
+            onClick={() => handleFilterClick('Tous')}
+          />
+          <CatalogFilter
+            category="Crème"
+            isActive={activeFilter === 'Crème'}
+            onClick={() => handleFilterClick('Crème')}
+          />
+          <CatalogFilter
+            category="Fruits"
+            isActive={activeFilter === 'Fruits'}
+            onClick={() => handleFilterClick('Fruits')}
+          />
+          <CatalogFilter
+            category="Noix"
+            isActive={activeFilter === 'Noix'}
+            onClick={() => handleFilterClick('Noix')}
+          />
+          <CatalogFilter
+            category="Fruits rouges"
+            isActive={activeFilter === 'Fruits rouges'}
+            onClick={() => handleFilterClick('Fruits rouges')}
+          />
         </div>
         <div className="catalog-list">
           {items.map((item) => (

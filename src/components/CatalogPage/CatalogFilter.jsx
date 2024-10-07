@@ -1,7 +1,12 @@
-const CatalogFilter = ({ category }) => {
+const CatalogFilter = ({ category, isActive, onClick }) => {
   return (
     <div>
-      <button>{category}</button>
+      <button
+        className={`catalog-filter-btn ${isActive ? 'active' : ''}`}
+        onClick={onClick}
+      >
+        {category}
+      </button>
     </div>
   );
 };
