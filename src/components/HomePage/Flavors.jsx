@@ -56,9 +56,8 @@ const Flavors = () => {
           }}
         >
           {items.map((item) => (
-            <swiper-slide>
+            <swiper-slide key={item._id}>
               <Flavor
-                key={item._id}
                 id={item._id}
                 title={item.title}
                 description={item.description}
@@ -74,7 +73,7 @@ const Flavors = () => {
         </swiper-container>
       </div>
       <div className="slider"></div>
-      <button style={{ 'margin-top': '30px' }}>
+      <button style={{ marginTop: '30px' }}>
         <a href="catalog">Сonsulter le catalogue</a>
       </button>
     </section>

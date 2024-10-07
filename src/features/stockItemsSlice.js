@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const apiKey = import.meta.env.VITE_API_KEY;
 
 export const fetchStockItems = createAsyncThunk(
   'stockItems/fetchStockItems',
   async () => {
-    const response = await axios.get(`${API_BASE_URL}/stockItems`);
+    const response = await axios.get(`${apiKey}/stockItems`);
     return response.data;
   }
 );
@@ -14,9 +14,7 @@ export const fetchStockItems = createAsyncThunk(
 export const fetchStockItemsByCategory = createAsyncThunk(
   'stockItems/fetchStockItemsByCategory',
   async (category) => {
-    const response = await axios.get(
-      `${API_BASE_URL}/stockItems/filter/${category}`
-    );
+    const response = await axios.get(`${apiKey}/stockItems/filter/${category}`);
     return response.data;
   }
 );
