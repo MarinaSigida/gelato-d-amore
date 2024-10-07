@@ -35,6 +35,7 @@
   align-items: center;
   text-align: center;
   h3 {
+    text-transform: capitalize;
     font-weight: 500;
     font-size: 20px;
     margin-bottom: 30px;
@@ -46,7 +47,7 @@
 
 .popup-content-img {
   width: 240px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   overflow: hidden;
   img {
     border-radius: 30px;
@@ -61,4 +62,40 @@
 .popup-buttons {
   display: flex;
   gap: 80px;
+}
+
+//Product Popup
+.product-popup-main-content {
+  @include mx.media-query('md') {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+}
+.product-popup-main-content-img {
+  min-width: 50%;
+  img {
+    border-radius: 30px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.product-popup-main-content-text {
+  h3 {
+    font-size: 18px;
+    margin-bottom: 0;
+    font-weight: 500;
+    color: fn.get-color('dark-red');
+    @include mx.media-query('md') {
+      margin-bottom: 20px;
+    }
+  }
+  @include mx.media-query('md') {
+    text-align: start;
+  }
+  .flavor-category {
+    color: fn.get-color('grey');
+    font-size: 14px;
+  }
 }

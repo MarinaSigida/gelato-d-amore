@@ -13,11 +13,14 @@ const Flavor = ({
   createdAt,
   updatedAt,
   status,
+  onClick,
 }) => {
   return (
     <div className="flavor-card">
-      <img src={caramel} alt={title} />
-      <h3 style={{ textTransform: 'capitalize' }}>{title}</h3>
+      <img src={caramel} alt={title} onClick={onClick} />
+      <h3 className="flavor-title" onClick={onClick}>
+        {title}
+      </h3>
       <p className="flavor-category">{category}</p>
       <div className="flavor-size">
         <p>Poids : 450 g</p>
@@ -27,7 +30,7 @@ const Flavor = ({
           <p>{pricePerUnit} €</p>
         </div>
         <div className="quantity">
-          <p>{quantity}</p>
+          <p>1</p>
         </div>
         <div className="quantity-btn-container">
           <button className="quantity-btn">+</button>

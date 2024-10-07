@@ -1,10 +1,18 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchStockItems } from '../../features/stockItemsSlice';
 import Flavor from './Flavor';
 
 const Flavors = () => {
   const [swiperThemeColor, setSwiperThemeColor] = useState(
     'rgba(255, 255, 255, 0)'
   );
+  const dispatch = useDispatch();
+  const { items, loading, error } = useSelector((state) => state.stockItems);
+
+  useEffect(() => {
+    dispatch(fetchStockItems());
+  }, [dispatch]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,6 +27,13 @@ const Flavors = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
   return (
     <section className="flavors">
       <h1>
@@ -40,27 +55,28 @@ const Flavors = () => {
             '--swiper-navigation-top-offset': '30%',
           }}
         >
-          <swiper-slide>
-            <Flavor />
-          </swiper-slide>
-          <swiper-slide>
-            <Flavor />
-          </swiper-slide>
-          <swiper-slide>
-            <Flavor />
-          </swiper-slide>
-          <swiper-slide>
-            <Flavor />
-          </swiper-slide>
-          <swiper-slide>
-            <Flavor />
-          </swiper-slide>
-          <swiper-slide>
-            <Flavor />
-          </swiper-slide>
+          {items.map((item) => (
+            <swiper-slide>
+              <Flavor
+                key={item._id}
+                id={item._id}
+                title={item.title}
+                description={item.description}
+                pricePerUnit={item.pricePerUnit}
+                quantity={item.quantity}
+                category={item.category}
+                createdAt={item.createdAt}
+                updatedAt={item.updatedAt}
+                status={item.status}
+              />
+            </swiper-slide>
+          ))}
         </swiper-container>
       </div>
       <div className="slider"></div>
+      <button style={{ 'margin-top': '30px' }}>
+        <a href="catalog">Сonsulter le catalogue</a>
+      </button>
     </section>
   );
 };

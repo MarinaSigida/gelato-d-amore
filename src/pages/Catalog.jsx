@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchStockItems } from '../features/stockItemsSlice';
+import {
+  fetchStockItems,
+  selectItem,
+  clearSelectedItem,
+} from '../features/stockItemsSlice';
+import ProductPopup from '../components/CatalogPage/ProductPopup';
 import Banner from '../components/Shared/Banner';
 import CatalogFilter from '../components/CatalogPage/CatalogFilter';
 import Flavor from '../components/HomePage/Flavor';
@@ -10,7 +15,9 @@ import bannerCatalogMobile from '/assets/images/banner-catalog-mobile.png';
 const Catalog = () => {
   const [bannerImage, setBannerImage] = useState(bannerCatalogMobile);
   const dispatch = useDispatch();
-  const { items, loading, error } = useSelector((state) => state.stockItems);
+  const { items, loading, error, selectedItem } = useSelector(
+    (state) => state.stockItems
+  );
 
   useEffect(() => {
     dispatch(fetchStockItems());
@@ -28,6 +35,13 @@ const Catalog = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleItemClick = (itemId) => {
+    dispatch(selectItem(itemId));
+  };
+  const handleClosePopup = () => {
+    dispatch(clearSelectedItem());
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -69,9 +83,17 @@ const Catalog = () => {
               createdAt={item.createdAt}
               updatedAt={item.updatedAt}
               status={item.status}
+              onClick={() => handleItemClick(item._id)}
             />
           ))}
         </div>
+        {selectedItem && (
+          <ProductPopup
+            isPopupOpen={!!selectedItem}
+            closePopup={handleClosePopup}
+            product={selectedItem}
+          />
+        )}
       </section>
     </div>
   );

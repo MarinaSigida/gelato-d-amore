@@ -19,7 +19,14 @@ const stockItemsSlice = createSlice({
     error: null,
   },
   reducers: {
-    // You can add more reducers here if needed for other stock item actions
+    selectItem: (state, action) => {
+      state.selectedItem = state.items.find(
+        (item) => item._id === action.payload
+      );
+    },
+    clearSelectedItem: (state) => {
+      state.selectedItem = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -38,4 +45,5 @@ const stockItemsSlice = createSlice({
   },
 });
 
+export const { selectItem, clearSelectedItem } = stockItemsSlice.actions;
 export default stockItemsSlice.reducer;
