@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import Banner from '../Shared/Banner';
 import bannerDashboard from '/assets/images/banner-dashboard.png';
 import bannerDashboardMobile from '/assets/images/banner-dashboard-mobile.png';
+import ordersImg from '../../assets/images/orders.png';
+import usersImg from '../../assets/images/users.png';
+import stockImg from '../../assets/images/stock.png';
 
 const DashboardControlPanel = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
@@ -28,18 +31,24 @@ const DashboardControlPanel = () => {
         textPosition="center"
       />
       <div className="dashboard-control-panel">
-        <h2>Dashboard Control Panel</h2>
-        <ul>
-          <li>
-            <Link to="/dashboard/stock">Stock Management</Link>
-          </li>
-          <li>
-            <Link to="/dashboard/orders">Order Management</Link>
-          </li>
-          <li>
-            <Link to="/dashboard/users">User Management</Link>
-          </li>
-        </ul>
+        <div className="dashboard-control-panel-card">
+          <Link to="/dashboard/stock">
+            <img src={stockImg} alt="Gestion des stocks" />
+            <h3>Gestion des stocks</h3>
+          </Link>
+        </div>
+        <div className="dashboard-control-panel-card">
+          <Link to="/dashboard/orders">
+            <img src={ordersImg} alt="Gestion des commandes" />
+            <h3>Gestion des commandes</h3>
+          </Link>
+        </div>
+        <div className="dashboard-control-panel-card">
+          <Link to="/dashboard/users">
+            <img src={usersImg} alt="Gestion des commandes" />
+            <h3>Gestion des utilisateurs</h3>
+          </Link>
+        </div>
       </div>
     </>
   );

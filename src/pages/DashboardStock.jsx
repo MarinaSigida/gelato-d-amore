@@ -69,8 +69,8 @@ const DashboardStock = () => {
     <div className="main">
       <Banner
         image={bannerImage}
-        titleSpan="Gestion des stocks"
-        textColorExtra="white"
+        title="Gestion des stocks"
+        textColor="white"
         textPosition="left"
       />
       <section className="stock">
