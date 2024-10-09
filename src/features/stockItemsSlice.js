@@ -20,6 +20,30 @@ export const fetchStockItemsByCategory = createAsyncThunk(
   }
 );
 
+export const addStockItem = createAsyncThunk(
+  'stockItems/addStockItem',
+  async (newItem, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${apiKey}/stockItem`, newItem);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const deleteStockItem = createAsyncThunk(
+  'stockItems/deleteStockItem',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(`${apiKey}/stockItem/delete/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const stockItemsSlice = createSlice({
   name: 'stockItems',
   initialState: {
@@ -62,6 +86,30 @@ const stockItemsSlice = createSlice({
       .addCase(fetchStockItemsByCategory.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(addStockItem.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addStockItem.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items.push(action.payload);
+      })
+      .addCase(addStockItem.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteStockItem.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteStockItem.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = state.items.filter(
+          (item) => item._id !== action.payload.result._id
+        ); // Remove the deleted item from the state
+      })
+      .addCase(deleteStockItem.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message || action.error.message;
       });
   },
 });

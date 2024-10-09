@@ -34,7 +34,7 @@ const StockItem = ({
       </div>
       <div className="stock-item-buttons">
         <button onClick={handleStockItemClick}>Modifier</button>
-        <button onClick={() => onDeleteClick(title)}>Supprimer</button>
+        <button onClick={() => onDeleteClick(id, title)}>Supprimer</button>
       </div>
     </div>
   );

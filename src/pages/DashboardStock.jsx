@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchStockItems } from '../features/stockItemsSlice';
 import Banner from '../components/Shared/Banner';
 import StockItem from '../components/DashboardStockPage/StockItem';
 import AddStockItemForm from '../components/DashboardStockPage/AddStockItemForm';
@@ -6,7 +8,7 @@ import DeleteStockItemPopup from '../components/DashboardStockPage/DeleteStockIt
 import bannerDashboardProducts from '/assets/images/banner-dashboard-products.png';
 import bannerDashboardProductsMobile from '/assets/images/banner-dashboard-products-mobile.png';
 import searhIcon from '../assets/images/search.png';
-import stockItems from '../resources/stockItems.json';
+//import stockItems from '../resources/stockItems.json';
 
 const DashboardStock = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardProductsMobile);
@@ -14,6 +16,13 @@ const DashboardStock = () => {
   const [isAddStockItemOpen, setIsAddStockItemOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [selectedItemTitle, setSelectedItemTitle] = useState('');
+  const [selectedItemId, setSelectedItemId] = useState('');
+  const dispatch = useDispatch();
+  const { items, loading, error } = useSelector((state) => state.stockItems);
+
+  useEffect(() => {
+    dispatch(fetchStockItems());
+  }, [dispatch]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,10 +52,19 @@ const DashboardStock = () => {
     setIsDeletePopupOpen(!isDeletePopupOpen);
   };
 
-  const handleDeleteClick = (title) => {
+  const handleDeleteClick = (id, title) => {
+    setSelectedItemId(id);
     setSelectedItemTitle(title);
     toggleDeleteStockItemPopup();
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="main">
@@ -64,23 +82,24 @@ const DashboardStock = () => {
 
         {isStockListOpen && !isAddStockItemOpen && (
           <div className="stock-quantity-and-search">
-            <p>Nombre d'articles: 35</p>
+            <p>Nombre d'articles: {items.length}</p>
             <div className="search-bar">
               <input placeholder="Rechercher" type="text" name="title" />
               <img src={searhIcon} className="search-icon" alt="search icon" />
             </div>
 
             <div className="stock-list">
-              {stockItems.map((item) => (
+              {items.map((item) => (
                 <StockItem
-                  key={item.id}
+                  id={item._id}
+                  key={item._id}
                   title={item.title}
                   description={item.description}
                   quantity={item.quantity}
                   pricePerUnit={item.pricePerUnit}
                   category={item.category}
                   status={item.status}
-                  onDeleteClick={() => handleDeleteClick(item.title)}
+                  onDeleteClick={() => handleDeleteClick(item._id, item.title)}
                 />
               ))}
             </div>
@@ -92,6 +111,7 @@ const DashboardStock = () => {
           isPopupOpen={isDeletePopupOpen}
           closePopup={toggleDeleteStockItemPopup}
           itemTitle={selectedItemTitle}
+          itemId={selectedItemId}
         />
       </section>
     </div>

@@ -1,7 +1,25 @@
+import { useDispatch } from 'react-redux';
+import { deleteStockItem } from '../../features/stockItemsSlice';
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import cross from '../../assets/images/close.png';
 
-const DeleteStockItemPopup = ({ isPopupOpen, closePopup, itemTitle }) => {
+const DeleteStockItemPopup = ({
+  isPopupOpen,
+  closePopup,
+  itemTitle,
+  itemId,
+}) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = async () => {
+    try {
+      await dispatch(deleteStockItem(itemId)).unwrap();
+      closePopup();
+    } catch (err) {
+      console.error('Failed to delete item:', err);
+    }
+  };
+
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closePopup();
@@ -22,7 +40,7 @@ const DeleteStockItemPopup = ({ isPopupOpen, closePopup, itemTitle }) => {
             ?
           </h3>
           <div className="popup-buttons">
-            <button type="submit">Oui</button>
+            <button onClick={handleDelete}>Oui</button>
             <button onClick={closePopup}>Non</button>
           </div>
         </div>
