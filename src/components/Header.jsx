@@ -41,20 +41,7 @@ const Header = () => {
             <NavLink to="/orders">Mes commandes</NavLink>
             <NavLink to="/contact">Contact</NavLink>
             <div className="dropdown">
-              <NavLink
-                to="/dashboard"
-                className={({ isActive, isPartiallyActive }) =>
-                  isActive || isPartiallyActive ? 'active' : ''
-                }
-                onClick={handleDashboardClick}
-              >
-                {/* <img
-                  src={dashboardIcon}
-                  className="dashboard-icon"
-                  alt="dashboard icon"
-                /> */}
-                Tableau de bord
-              </NavLink>
+              <NavLink to="/dashboard">Tableau de bord</NavLink>
               <div className="dropdown-content">
                 <NavLink to="/dashboard/stock">Stocks</NavLink>
                 <NavLink to="/dashboard/users">Utilisateurs</NavLink>

@@ -15,6 +15,7 @@ import DashboardOrders from './pages/DashboardOrders';
 import DashboardStockModifyItem from './pages/DashboardStockModifyItem';
 import DashboardUserModify from './pages/DashboardUserModify';
 import DashboardOrderModify from './pages/DashboardOrderModify';
+import DashboardControlPanel from './components/Dashboard/DashboardControlPanel';
 import Signup from './pages/Signup';
 import './sass/main.scss';
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="orders/:id" element={<OrderDetail />} />
           <Route path="contact" element={<Contact />} />
           <Route path="dashboard" element={<Dashboard />}>
+            <Route index element={<DashboardControlPanel />} />
             <Route path="stock" element={<DashboardStock />} />
             <Route path="stock/:id" element={<DashboardStockModifyItem />} />
             <Route path="users" element={<DashboardUsers />} />
