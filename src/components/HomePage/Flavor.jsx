@@ -1,7 +1,4 @@
 import caramel from '../../assets/images/flavors/caramel.png';
-import vanille from '../../assets/images/flavors/vanille.png';
-import apricot from '../../assets/images/flavors/caramel.png';
-import lemon from '../../assets/images/flavors/lemon.png';
 
 const Flavor = ({
   id,

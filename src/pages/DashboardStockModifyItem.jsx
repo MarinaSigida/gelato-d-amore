@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import Banner from '../components/Shared/Banner';
 import bannerDashboardProducts from '/assets/images/banner-dashboard-products.png';
@@ -8,8 +9,15 @@ import almond from '../assets/images/flavors/almond.png';
 
 const DashboardStockModifyItem = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardProductsMobile);
-  const { id } = useParams();
   const navigate = useNavigate();
+  const stockItem = useSelector((state) => state.stockItems.selectedItem);
+  const [stockItemData, setStockItemData] = useState(null);
+
+  useEffect(() => {
+    if (stockItem) {
+      setStockItemData(stockItem);
+    }
+  }, [stockItem]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,6 +37,10 @@ const DashboardStockModifyItem = () => {
     navigate(`/dashboard/stock`);
   };
 
+  if (!stockItemData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="main">
       <Banner
@@ -44,13 +56,13 @@ const DashboardStockModifyItem = () => {
           </div>
           <Formik
             initialValues={{
-              title: { id },
-              category: '',
-              description: '',
-              imgUrl: '',
-              quantity: 0,
-              pricePerUnit: 0,
-              status: '',
+              title: stockItemData.title || '',
+              category: stockItemData.category || '',
+              description: stockItemData.description || '',
+              imgUrl: stockItemData.imgUrl || '',
+              quantity: stockItemData.quantity || 0,
+              pricePerUnit: stockItemData.pricePerUnit || 0,
+              status: stockItemData.status || '',
             }}
             onSubmit={(values) => {
               console.log(values);
@@ -70,10 +82,10 @@ const DashboardStockModifyItem = () => {
                 <div>
                   <label htmlFor="category">Categorie de la glace</label>
                   <Field as="select" name="category" id="option" required>
-                    <option value="cream" label="Crème" />
-                    <option value="fruits" label="Fruits" />
-                    <option value="berries" label="Fruits rouges" />
-                    <option value="nuts" label="Noix" />
+                    <option value="Crème" label="Crème" />
+                    <option value="Fruits" label="Fruits" />
+                    <option value="Fruits rouges" label="Fruits rouges" />
+                    <option value="Noix" label="Noix" />
                   </Field>
                 </div>
 

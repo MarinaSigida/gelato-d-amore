@@ -8,7 +8,6 @@ import DeleteStockItemPopup from '../components/DashboardStockPage/DeleteStockIt
 import bannerDashboardProducts from '/assets/images/banner-dashboard-products.png';
 import bannerDashboardProductsMobile from '/assets/images/banner-dashboard-products-mobile.png';
 import searhIcon from '../assets/images/search.png';
-//import stockItems from '../resources/stockItems.json';
 
 const DashboardStock = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardProductsMobile);

@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchStockItemById } from '../../features/stockItemsSlice';
 import almond from '../../assets/images/flavors/almond.png';
 
 const StockItem = ({
@@ -12,8 +14,10 @@ const StockItem = ({
   onDeleteClick,
 }) => {
   const navigate = useNavigate();
-  const handleStockItemClick = (e) => {
+  const dispatch = useDispatch();
+  const handleStockItemClick = async (e) => {
     e.preventDefault();
+    await dispatch(fetchStockItemById(id));
     navigate(`/dashboard/stock/${id}`);
   };
   return (

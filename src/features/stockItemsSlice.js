@@ -1,13 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-//test commit
 const apiKey = import.meta.env.VITE_API_KEY;
 
 export const fetchStockItems = createAsyncThunk(
   'stockItems/fetchStockItems',
   async () => {
     const response = await axios.get(`${apiKey}/stockItems`);
+    return response.data;
+  }
+);
+export const fetchStockItemById = createAsyncThunk(
+  'stockItems/fetchStockItemById',
+  async (id) => {
+    const response = await axios.get(`${apiKey}/stockItems/${id}`);
     return response.data;
   }
 );
@@ -49,13 +55,12 @@ const stockItemsSlice = createSlice({
   initialState: {
     items: [],
     loading: false,
+    selectedItem: null,
     error: null,
   },
   reducers: {
     selectItem: (state, action) => {
-      state.selectedItem = state.items.find(
-        (item) => item._id === action.payload
-      );
+      state.selectedItem = action.payload;
     },
     clearSelectedItem: (state) => {
       state.selectedItem = null;
@@ -72,6 +77,18 @@ const stockItemsSlice = createSlice({
         state.items = action.payload;
       })
       .addCase(fetchStockItems.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(fetchStockItemById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchStockItemById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedItem = action.payload;
+      })
+      .addCase(fetchStockItemById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })

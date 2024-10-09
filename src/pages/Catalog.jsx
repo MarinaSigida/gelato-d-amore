@@ -22,6 +22,7 @@ const Catalog = () => {
   );
 
   useEffect(() => {
+    dispatch(clearSelectedItem());
     dispatch(fetchStockItems());
   }, [dispatch]);
 
@@ -46,8 +47,8 @@ const Catalog = () => {
       dispatch(fetchStockItemsByCategory(category));
     }
   };
-  const handleItemClick = (itemId) => {
-    dispatch(selectItem(itemId));
+  const handleItemClick = (item) => {
+    dispatch(selectItem(item));
   };
   const handleClosePopup = () => {
     dispatch(clearSelectedItem());
@@ -113,7 +114,7 @@ const Catalog = () => {
               createdAt={item.createdAt}
               updatedAt={item.updatedAt}
               status={item.status}
-              onClick={() => handleItemClick(item._id)}
+              onClick={() => handleItemClick(item)}
             />
           ))}
         </div>
