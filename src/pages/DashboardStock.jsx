@@ -7,7 +7,7 @@ import AddStockItemForm from '../components/DashboardStockPage/AddStockItemForm'
 import DeleteStockItemPopup from '../components/DashboardStockPage/DeleteStockItemPopup';
 import bannerDashboardProducts from '/assets/images/banner-dashboard-products.png';
 import bannerDashboardProductsMobile from '/assets/images/banner-dashboard-products-mobile.png';
-import searhIcon from '../assets/images/search.png';
+import searchIcon from '../assets/images/search.png';
 
 const DashboardStock = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardProductsMobile);
@@ -84,7 +84,7 @@ const DashboardStock = () => {
             <p>Nombre d'articles: {items.length}</p>
             <div className="search-bar">
               <input placeholder="Rechercher" type="text" name="title" />
-              <img src={searhIcon} className="search-icon" alt="search icon" />
+              <img src={searchIcon} className="search-icon" alt="search icon" />
             </div>
 
             <div className="stock-list">

@@ -50,6 +50,21 @@ export const deleteStockItem = createAsyncThunk(
   }
 );
 
+export const updateStockItem = createAsyncThunk(
+  'stockItems/updateStockItem',
+  async ({ id, updatedItem }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `${apiKey}/stockItem/update/${id}`,
+        updatedItem
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const stockItemsSlice = createSlice({
   name: 'stockItems',
   initialState: {
@@ -112,6 +127,23 @@ const stockItemsSlice = createSlice({
         state.items.push(action.payload);
       })
       .addCase(addStockItem.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateStockItem.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateStockItem.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.items.findIndex(
+          (item) => item._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+        state.selectedItem = action.payload;
+      })
+      .addCase(updateStockItem.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

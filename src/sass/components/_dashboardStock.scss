@@ -96,7 +96,15 @@
   }
 }
 .add-stock-item-form-image {
+  margin: 0 auto;
   margin-bottom: 30px;
+  border-radius: 10px;
+  width: 230px;
+  height: 200px;
+  overflow: hidden;
+  img {
+    object-fit: cover;
+  }
 }
 .add-stock-item-form {
   display: flex;

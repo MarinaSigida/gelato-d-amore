@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
+import { updateStockItem } from '../features/stockItemsSlice';
 import Banner from '../components/Shared/Banner';
 import bannerDashboardProducts from '/assets/images/banner-dashboard-products.png';
 import bannerDashboardProductsMobile from '/assets/images/banner-dashboard-products-mobile.png';
 import iceCreamPlaceholder from '../assets/images/placeholder-ice-cream.png';
 
+const imageKey = import.meta.env.VITE_IMAGE_KEY;
+
 const DashboardStockModifyItem = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardProductsMobile);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const stockItem = useSelector((state) => state.stockItems.selectedItem);
   const [stockItemData, setStockItemData] = useState(null);
   const [previewImage, setPreviewImage] = useState(iceCreamPlaceholder);
@@ -17,7 +21,9 @@ const DashboardStockModifyItem = () => {
   useEffect(() => {
     if (stockItem) {
       setStockItemData(stockItem);
-      setPreviewImage(stockItem.image || iceCreamPlaceholder);
+      setPreviewImage(
+        stockItem.image ? `${imageKey}/${stockItem.image}` : iceCreamPlaceholder
+      );
     }
   }, [stockItem]);
 
@@ -53,6 +59,25 @@ const DashboardStockModifyItem = () => {
     }
   };
 
+  const handleSubmit = async (values) => {
+    const formData = new FormData();
+    formData.append('title', values.title);
+    formData.append('category', values.category);
+    formData.append('description', values.description);
+    formData.append('quantity', values.quantity);
+    formData.append('pricePerUnit', values.pricePerUnit);
+    formData.append('status', values.status);
+    formData.append('image', values.image);
+    try {
+      await dispatch(
+        updateStockItem({ id: stockItem._id, updatedItem: formData })
+      ).unwrap();
+      navigate('/dashboard/stock');
+    } catch (error) {
+      console.error('Failed to update item:', error);
+    }
+  };
+
   if (!stockItemData) {
     return <div>Loading...</div>;
   }
@@ -81,11 +106,9 @@ const DashboardStockModifyItem = () => {
               status: stockItemData.status || '',
               image: stockItemData.image || '',
             }}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
+            onSubmit={handleSubmit}
           >
-            {() => (
+            {({ setFieldValue }) => (
               <Form className="add-stock-item-form">
                 <label htmlFor="title">Nom de la glace</label>
                 <div className="add-stock-item-input">
