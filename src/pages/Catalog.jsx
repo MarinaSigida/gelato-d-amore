@@ -106,6 +106,7 @@ const Catalog = () => {
             <Flavor
               key={item._id}
               id={item._id}
+              image={item.image}
               title={item.title}
               description={item.description}
               pricePerUnit={item.pricePerUnit}

@@ -25,10 +25,12 @@ const StockItem = ({
   };
   return (
     <div className="flavor-card basket-item-card">
-      <img
-        src={image ? `${imageKey}/${image}` : iceCreamPlaceholder}
-        alt={title}
-      />
+      <div className="flavor-card-image">
+        <img
+          src={image ? `${imageKey}/${image}` : iceCreamPlaceholder}
+          alt={title}
+        />
+      </div>
       <h3>{title}</h3>
       <p className="flavor-category">{category}</p>
       <div className="flavor-size">

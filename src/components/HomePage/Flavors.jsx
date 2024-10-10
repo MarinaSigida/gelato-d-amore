@@ -14,6 +14,8 @@ const Flavors = () => {
     dispatch(fetchStockItems());
   }, [dispatch]);
 
+  const firstItems = items.slice(0, 8);
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
@@ -55,10 +57,11 @@ const Flavors = () => {
             '--swiper-navigation-top-offset': '30%',
           }}
         >
-          {items.map((item) => (
+          {firstItems.map((item) => (
             <swiper-slide key={item._id}>
               <Flavor
                 id={item._id}
+                image={item.image}
                 title={item.title}
                 description={item.description}
                 pricePerUnit={item.pricePerUnit}

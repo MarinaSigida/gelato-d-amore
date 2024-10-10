@@ -1,8 +1,12 @@
 import caramel from '../../assets/images/flavors/caramel.png';
+import iceCreamPlaceholder from '../../assets/images/placeholder-ice-cream.png';
+
+const imageKey = import.meta.env.VITE_IMAGE_KEY;
 
 const Flavor = ({
   id,
   title,
+  image,
   description,
   quantity,
   pricePerUnit,
@@ -14,7 +18,13 @@ const Flavor = ({
 }) => {
   return (
     <div className="flavor-card">
-      <img src={caramel} alt={title} onClick={onClick} />
+      <div className="flavor-card-image">
+        <img
+          src={image ? `${imageKey}/${image}` : iceCreamPlaceholder}
+          alt={title}
+          onClick={onClick}
+        />
+      </div>
       <h3 className="flavor-title" onClick={onClick}>
         {title}
       </h3>
