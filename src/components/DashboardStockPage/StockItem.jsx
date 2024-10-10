@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchStockItemById } from '../../features/stockItemsSlice';
-import almond from '../../assets/images/flavors/almond.png';
+import iceCreamPlaceholder from '../../assets/images/placeholder-ice-cream.png';
+
+const imageKey = import.meta.env.VITE_IMAGE_KEY;
 
 const StockItem = ({
   id,
@@ -11,6 +13,7 @@ const StockItem = ({
   pricePerUnit,
   category,
   status,
+  image,
   onDeleteClick,
 }) => {
   const navigate = useNavigate();
@@ -22,7 +25,10 @@ const StockItem = ({
   };
   return (
     <div className="flavor-card basket-item-card">
-      <img src={almond} alt="Lemon" />
+      <img
+        src={image ? `${imageKey}/${image}` : iceCreamPlaceholder}
+        alt={title}
+      />
       <h3>{title}</h3>
       <p className="flavor-category">{category}</p>
       <div className="flavor-size">

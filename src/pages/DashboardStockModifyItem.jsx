@@ -5,17 +5,19 @@ import { Formik, Form, Field } from 'formik';
 import Banner from '../components/Shared/Banner';
 import bannerDashboardProducts from '/assets/images/banner-dashboard-products.png';
 import bannerDashboardProductsMobile from '/assets/images/banner-dashboard-products-mobile.png';
-import almond from '../assets/images/flavors/almond.png';
+import iceCreamPlaceholder from '../assets/images/placeholder-ice-cream.png';
 
 const DashboardStockModifyItem = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardProductsMobile);
   const navigate = useNavigate();
   const stockItem = useSelector((state) => state.stockItems.selectedItem);
   const [stockItemData, setStockItemData] = useState(null);
+  const [previewImage, setPreviewImage] = useState(iceCreamPlaceholder);
 
   useEffect(() => {
     if (stockItem) {
       setStockItemData(stockItem);
+      setPreviewImage(stockItem.image || iceCreamPlaceholder);
     }
   }, [stockItem]);
 
@@ -37,6 +39,20 @@ const DashboardStockModifyItem = () => {
     navigate(`/dashboard/stock`);
   };
 
+  const handleImageChange = (event, setFieldValue) => {
+    const file = event.currentTarget.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result); // Update the preview image
+        setFieldValue('image', file); // Set the selected file for Formik
+      };
+      reader.readAsDataURL(file); // Read the file as a data URL
+    } else {
+      setPreviewImage(iceCreamPlaceholder); // Reset to placeholder if no file is selected
+    }
+  };
+
   if (!stockItemData) {
     return <div>Loading...</div>;
   }
@@ -52,7 +68,7 @@ const DashboardStockModifyItem = () => {
       <section className="modify-stock-item">
         <div className="add-stock-item-form-wrapper">
           <div className="add-stock-item-form-image">
-            <img src={almond} alt="ice cream placeholder" />
+            <img src={previewImage} alt="Stock Item" />
           </div>
           <Formik
             initialValues={{
@@ -63,6 +79,7 @@ const DashboardStockModifyItem = () => {
               quantity: stockItemData.quantity || 0,
               pricePerUnit: stockItemData.pricePerUnit || 0,
               status: stockItemData.status || '',
+              image: stockItemData.image || '',
             }}
             onSubmit={(values) => {
               console.log(values);
@@ -97,12 +114,15 @@ const DashboardStockModifyItem = () => {
                     placeholder="Description"
                   />
                 </div>
-                <label htmlFor="imgUrl">Url de l'image</label>
+                <label htmlFor="image">Image</label>
                 <div className="add-stock-item-input">
-                  <Field
-                    name="imgUrl"
-                    type="text"
-                    placeholder="Url de l'image"
+                  <input
+                    name="image"
+                    type="file"
+                    accept="image/*"
+                    onChange={(event) =>
+                      handleImageChange(event, setFieldValue)
+                    }
                   />
                 </div>
                 <label htmlFor="quantity">Quantité</label>

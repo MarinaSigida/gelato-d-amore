@@ -93,6 +93,7 @@ const DashboardStock = () => {
                   id={item._id}
                   key={item._id}
                   title={item.title}
+                  image={item.image}
                   description={item.description}
                   quantity={item.quantity}
                   pricePerUnit={item.pricePerUnit}
