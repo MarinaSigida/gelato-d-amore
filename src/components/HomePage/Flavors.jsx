@@ -14,7 +14,7 @@ const Flavors = () => {
     dispatch(fetchStockItems());
   }, [dispatch]);
 
-  const firstItems = items.slice(0, 8);
+  const firstItems = items.slice(0, 12);
 
   useEffect(() => {
     const handleResize = () => {

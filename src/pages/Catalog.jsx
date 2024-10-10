@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchStockItems,
-  fetchStockItemsByCategory,
   selectItem,
   clearSelectedItem,
 } from '../features/stockItemsSlice';
@@ -16,6 +15,8 @@ import bannerCatalogMobile from '/assets/images/banner-catalog-mobile.png';
 const Catalog = () => {
   const [bannerImage, setBannerImage] = useState(bannerCatalogMobile);
   const [activeFilter, setActiveFilter] = useState('Tous');
+  const [filteredItems, setFilteredItems] = useState([]);
+
   const dispatch = useDispatch();
   const { items, loading, error, selectedItem } = useSelector(
     (state) => state.stockItems
@@ -39,13 +40,17 @@ const Catalog = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    if (activeFilter === 'Tous') {
+      setFilteredItems(items);
+    } else {
+      const filtered = items.filter((item) => item.category === activeFilter);
+      setFilteredItems(filtered);
+    }
+  }, [items, activeFilter]);
+
   const handleFilterClick = (category) => {
     setActiveFilter(category);
-    if (category === 'Tous') {
-      dispatch(fetchStockItems());
-    } else {
-      dispatch(fetchStockItemsByCategory(category));
-    }
   };
   const handleItemClick = (item) => {
     dispatch(selectItem(item));
@@ -102,7 +107,7 @@ const Catalog = () => {
           />
         </div>
         <div className="catalog-list">
-          {items.map((item) => (
+          {filteredItems.map((item) => (
             <Flavor
               key={item._id}
               id={item._id}
