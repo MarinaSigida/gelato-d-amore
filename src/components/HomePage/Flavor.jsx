@@ -1,4 +1,3 @@
-import caramel from '../../assets/images/flavors/caramel.png';
 import iceCreamPlaceholder from '../../assets/images/placeholder-ice-cream.png';
 
 const imageKey = import.meta.env.VITE_IMAGE_KEY;

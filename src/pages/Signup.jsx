@@ -18,6 +18,25 @@ const Signup = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleSignup = async (values) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await response.json();
+      if (data.token) {
+        localStorage.setItem('token', data.token); // Store token in localStorage
+      }
+    } catch (error) {
+      console.error('Error signing up:', error);
+    }
+  };
+
   return (
     <div className="main">
       <div className="login-container">
@@ -27,19 +46,20 @@ const Signup = () => {
         ></div>
         <div className="login-form-wrapper">
           <Formik
-            initialValues={{ email: '', password: '' }}
-            onSubmit={(values) => {
-              console.log(values);
+            initialValues={{
+              email: '',
+              password: '',
             }}
+            onSubmit={handleSignup}
           >
             {() => (
               <Form className="login-form">
                 <h2>BIENVENUE</h2>
                 <div className="login-inputs">
-                  <div className="login-input">
+                  {/* <div className="login-input">
                     <Field
                       type="text"
-                      name="name"
+                      name="lastName"
                       placeholder="Votre nom"
                       required
                     />
@@ -47,11 +67,11 @@ const Signup = () => {
                   <div className="login-input">
                     <Field
                       type="text"
-                      name="name"
+                      name="firstName"
                       placeholder="Votre prénom"
                       required
                     />
-                  </div>
+                  </div> */}
                   <div className="login-input">
                     <Field
                       type="email"

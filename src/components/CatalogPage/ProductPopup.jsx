@@ -1,6 +1,9 @@
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import cross from '../../assets/images/close.png';
 import chocolate from '../../assets/images/flavors/chocolate.png';
+import iceCreamPlaceholder from '../../assets/images/placeholder-ice-cream.png';
+
+const imageKey = import.meta.env.VITE_IMAGE_KEY;
 
 const ProductPopup = ({ isPopupOpen, closePopup, product }) => {
   const handleBackdropClick = (e) => {
@@ -18,7 +21,14 @@ const ProductPopup = ({ isPopupOpen, closePopup, product }) => {
           <div className="product-popup-content">
             <div className="product-popup-main-content">
               <div className="product-popup-main-content-img">
-                <img src={chocolate} alt={product.title} />
+                <img
+                  src={
+                    product.image
+                      ? `${imageKey}/${product.image}`
+                      : iceCreamPlaceholder
+                  }
+                  alt={product.title}
+                />
               </div>
               <div className="product-popup-main-content-text">
                 <h3>{product.title}</h3>

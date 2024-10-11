@@ -72,10 +72,16 @@
   }
 }
 .product-popup-main-content-img {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-radius: 10px;
   min-width: 50%;
+  height: 200px;
+  overflow: hidden;
   img {
-    border-radius: 30px;
     width: 100%;
+    height: 100%;
+    border-radius: 10px;
     object-fit: cover;
   }
 }
