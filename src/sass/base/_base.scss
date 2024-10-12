@@ -113,6 +113,29 @@ button {
   }
 }
 
+.logout-button {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: none;
+  &:hover,
+  &:focus {
+    background-color: none;
+    color: none;
+    border: none;
+  }
+  .icon {
+    transition: scale 0.3s ease;
+    &:hover,
+    &:focus {
+      scale: 1.05;
+    }
+  }
+}
+
 .icon-open,
 .icon-close {
   position: absolute;

@@ -1,14 +1,16 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../features/userSlice';
 import logo from '../assets/images/logo.png';
-import dashboardIcon from '../assets/images/dashboard.png';
+import logoutIcon from '../assets/images/logout.png';
 import BurgerMenuBtn from './BurgerMenu/BurgerMenuBtn';
 import ModalBurgerMenu from './BurgerMenu/ModalBurgerMenu';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
 
   const toggleModal = () => {
@@ -17,6 +19,11 @@ const Header = () => {
 
   const getUserName = (email) => {
     return email ? email.split('@')[0] : '';
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
   };
 
   return (
@@ -62,13 +69,20 @@ const Header = () => {
                 ></use>
               </svg>
             </NavLink>
-            <NavLink to="/login">
-              <svg className="icon" alt="login">
-                <use
-                  xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#user`}
-                ></use>
-              </svg>
-            </NavLink>
+            {!user && (
+              <NavLink to="/login">
+                <svg className="icon" alt="login">
+                  <use
+                    xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#user`}
+                  ></use>
+                </svg>
+              </NavLink>
+            )}
+            {user && (
+              <button onClick={handleLogout} className="logout-button">
+                <img src={logoutIcon} className="icon" alt="logout-icon" />
+              </button>
+            )}
           </div>
           <BurgerMenuBtn onClick={toggleModal} />
         </div>
