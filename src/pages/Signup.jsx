@@ -1,10 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../features/userSlice';
 import signupImage from '/assets/images/signup-background.jpg';
 import signupImageMobile from '/assets/images/signup-background-mobile.png';
 
 const Signup = () => {
   const [backgroundImage, setBackgroundImage] = useState(signupImageMobile);
+  const dispatch = useDispatch();
+  const { loading, error, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,23 +27,19 @@ const Signup = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleSignup = async (values) => {
-    try {
-      const response = await fetch('http://localhost:5000/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      });
-      const data = await response.json();
-      if (data.token) {
-        localStorage.setItem('token', data.token); // Store token in localStorage
-      }
-    } catch (error) {
-      console.error('Error signing up:', error);
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
     }
+  }, [isAuthenticated, navigate]);
+
+  const handleSignup = (values) => {
+    dispatch(registerUser({ email: values.email, password: values.password }));
   };
+
+  if (isAuthenticated) {
+    return <div>You are logged in!</div>;
+  }
 
   return (
     <div className="main">
@@ -49,29 +53,28 @@ const Signup = () => {
             initialValues={{
               email: '',
               password: '',
+              confirmPassword: '',
             }}
             onSubmit={handleSignup}
+            validate={(values) => {
+              const errors = {};
+              if (!values.email) {
+                errors.email = "L'email est requis";
+              }
+              if (!values.password) {
+                errors.password = 'Le mot de passe est requis';
+              }
+              if (values.password !== values.confirmPassword) {
+                errors.confirmPassword =
+                  'Les mots de passe ne correspondent pas';
+              }
+              return errors;
+            }}
           >
-            {() => (
+            {({ errors, touched }) => (
               <Form className="login-form">
                 <h2>BIENVENUE</h2>
                 <div className="login-inputs">
-                  {/* <div className="login-input">
-                    <Field
-                      type="text"
-                      name="lastName"
-                      placeholder="Votre nom"
-                      required
-                    />
-                  </div>
-                  <div className="login-input">
-                    <Field
-                      type="text"
-                      name="firstName"
-                      placeholder="Votre prénom"
-                      required
-                    />
-                  </div> */}
                   <div className="login-input">
                     <Field
                       type="email"
@@ -80,6 +83,7 @@ const Signup = () => {
                       required
                     />
                   </div>
+                  {errors.email && touched.email && <p>{errors.email}</p>}
                   <div className="login-input">
                     <Field
                       type="password"
@@ -88,6 +92,9 @@ const Signup = () => {
                       required
                     />
                   </div>
+                  {errors.password && touched.password && (
+                    <p>{errors.password}</p>
+                  )}
                   <div className="login-input">
                     <Field
                       type="password"
@@ -96,8 +103,15 @@ const Signup = () => {
                       required
                     />
                   </div>
+                  {errors.confirmPassword && touched.confirmPassword && (
+                    <p>{errors.confirmPassword}</p>
+                  )}
                 </div>
-                <button type="submit">Créer un compte</button>
+                <button type="submit">
+                  {' '}
+                  {loading ? "Création d'un compte..." : 'Créer un compte'}
+                </button>
+                {error && <p>{error}</p>}
               </Form>
             )}
           </Formik>
