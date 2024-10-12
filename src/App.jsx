@@ -18,8 +18,21 @@ import DashboardOrderModify from './pages/DashboardOrderModify';
 import DashboardControlPanel from './components/Dashboard/DashboardControlPanel';
 import Signup from './pages/Signup';
 import './sass/main.scss';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUserFromToken, setUser } from './features/userSlice';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const user = setUserFromToken();
+    console.log(user);
+    if (user) {
+      dispatch(setUser(user));
+    }
+  }, [dispatch]);
+
   return (
     <>
       <Routes>

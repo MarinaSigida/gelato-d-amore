@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import logo from '../assets/images/logo.png';
 import dashboardIcon from '../assets/images/dashboard.png';
 import BurgerMenuBtn from './BurgerMenu/BurgerMenuBtn';
@@ -8,14 +9,14 @@ import ModalBurgerMenu from './BurgerMenu/ModalBurgerMenu';
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-
-  const handleDashboardClick = (e) => {
-    e.preventDefault();
-    navigate('/dashboard/stock');
-  };
+  const user = useSelector((state) => state.user.user);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const getUserName = (email) => {
+    return email ? email.split('@')[0] : '';
   };
 
   return (
@@ -49,7 +50,9 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div></div>
+          <div className="username">
+            {user && <p>{getUserName(user.email)}</p>}
+          </div>
           <div className="basket-and-login">
             <NavLink to="/basket">
               <svg className="icon" alt="basket">

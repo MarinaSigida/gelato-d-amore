@@ -1,7 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 
 const apiKey = import.meta.env.VITE_API_KEY;
+
+export const setUserFromToken = () => {
+  const token = localStorage.getItem('jwtToken');
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+      console.log(decoded);
+      return { id: decoded.userId, email: decoded.email, token };
+    } catch (error) {
+      console.error('Token is invalid', error);
+      return null;
+    }
+  }
+  return null;
+};
 
 export const registerUser = createAsyncThunk(
   'user/register',
@@ -9,7 +25,7 @@ export const registerUser = createAsyncThunk(
     try {
       const response = await axios.post(`${apiKey}/register`, userData);
       localStorage.setItem('jwtToken', response.data.token);
-      return response.data;
+      return response.data.user;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -22,7 +38,7 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await axios.post(`${apiKey}/login`, credentials);
       localStorage.setItem('jwtToken', response.data.token);
-      return response.data;
+      return response.data.user;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -43,6 +59,10 @@ const userSlice = createSlice({
       state.isAuthenticated = false;
       localStorage.removeItem('jwtToken');
     },
+    setUser: (state, action) => {
+      state.user = action.payload;
+      state.isAuthenticated = true;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -52,7 +72,7 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.isAuthenticated = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
@@ -65,7 +85,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.isAuthenticated = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -75,7 +95,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { authStart, authSuccess, authFailure, logout } =
-  userSlice.actions;
+export const { setUser, logout } = userSlice.actions;
 
 export default userSlice.reducer;
