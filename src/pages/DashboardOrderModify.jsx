@@ -1,17 +1,30 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchOrderById } from '../features/ordersSlice';
 import OrderItem from '../components/OrderDetailPage/OrderItem';
 import Banner from '../components/Shared/Banner';
 import bannerDashboardOrders from '/assets/images/banner-dashboard-orders.png';
 import bannerDashboardTablet from '/assets/images/banner-dashboard-orders-tablet.png';
 import bannerDashboardMobile from '/assets/images/banner-dashboard-orders-mobile.png';
 import CancelOrderPopup from '../components/DashboardOrdersPage/CancelOrderPopup';
+import { statusTranslations, deliveryTranslations } from '../utils/orderUtils';
 
 const DashboardOrderModify = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
   const [selectedOrderNumber, setSelectedOrderNumber] = useState('');
-  const { id } = useParams();
+  const navigate = useNavigate();
+  const { id } = useParams(); // Extract the order ID from the URL
+  const dispatch = useDispatch();
+  const selectedOrder = useSelector((state) => state.orders.selectedOrder);
+  const loading = useSelector((state) => state.orders.loading);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOrderById(id)); // Fetch the order using the order ID
+    }
+  }, [id, dispatch]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,14 +42,21 @@ const DashboardOrderModify = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!selectedOrder) {
+    return <div>No order found</div>;
+  }
+  const { order, orderItems } = selectedOrder;
+
   const toggleCancelOrderPopup = () => {
     setIsCancelPopupOpen(!isCancelPopupOpen);
   };
 
-  //CHANGE TO ID TO ORDER_NUMBER AFTER FETCHING ALL ORDER'S INFO
-
   const handleCancelOrderClick = () => {
-    setSelectedOrderNumber(id);
+    setSelectedOrderNumber(order.number); // Ensure selectedOrder has a 'number' field
     toggleCancelOrderPopup();
   };
 
@@ -50,28 +70,54 @@ const DashboardOrderModify = () => {
       <section className="order-detail">
         <div className="order-container">
           <div className="order-number">
-            <h3>#{id}</h3>
-            <p>Date : 01.12.2024</p>
+            <h3>#{order.number}</h3>
+            <p>Date : {new Date(order.createdAt).toLocaleDateString()}</p>
           </div>
           <div className="order-main-info">
             <div className="order-total">
               <div>
                 <p>
-                  Coût total : <span>50€</span>
+                  Coût total :{' '}
+                  <span>
+                    {' '}
+                    {orderItems.reduce(
+                      (total, item) =>
+                        total + item.quantity * item.stockItemId.pricePerUnit,
+                      0
+                    )}
+                    €
+                  </span>
                 </p>
                 <p>
-                  Quantité : <span>2kg</span>
+                  Quantité :{' '}
+                  <span>
+                    {' '}
+                    {(orderItems.reduce(
+                      (total, item) => total + item.quantity,
+                      0
+                    ) *
+                      450) /
+                      1000}{' '}
+                    kg
+                  </span>
                 </p>
               </div>
             </div>
             <div className="order-delivery-info">
-              <p>Statut : Confirmé</p>
-              <p>Mode de livraison : A domicile</p>
+              <p>
+                Statut : {statusTranslations[order.status] || 'Statut inconnu'}
+              </p>
+              <p>
+                Mode de livraison :{' '}
+                {deliveryTranslations[order.deliveryOption] ||
+                  'Option inconnue'}
+              </p>
+              {/* remake due to user unfo */}
               <p>Adresse de livraison : 22 Victor Hugo, Nice , 06000</p>
             </div>
           </div>
           <div className="dashboard-order-modify-buttons">
-            {/* enabled only when the status is penging */}
+            {/* enabled only when the status is pending */}
             <button id="confirm-btn">Confirmer</button>
             {/* to change the items in the order */}
             <button id="modify-btn">Modifier</button>
@@ -82,11 +128,20 @@ const DashboardOrderModify = () => {
           </div>
         </div>
         <div className="order-items-container">
-          <OrderItem />
-          <OrderItem />
-          <OrderItem />
-          <OrderItem />
-          <OrderItem />
+          {orderItems && orderItems.length > 0 ? (
+            orderItems.map((item) => (
+              <OrderItem
+                key={item._id}
+                title={item.stockItemId.title}
+                category={item.stockItemId.category}
+                price={item.stockItemId.pricePerUnit}
+                quantity={item.quantity}
+                image={item.stockItemId.image}
+              />
+            ))
+          ) : (
+            <div>Aucun article dans la commande</div>
+          )}
         </div>
       </section>
       <CancelOrderPopup

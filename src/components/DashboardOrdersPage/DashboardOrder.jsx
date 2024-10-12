@@ -1,14 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import rightArrow from '../../assets/images/right-arrow.png';
+import {
+  statusTranslations,
+  deliveryTranslations,
+} from '../../utils/orderUtils';
 
 const DashboardOrder = ({
   id,
   number,
-  userId,
   createdAt,
-  updateAt,
   status,
   deliveryOption,
+  orderItems,
 }) => {
   const navigate = useNavigate();
   const handleOrderClick = (e) => {
@@ -23,23 +26,40 @@ const DashboardOrder = ({
       </div>
       <div className="order-number">
         <h3>#{number}</h3>
-        <p>Date : {createdAt}</p>
+        <p>Date : {new Date(createdAt).toLocaleDateString()}</p>
       </div>
       <div className="order-main-info">
         <div className="order-total">
           <div>
             <p>
-              Coût total : <span>50€</span>
+              Coût total :{' '}
+              <span>
+                {orderItems.reduce(
+                  (total, item) =>
+                    total + item.quantity * item.stockItemId.pricePerUnit,
+                  0
+                )}
+                €
+              </span>
             </p>
             <p>
-              Quantité : <span>2kg</span>
+              Quantité :{' '}
+              <span>
+                {(orderItems.reduce((total, item) => total + item.quantity, 0) *
+                  450) /
+                  1000}{' '}
+                kg
+              </span>
             </p>
           </div>
         </div>
 
         <div className="order-delivery-info">
-          <p>Statut : {status}</p>
-          <p>Mode de livraison : {deliveryOption}</p>
+          <p>Statut : {statusTranslations[status] || 'Statut inconnu'}</p>
+          <p>
+            Mode de livraison :{' '}
+            {deliveryTranslations[deliveryOption] || 'Option inconnue'}
+          </p>
           <p>Adresse de livraison : 22 Victor Hugo, Nice , 06000</p>
         </div>
       </div>

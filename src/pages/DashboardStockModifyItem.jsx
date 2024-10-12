@@ -9,7 +9,6 @@ import bannerDashboardProductsMobile from '/assets/images/banner-dashboard-produ
 import iceCreamPlaceholder from '../assets/images/placeholder-ice-cream.png';
 
 const imageKey = import.meta.env.VITE_IMAGE_KEY;
-//test
 const DashboardStockModifyItem = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardProductsMobile);
   const navigate = useNavigate();

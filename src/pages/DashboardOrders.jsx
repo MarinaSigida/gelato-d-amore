@@ -1,13 +1,20 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchOrders } from '../features/ordersSlice';
 import Banner from '../components/Shared/Banner';
 import bannerDashboardOrders from '/assets/images/banner-dashboard-orders.png';
 import bannerDashboardTablet from '/assets/images/banner-dashboard-orders-tablet.png';
 import bannerDashboardMobile from '/assets/images/banner-dashboard-orders-mobile.png';
-import DashboardOrder from '../components/DashboardOrdersPage/OrderDashboard';
-import ordersData from '../resources/orders.json';
+import DashboardOrder from '../components/DashboardOrdersPage/DashboardOrder';
 
 const DashboardOrders = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
+  const dispatch = useDispatch();
+  const { orders, loading, error } = useSelector((state) => state.orders);
+
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, [dispatch]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,16 +40,17 @@ const DashboardOrders = () => {
         textPosition="right"
       />
       <section className="orders">
-        {ordersData.map((order) => (
+        {orders.map((order) => (
           <DashboardOrder
-            key={order.id}
-            id={order.id}
+            key={order._id}
+            id={order._id}
             number={order.number}
             userId={order.userId}
             status={order.status}
             deliveryOption={order.deliveryOption}
             createdAt={order.createdAt}
             updatedAt={order.updatedAt}
+            orderItems={order.orderItems}
           />
         ))}
       </section>
