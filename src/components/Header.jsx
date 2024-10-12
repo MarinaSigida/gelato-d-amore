@@ -50,10 +50,11 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="username">
-            {user && <p>{getUserName(user.email)}</p>}
-          </div>
+
           <div className="basket-and-login">
+            <div className="username">
+              {user && <p>{getUserName(user.email)}</p>}
+            </div>
             <NavLink to="/basket">
               <svg className="icon" alt="basket">
                 <use

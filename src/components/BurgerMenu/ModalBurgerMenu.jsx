@@ -1,13 +1,19 @@
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { OverlayBurgerMenu } from './OverlayBurgerMenu';
 import cross from '../../assets/images/close.png';
 
 const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
+  const user = useSelector((state) => state.user.user);
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
     }
   };
+
+   const getUserName = (email) => {
+     return email ? email.split('@')[0] : '';
+   };
   return (
     <>
       <OverlayBurgerMenu onClick={handleBackdropClick}>
@@ -20,6 +26,9 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
             <img src={cross} alt="close" />
           </div>
           <div className="burger-menu-navigation">
+            <div className="username">
+              {user && <p>{getUserName(user.email)}</p>}
+            </div>
             <NavLink to="/" end onClick={closeModal}>
               Accueil
             </NavLink>

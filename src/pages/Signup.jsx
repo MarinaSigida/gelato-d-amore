@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../features/userSlice';
+import { registerUser, setUser } from '../features/userSlice';
 import signupImage from '/assets/images/signup-background.jpg';
 import signupImageMobile from '/assets/images/signup-background-mobile.png';
 
@@ -33,10 +33,16 @@ const Signup = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  const handleSignup = (values) => {
-    dispatch(registerUser({ email: values.email, password: values.password }));
+  const handleSignup = async (values) => {
+    try {
+      const user = await dispatch(
+        registerUser({ email: values.email, password: values.password })
+      ).unwrap();
+      dispatch(setUser(user));
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
   };
-
   if (isAuthenticated) {
     return <div>You are logged in!</div>;
   }

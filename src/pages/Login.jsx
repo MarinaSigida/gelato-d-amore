@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../features/userSlice';
+import { loginUser, setUser } from '../features/userSlice';
 import loginImage from '/assets/images/login-background.png';
 import loginImageMobile from '/assets/images/login-background-mobile.png';
 
@@ -33,8 +33,15 @@ const Login = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  const handleLogin = (values) => {
-    dispatch(loginUser({ email: values.email, password: values.password }));
+  const handleLogin = async (values) => {
+    try {
+      const user = await dispatch(
+        loginUser({ email: values.email, password: values.password })
+      ).unwrap();
+      dispatch(setUser(user));
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
   if (isAuthenticated) {

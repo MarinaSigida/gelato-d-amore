@@ -136,6 +136,7 @@
   .icon {
     width: 24px;
     height: 24px;
+    margin: auto 0;
     stroke: fn.get-color('dark');
     fill: fn.get-color('white');
     transition: stroke 0.3s ease, fill 0.3s ease;
@@ -148,5 +149,8 @@
 
 .username {
   text-transform: capitalize;
-  text-align: end;
+  display: flex;
+  align-items: flex-end;
+  font-weight: 500;
+  color: fn.get-color('dark-red');
 }

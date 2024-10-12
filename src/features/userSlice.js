@@ -9,7 +9,6 @@ export const setUserFromToken = () => {
   if (token) {
     try {
       const decoded = jwtDecode(token);
-      console.log(decoded);
       return { id: decoded.userId, email: decoded.email, token };
     } catch (error) {
       console.error('Token is invalid', error);
@@ -72,7 +71,7 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.isAuthenticated = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
@@ -85,7 +84,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.isAuthenticated = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
