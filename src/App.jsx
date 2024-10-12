@@ -27,7 +27,6 @@ function App() {
 
   useEffect(() => {
     const user = setUserFromToken();
-    console.log(user);
     if (user) {
       dispatch(setUser(user));
     }

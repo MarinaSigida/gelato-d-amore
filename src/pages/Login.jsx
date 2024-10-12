@@ -40,12 +40,12 @@ const Login = () => {
       ).unwrap();
       dispatch(setUser(user));
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('Échec de la connexion :', error);
     }
   };
 
   if (isAuthenticated) {
-    return <div>You are logged in!</div>;
+    return <div>Vous êtes connecté !</div>;
   }
 
   return (
@@ -95,6 +95,12 @@ const Login = () => {
                     <p>{errors.password}</p>
                   )}
                 </div>
+                {error && (
+                  <p className="error-message">
+                    Utilisateur non trouvé. Veuillez vérifier votre email et mot
+                    de passe.
+                  </p>
+                )}
                 <button type="submit">
                   {' '}
                   {loading ? 'Connexion en cours...' : 'Connexion'}

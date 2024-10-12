@@ -1,19 +1,28 @@
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { OverlayBurgerMenu } from './OverlayBurgerMenu';
+import { logout } from '../../features/userSlice';
+import logoutIcon from '../../assets/images/logout.png';
 import cross from '../../assets/images/close.png';
 
 const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
   const user = useSelector((state) => state.user.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
     }
   };
 
-   const getUserName = (email) => {
-     return email ? email.split('@')[0] : '';
-   };
+  const getUserName = (email) => {
+    return email ? email.split('@')[0] : '';
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
   return (
     <>
       <OverlayBurgerMenu onClick={handleBackdropClick}>
@@ -27,7 +36,7 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
           </div>
           <div className="burger-menu-navigation">
             <div className="username">
-              {user && <p>{getUserName(user.email)}</p>}
+              {user && <p>{`Bienvenue ${getUserName(user.email)}`}</p>}
             </div>
             <NavLink to="/" end onClick={closeModal}>
               Accueil
@@ -62,13 +71,20 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
                 ></use>
               </svg>
             </NavLink>
-            <NavLink to="/login" onClick={closeModal}>
-              <svg className="icon" alt="login">
-                <use
-                  xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#user`}
-                ></use>
-              </svg>
-            </NavLink>
+            {!user && (
+              <NavLink to="/login" onClick={closeModal}>
+                <svg className="icon" alt="login">
+                  <use
+                    xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#user`}
+                  ></use>
+                </svg>
+              </NavLink>
+            )}
+            {user && (
+              <button onClick={handleLogout} className="logout-button">
+                <img src={logoutIcon} className="icon" alt="logout-icon" />
+              </button>
+            )}
           </div>
         </div>
       </OverlayBurgerMenu>

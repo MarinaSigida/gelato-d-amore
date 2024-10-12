@@ -113,11 +113,15 @@ const Signup = () => {
                     <p>{errors.confirmPassword}</p>
                   )}
                 </div>
+                {error && (
+                  <p className="error-message">
+                    L'utilisateur avec cette adresse e-mail existe déjà
+                  </p>
+                )}
                 <button type="submit">
                   {' '}
                   {loading ? "Création d'un compte..." : 'Créer un compte'}
                 </button>
-                {error && <p>{error}</p>}
               </Form>
             )}
           </Formik>
