@@ -47,21 +47,27 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
             <NavLink to="/catalog" onClick={closeModal}>
               Catalogue
             </NavLink>
-            <NavLink to="/orders" onClick={closeModal}>
-              Mes commandes
-            </NavLink>
+            {user && user.role === 'client' && (
+              <NavLink to="/orders" onClick={closeModal}>
+                Mes commandes
+              </NavLink>
+            )}
             <NavLink to="/contact" onClick={closeModal}>
               Contact
             </NavLink>
-            <NavLink to="/dashboard/stock" onClick={closeModal}>
-              Stocks
-            </NavLink>
-            <NavLink to="/dashboard/users" onClick={closeModal}>
-              Utilisateurs
-            </NavLink>
-            <NavLink to="/dashboard/orders" onClick={closeModal}>
-              Commandes
-            </NavLink>
+            {user && user.role === 'admin' && (
+              <>
+                <NavLink to="/dashboard/stock" onClick={closeModal}>
+                  Stocks
+                </NavLink>
+                <NavLink to="/dashboard/users" onClick={closeModal}>
+                  Utilisateurs
+                </NavLink>
+                <NavLink to="/dashboard/orders" onClick={closeModal}>
+                  Commandes
+                </NavLink>
+              </>
+            )}
           </div>
           <div className="burger-menu-basket-and-login">
             <NavLink to="/basket" onClick={closeModal}>

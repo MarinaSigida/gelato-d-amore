@@ -41,8 +41,19 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="catalog" element={<Catalog />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="orders/:id" element={<OrderDetail />} />
+          <Route
+            path="orders/*"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                userRole={user?.role}
+                requiredRole="client"
+              />
+            }
+          >
+            <Route index element={<Orders />} />
+            <Route path="orders/:id" element={<OrderDetail />} />
+          </Route>
           <Route path="contact" element={<Contact />} />
           <Route
             path="dashboard/*"

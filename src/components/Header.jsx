@@ -46,7 +46,9 @@ const Header = () => {
             </NavLink>
             <NavLink to="/about">A propos</NavLink>
             <NavLink to="/catalog">Catalogue</NavLink>
-            <NavLink to="/orders">Mes commandes</NavLink>
+            {user && user.role === 'client' && (
+              <NavLink to="/orders">Mes commandes</NavLink>
+            )}
             <NavLink to="/contact">Contact</NavLink>
             {user && user.role === 'admin' && (
               <div className="dropdown">
