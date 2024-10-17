@@ -48,14 +48,16 @@ const Header = () => {
             <NavLink to="/catalog">Catalogue</NavLink>
             <NavLink to="/orders">Mes commandes</NavLink>
             <NavLink to="/contact">Contact</NavLink>
-            <div className="dropdown">
-              <NavLink to="/dashboard">Tableau de bord</NavLink>
-              <div className="dropdown-content">
-                <NavLink to="/dashboard/stock">Stocks</NavLink>
-                <NavLink to="/dashboard/users">Utilisateurs</NavLink>
-                <NavLink to="/dashboard/orders">Commandes</NavLink>
+            {user && user.role === 'admin' && (
+              <div className="dropdown">
+                <NavLink to="/dashboard">Tableau de bord</NavLink>
+                <div className="dropdown-content">
+                  <NavLink to="/dashboard/stock">Stocks</NavLink>
+                  <NavLink to="/dashboard/users">Utilisateurs</NavLink>
+                  <NavLink to="/dashboard/orders">Commandes</NavLink>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           <div className="basket-and-login">

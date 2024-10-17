@@ -9,7 +9,12 @@ export const setUserFromToken = () => {
   if (token) {
     try {
       const decoded = jwtDecode(token);
-      return { id: decoded.userId, email: decoded.email, token };
+      return {
+        id: decoded.userId,
+        email: decoded.email,
+        role: decoded.role,
+        token,
+      };
     } catch (error) {
       console.error('Token is invalid', error);
       return null;
@@ -47,8 +52,8 @@ export const loginUser = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    user: null,
-    isAuthenticated: false,
+    user: setUserFromToken(),
+    isAuthenticated: !!setUserFromToken(),
     loading: false,
     error: null,
   },

@@ -5,7 +5,6 @@ import Catalog from './pages/Catalog';
 import Orders from './pages/Orders';
 import OrderDetail from './pages/OrderDetail';
 import Contact from './pages/Contact';
-import Dashboard from './pages/Dashboard';
 import MainLayout from './components/MainLayout';
 import Login from './pages/Login';
 import Basket from './pages/Basket';
@@ -17,12 +16,15 @@ import DashboardUserModify from './pages/DashboardUserModify';
 import DashboardOrderModify from './pages/DashboardOrderModify';
 import DashboardControlPanel from './components/Dashboard/DashboardControlPanel';
 import Signup from './pages/Signup';
+import ProtectedRoute from './components/ProtectedRoute';
 import './sass/main.scss';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { setUserFromToken, setUser } from './features/userSlice';
 
 function App() {
+  const { user, isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,7 +44,16 @@ function App() {
           <Route path="orders" element={<Orders />} />
           <Route path="orders/:id" element={<OrderDetail />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="dashboard" element={<Dashboard />}>
+          <Route
+            path="dashboard/*"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                userRole={user?.role}
+                requiredRole="admin"
+              />
+            }
+          >
             <Route index element={<DashboardControlPanel />} />
             <Route path="stock" element={<DashboardStock />} />
             <Route path="stock/:id" element={<DashboardStockModifyItem />} />
