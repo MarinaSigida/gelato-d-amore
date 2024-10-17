@@ -9,6 +9,7 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { items, totalQuantity } = useSelector((state) => state.basket);
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
@@ -71,11 +72,16 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
           </div>
           <div className="burger-menu-basket-and-login">
             <NavLink to="/basket" onClick={closeModal}>
-              <svg className="icon" alt="basket">
-                <use
-                  xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#basket`}
-                ></use>
-              </svg>
+              <div className="basket-icon-container">
+                <svg className="icon" alt="basket">
+                  <use
+                    xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#basket`}
+                  ></use>
+                </svg>
+                {items.length > 0 && (
+                  <div className="basket-quantity">{totalQuantity}</div>
+                )}
+              </div>
             </NavLink>
             {!user && (
               <NavLink to="/login" onClick={closeModal}>

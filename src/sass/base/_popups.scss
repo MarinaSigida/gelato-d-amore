@@ -104,4 +104,16 @@
     color: fn.get-color('grey');
     font-size: 14px;
   }
+
+  .item-add-to-basket-text {
+    padding: 20px 0;
+    span {
+      color: fn.get-color('dark-red');
+      font-weight: 500;
+    }
+  }
+  .go-to-basket-btn {
+    display: flex;
+    justify-content: center;
+  }
 }

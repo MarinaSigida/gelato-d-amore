@@ -6,6 +6,7 @@ import {
   clearSelectedItem,
 } from '../features/stockItemsSlice';
 import ProductPopup from '../components/CatalogPage/ProductPopup';
+import ItemAddedToBasketNotification from '../components/Notifications/ItemAddedToBasketNotification';
 import Banner from '../components/Shared/Banner';
 import CatalogFilter from '../components/CatalogPage/CatalogFilter';
 import Flavor from '../components/HomePage/Flavor';
@@ -16,6 +17,8 @@ const Catalog = () => {
   const [bannerImage, setBannerImage] = useState(bannerCatalogMobile);
   const [activeFilter, setActiveFilter] = useState('Tous');
   const [filteredItems, setFilteredItems] = useState([]);
+  const [notificationData, setNotificationData] = useState(null);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
   const dispatch = useDispatch();
   const { items, loading, error, selectedItem } = useSelector(
@@ -59,6 +62,15 @@ const Catalog = () => {
     dispatch(clearSelectedItem());
   };
 
+  const handleNotificationClose = () => {
+    setIsNotificationOpen(false);
+    setNotificationData(null);
+  };
+
+  const handleAddToBasket = (item) => {
+    setNotificationData(item);
+    setIsNotificationOpen(true);
+  };
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -121,6 +133,7 @@ const Catalog = () => {
               updatedAt={item.updatedAt}
               status={item.status}
               onClick={() => handleItemClick(item)}
+              onAddToBasket={handleAddToBasket}
             />
           ))}
         </div>
@@ -129,6 +142,13 @@ const Catalog = () => {
             isPopupOpen={!!selectedItem}
             closePopup={handleClosePopup}
             product={selectedItem}
+          />
+        )}
+        {isNotificationOpen && (
+          <ItemAddedToBasketNotification
+            isPopupOpen={isNotificationOpen}
+            closePopup={handleNotificationClose}
+            item={notificationData}
           />
         )}
       </section>

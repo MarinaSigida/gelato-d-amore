@@ -4,7 +4,7 @@ import iceCreamPlaceholder from '../../assets/images/placeholder-ice-cream.png';
 
 const imageKey = import.meta.env.VITE_IMAGE_KEY;
 
-const ProductPopup = ({ isPopupOpen, closePopup, product }) => {
+const ItemAddedToBasketNotification = ({ isPopupOpen, closePopup, item }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closePopup();
@@ -22,37 +22,28 @@ const ProductPopup = ({ isPopupOpen, closePopup, product }) => {
               <div className="product-popup-main-content-img">
                 <img
                   src={
-                    product.image
-                      ? `${imageKey}/${product.image}`
+                    item.image
+                      ? `${imageKey}/${item.image}`
                       : iceCreamPlaceholder
                   }
-                  alt={product.title}
+                  alt={item.title}
                 />
               </div>
               <div className="product-popup-main-content-text">
-                <h3>{product.title}</h3>
-                <p className="flavor-category">{product.category}</p>
-                <p className="flavor-description">{product.description}</p>
-                <div className="flavor-size">
-                  <p>Poids : 450 g</p>
+                <div className="item-add-to-basket-text">
+                  <span>{item.title}</span> a été ajouté à votre panier !
+                  <br />
+                  Quantité : <span>{item.quantity}</span>
+                  <br />
+                  Montant total : <span>{item.quantity * item.price} €</span>
+                </div>
+                <div className="go-to-basket-btn">
+                  <button>
+                    <a href="/basket">Panier</a>
+                  </button>
                 </div>
               </div>
             </div>
-            <div className="price-and-quantity">
-              <div className="price">
-                <p>{product.pricePerUnit} €</p>
-              </div>
-              <div className="quantity">
-                <p>1</p>
-              </div>
-              <div className="quantity-btn-container">
-                <button className="quantity-btn">+</button>
-                <button className="quantity-btn">-</button>
-              </div>
-            </div>
-            <button className="buy-btn" style={{ padding: '8px 14px' }}>
-              Ajouter au panier
-            </button>
           </div>
         </div>
       </OverlayPopup>
@@ -60,4 +51,4 @@ const ProductPopup = ({ isPopupOpen, closePopup, product }) => {
   );
 };
 
-export default ProductPopup;
+export default ItemAddedToBasketNotification;

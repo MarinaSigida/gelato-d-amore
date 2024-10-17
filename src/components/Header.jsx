@@ -12,6 +12,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const { items, totalQuantity } = useSelector((state) => state.basket);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -67,11 +68,16 @@ const Header = () => {
               {user && <p>{getUserName(user.email)}</p>}
             </div>
             <NavLink to="/basket">
-              <svg className="icon" alt="basket">
-                <use
-                  xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#basket`}
-                ></use>
-              </svg>
+              <div className="basket-icon-container">
+                <svg className="icon" alt="basket">
+                  <use
+                    xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#basket`}
+                  ></use>
+                </svg>
+                {items.length > 0 && (
+                  <div className="basket-quantity">{totalQuantity}</div>
+                )}
+              </div>
             </NavLink>
             {!user && (
               <NavLink to="/login">
