@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearBasket } from '../features/basketSlice';
 import Banner from '../components/Shared/Banner';
 import BasketItem from '../components/BasketPage/BasketItem';
 import BasketForm from '../components/BasketPage/BasketForm';
@@ -11,6 +12,7 @@ const Basket = () => {
   const { items, totalQuantity, totalAmount } = useSelector(
     (state) => state.basket
   );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleResize = () => {
@@ -24,6 +26,10 @@ const Basket = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleClearBasket = () => {
+    dispatch(clearBasket());
+  };
 
   return (
     <div className="main">
@@ -47,6 +53,16 @@ const Basket = () => {
                   <p>{(totalQuantity * 450) / 1000} kg</p>
                 </div>
               </div>
+              {items.length > 0 && (
+                <div>
+                  <button
+                    className="empty-basket-button"
+                    onClick={handleClearBasket}
+                  >
+                    <p>Vider le panier</p>
+                  </button>
+                </div>
+              )}
             </div>
             <div className="basket-items">
               {items.length > 0 ? (
