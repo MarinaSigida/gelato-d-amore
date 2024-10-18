@@ -16,6 +16,7 @@ const DashboardStock = () => {
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [selectedItemTitle, setSelectedItemTitle] = useState('');
   const [selectedItemId, setSelectedItemId] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const dispatch = useDispatch();
   const { items, loading, error } = useSelector((state) => state.stockItems);
 
@@ -57,6 +58,14 @@ const DashboardStock = () => {
     toggleDeleteStockItemPopup();
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredItems = items.filter((item) =>
+    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -81,14 +90,20 @@ const DashboardStock = () => {
 
         {isStockListOpen && !isAddStockItemOpen && (
           <div className="stock-quantity-and-search">
-            <p>Nombre d'articles: {items.length}</p>
+            <p>Nombre d'articles: {filteredItems.length}</p>
             <div className="search-bar">
-              <input placeholder="Rechercher" type="text" name="title" />
+              <input
+                placeholder="Rechercher"
+                type="text"
+                name="title"
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
               <img src={searchIcon} className="search-icon" alt="search icon" />
             </div>
 
             <div className="stock-list">
-              {items.map((item) => (
+              {filteredItems.map((item) => (
                 <StockItem
                   id={item._id}
                   key={item._id}
