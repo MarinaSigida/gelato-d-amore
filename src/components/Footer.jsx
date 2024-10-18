@@ -1,6 +1,9 @@
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Footer = () => {
+  const user = useSelector((state) => state.user.user);
+
   return (
     <div>
       <footer className="footer">
@@ -54,7 +57,9 @@ const Footer = () => {
           </NavLink>
           <NavLink to="/about">A propos</NavLink>
           <NavLink to="/catalog">Catalogue</NavLink>
-          <NavLink to="/orders">Mes commandes</NavLink>
+          {user && user.role === 'client' && (
+            <NavLink to="/orders">Mes commandes</NavLink>
+          )}
           <NavLink to="/contact">Contact</NavLink>
         </div>
       </footer>
