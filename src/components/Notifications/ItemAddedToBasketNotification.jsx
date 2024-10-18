@@ -37,9 +37,19 @@ const ItemAddedToBasketNotification = ({ isPopupOpen, closePopup, item }) => {
                   <br />
                   Montant total : <span>{item.quantity * item.price} €</span>
                 </div>
-                <div className="go-to-basket-btn">
-                  <button>
-                    <a href="/basket">Panier</a>
+                <div className="go-to-basket-btn-container">
+                  <button onClick={closePopup}>Fermer</button>
+                  <button className="go-to-basket-btn">
+                    <a href="/basket">
+                      <svg className="icon" alt="basket">
+                        <use
+                          xlinkHref={`${
+                            import.meta.env.BASE_URL
+                          }sprite.svg#basket`}
+                        ></use>
+                      </svg>
+                      <p>Panier</p>
+                    </a>
                   </button>
                 </div>
               </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Banner from '../components/Shared/Banner';
 import BasketItem from '../components/BasketPage/BasketItem';
 import BasketForm from '../components/BasketPage/BasketForm';
@@ -7,6 +8,9 @@ import bannerBasketMobile from '/assets/images/banner-basket-mobile.png';
 
 const Basket = () => {
   const [bannerImage, setBannerImage] = useState(bannerBasketMobile);
+  const { items, totalQuantity, totalAmount } = useSelector(
+    (state) => state.basket
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,6 +24,7 @@ const Basket = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
   return (
     <div className="main">
       <Banner image={bannerImage} />
@@ -33,21 +38,24 @@ const Basket = () => {
               <div className="basket-total-price">
                 <p>Coût total</p>
                 <div className="price">
-                  <p>50€</p>
+                  <p>{totalAmount} €</p>
                 </div>
               </div>
               <div className="basket-total-quantity">
                 <p>Quantité</p>
                 <div className="quantity">
-                  <p>2kg</p>
+                  <p>{(totalQuantity * 450) / 1000} kg</p>
                 </div>
               </div>
             </div>
             <div className="basket-items">
-              <BasketItem />
-              <BasketItem />
-              <BasketItem />
-              <BasketItem />
+              {items.length > 0 ? (
+                items.map((item) => <BasketItem key={item.id} item={item} />)
+              ) : (
+                <div className="empty-basket-message">
+                  <p>Votre panier est vide.</p>
+                </div>
+              )}
             </div>
           </div>
           <div className="basket-form">

@@ -69,6 +69,10 @@
 .basket-item-card {
   margin-bottom: 0;
 }
+
+.empty-basket-message {
+  padding: 20px;
+}
 .basket-form {
   min-width: 45%;
   @include mx.media-query('md') {
