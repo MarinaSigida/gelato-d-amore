@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchStockItems } from '../../features/stockItemsSlice';
 import Flavor from './Flavor';
 
-const Flavors = () => {
+const Flavors = ({ onAddToBasket }) => {
   const [swiperThemeColor, setSwiperThemeColor] = useState(
     'rgba(255, 255, 255, 0)'
   );
@@ -70,6 +70,7 @@ const Flavors = () => {
                 createdAt={item.createdAt}
                 updatedAt={item.updatedAt}
                 status={item.status}
+                onAddToBasket={onAddToBasket}
               />
             </swiper-slide>
           ))}

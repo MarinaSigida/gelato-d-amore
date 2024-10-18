@@ -1,15 +1,46 @@
+import { useDispatch } from 'react-redux';
+import { addToBasket } from '../../features/basketSlice';
+import { useState } from 'react';
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import cross from '../../assets/images/close.png';
 import iceCreamPlaceholder from '../../assets/images/placeholder-ice-cream.png';
 
 const imageKey = import.meta.env.VITE_IMAGE_KEY;
 
-const ProductPopup = ({ isPopupOpen, closePopup, product }) => {
+const ProductPopup = ({ isPopupOpen, closePopup, product, onAddToBasket }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closePopup();
     }
   };
+
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+
+  const handleIncrement = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
+
+  const handdleAddToBasket = () => {
+    const item = {
+      id: product._id,
+      title: product.title,
+      image: product.image,
+      price: product.pricePerUnit,
+      quantity,
+    };
+    dispatch(addToBasket(item));
+    onAddToBasket(item);
+    closePopup();
+    setQuantity(1);
+  };
+
   return (
     <>
       <OverlayPopup onClick={handleBackdropClick}>
@@ -40,17 +71,25 @@ const ProductPopup = ({ isPopupOpen, closePopup, product }) => {
             </div>
             <div className="price-and-quantity">
               <div className="price">
-                <p>{product.pricePerUnit} €</p>
+                <p>{product.pricePerUnit * quantity} €</p>
               </div>
               <div className="quantity">
-                <p>1</p>
+                <p>{quantity}</p>
               </div>
               <div className="quantity-btn-container">
-                <button className="quantity-btn">+</button>
-                <button className="quantity-btn">-</button>
+                <button className="quantity-btn" onClick={handleIncrement}>
+                  +
+                </button>
+                <button className="quantity-btn" onClick={handleDecrement}>
+                  -
+                </button>
               </div>
             </div>
-            <button className="buy-btn" style={{ padding: '8px 14px' }}>
+            <button
+              className="buy-btn"
+              onClick={handdleAddToBasket}
+              style={{ padding: '8px 14px' }}
+            >
               Ajouter au panier
             </button>
           </div>

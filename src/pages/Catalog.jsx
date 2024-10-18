@@ -142,6 +142,7 @@ const Catalog = () => {
             isPopupOpen={!!selectedItem}
             closePopup={handleClosePopup}
             product={selectedItem}
+            onAddToBasket={handleAddToBasket}
           />
         )}
         {isNotificationOpen && (
