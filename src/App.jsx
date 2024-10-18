@@ -17,6 +17,7 @@ import DashboardOrderModify from './pages/DashboardOrderModify';
 import DashboardControlPanel from './components/Dashboard/DashboardControlPanel';
 import Signup from './pages/Signup';
 import ProtectedRoute from './components/ProtectedRoute';
+import PlaceOrder from './pages/PlaceOrder';
 import './sass/main.scss';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -73,8 +74,9 @@ function App() {
             <Route path="orders" element={<DashboardOrders />} />
             <Route path="orders/:id" element={<DashboardOrderModify />} />
           </Route>
-          <Route path="login" element={<Login />} />
           <Route path="basket" element={<Basket />} />
+          <Route path="place-order" element={<PlaceOrder />} />
+          <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
         </Route>
       </Routes>

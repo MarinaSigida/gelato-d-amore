@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearBasket } from '../features/basketSlice';
-import SignInPopup from '../components/BasketPage/SignInPopup';
+import OrderPlacedPopup from '../components/BasketPage/OrderPlacedPopup';
 import Banner from '../components/Shared/Banner';
 import BasketItem from '../components/BasketPage/BasketItem';
+import OrderForm from '../components/BasketPage/OrderForm';
 import bannerBasket from '/assets/images/banner-basket.png';
 import bannerBasketMobile from '/assets/images/banner-basket-mobile.png';
 
-const Basket = () => {
+const PlaceOrder = () => {
   const [bannerImage, setBannerImage] = useState(bannerBasketMobile);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const { items, totalQuantity, totalAmount } = useSelector(
@@ -32,11 +33,11 @@ const Basket = () => {
     dispatch(clearBasket());
   };
 
-  const handlePlaceOrder = () => {
+  const openPopup = () => {
     setIsPopupOpen(true);
   };
 
-  const handleClosePopup = () => {
+  const closePopup = () => {
     setIsPopupOpen(false);
   };
 
@@ -45,7 +46,7 @@ const Basket = () => {
       <Banner image={bannerImage} />
       <section className="basket">
         <h2 className="basket-title">
-          bienvenue dans votre <span>panier</span>!
+          Completez votre <span>commande</span>
         </h2>
         <div className="basket-content">
           <div className="basket-items-total">
@@ -82,19 +83,17 @@ const Basket = () => {
                 </div>
               )}
             </div>
-            {items.length > 0 && (
-              <div>
-                <button onClick={handlePlaceOrder}>Passer commande</button>
-              </div>
-            )}
+          </div>
+          <div className="basket-form">
+            <OrderForm openPopup={openPopup} />
           </div>
         </div>
       </section>
       {isPopupOpen && (
-        <SignInPopup isPopupOpen={isPopupOpen} closePopup={handleClosePopup} />
+        <OrderPlacedPopup isPopupOpen={isPopupOpen} closePopup={closePopup} />
       )}
     </div>
   );
 };
 
-export default Basket;
+export default PlaceOrder;

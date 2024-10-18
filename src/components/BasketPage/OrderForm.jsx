@@ -1,11 +1,15 @@
 import { Formik, Form, Field } from 'formik';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BasketPopup from './BasketPopup';
+import { useDispatch } from 'react-redux';
+import { fetchUserByEmail } from '../../features/userSlice';
+import { createOrder } from '../../features/ordersSlice';
 
-const OrderForm = () => {
+const OrderForm = ({ openPopup }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [userExists, setUserExists] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
@@ -16,6 +20,48 @@ const OrderForm = () => {
     navigate(`/catalog`);
   };
 
+  const handleSubmit = async (values) => {
+    const {
+      email,
+      firstName,
+      lastName,
+      mobilePhone,
+      comment,
+      deliveryOption,
+      deliveryAddress,
+    } = values;
+    console.log(values);
+
+    const userResponse = await dispatch(fetchUserByEmail(email)).unwrap();
+    const userId = userResponse.id;
+
+    const orderData = {
+      userId,
+      comment,
+      deliveryOption,
+      deliveryAddress,
+      mobilePhone,
+      firstName,
+      lastName,
+    };
+
+    const orderResponse = await dispatch(createOrder(orderData)).unwrap();
+    const orderId = orderResponse.id;
+
+    const basketItems = items; // Fetch items from basket state (you can pass them as props)
+    const orderItems = basketItems.map((item) => ({
+      orderId,
+      stockItemId: item.id,
+      quantity: item.quantity,
+    }));
+
+    await dispatch(createOrderItems(orderItems));
+
+    handleClearBasket();
+
+    openPopup();
+  };
+
   return (
     <div className="order-form-wrapper">
       <Formik
@@ -23,14 +69,14 @@ const OrderForm = () => {
           firstName: '',
           lastName: '',
           email: '',
-          phone: '',
+          mobilePhone: '',
           comment: '',
+          deliveryOption: 'takeAway',
+          deliveryAddress: '',
         }}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={handleSubmit}
       >
-        {() => (
+        {({ values }) => (
           <Form className="order-form">
             <h3>Veuillez remplir les informations suivantes</h3>
             <div className="order-inputs">
@@ -77,18 +123,30 @@ const OrderForm = () => {
                   as="textarea"
                   name="comment"
                   placeholder="Avez-vous des précisions concernant votre commande?"
-                  required
                 />
               </div>
               <div>
-                <label htmlFor="delivery">
+                <label htmlFor="deliveryOption">
                   Je souhaite recuperer ma commande:
                 </label>
-                <Field as="select" name="delivery" id="option" required>
+                <Field as="select" name="deliveryOption" id="option" required>
                   <option value="takeAway" label="Sur place" />
                   <option value="delivery" label="Par une livraison" />
                 </Field>
               </div>
+              {values.deliveryOption === 'delivery' && (
+                <div>
+                  <label htmlFor="deliveryAddress">Adresse de livraison</label>
+                  <div className="order-input">
+                    <Field
+                      type="text"
+                      name="deliveryAddress"
+                      placeholder="Adresse de livraison"
+                      required
+                    />
+                  </div>
+                </div>
+              )}
             </div>
             <div className="order-buttons">
               <button onClick={handleCancelClick}>Annuler</button>
@@ -97,10 +155,6 @@ const OrderForm = () => {
           </Form>
         )}
       </Formik>
-      <button onClick={togglePopup}>Popup</button>
-      {isPopupOpen && (
-        <BasketPopup isPopupOpen={isPopupOpen} closePopup={togglePopup} />
-      )}
     </div>
   );
 };

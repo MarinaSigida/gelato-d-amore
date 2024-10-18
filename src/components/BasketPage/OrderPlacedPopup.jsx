@@ -2,7 +2,7 @@ import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import cross from '../../assets/images/close.png';
 import weLoveYou from '../../assets/images/we-love-you.png';
 
-const OrderPopup = ({ isPopupOpen, closePopup }) => {
+const OrderPlacedPopup = ({ isPopupOpen, closePopup }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closePopup();
@@ -31,4 +31,4 @@ const OrderPopup = ({ isPopupOpen, closePopup }) => {
   );
 };
 
-export default OrderPopup;
+export default OrderPlacedPopup;

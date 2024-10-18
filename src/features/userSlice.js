@@ -49,6 +49,18 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const fetchUserByEmail = createAsyncThunk(
+  'user/fetchUserByEmail',
+  async (email, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${apiKey}/user?email=${email}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -95,6 +107,10 @@ const userSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(fetchUserByEmail.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isAuthenticated = true;
       });
   },
 });

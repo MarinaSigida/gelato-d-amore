@@ -3,6 +3,7 @@ import stockItemsReducer from './features/stockItemsSlice';
 import ordersReducer from './features/ordersSlice';
 import userReducer from './features/userSlice';
 import basketReducer from './features/basketSlice';
+import orderItemsReducer from './features/orderItemsSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     orders: ordersReducer,
     user: userReducer,
     basket: basketReducer,
+    orderItems: orderItemsReducer,
   },
 });
 
