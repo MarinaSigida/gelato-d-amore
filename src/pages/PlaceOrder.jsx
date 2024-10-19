@@ -85,7 +85,11 @@ const PlaceOrder = () => {
             </div>
           </div>
           <div className="basket-form">
-            <OrderForm openPopup={openPopup} />
+            <OrderForm
+              openPopup={openPopup}
+              basketItems={items}
+              handleClearBasket={handleClearBasket}
+            />
           </div>
         </div>
       </section>

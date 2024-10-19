@@ -59,3 +59,8 @@
   flex-direction: row;
   gap: 20px;
 }
+
+.info-bold {
+  color: fn.get-color('dark-red');
+  font-weight: 500;
+}

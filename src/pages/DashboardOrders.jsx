@@ -48,9 +48,14 @@ const DashboardOrders = () => {
             userId={order.userId}
             status={order.status}
             deliveryOption={order.deliveryOption}
+            deliveryAddress={order.deliveryAddress}
             createdAt={order.createdAt}
             updatedAt={order.updatedAt}
             orderItems={order.orderItems}
+            firstName={order.firstName}
+            lastName={order.lastName}
+            mobilePhone={order.mobilePhone}
+            comment={order.comment}
           />
         ))}
       </section>

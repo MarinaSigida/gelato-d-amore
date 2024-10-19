@@ -11,6 +11,11 @@ const DashboardOrder = ({
   createdAt,
   status,
   deliveryOption,
+  deliveryAddress,
+  firstName,
+  lastName,
+  mobilePhone,
+  comment,
   orderItems,
 }) => {
   const navigate = useNavigate();
@@ -33,7 +38,7 @@ const DashboardOrder = ({
           <div>
             <p>
               Coût total :{' '}
-              <span>
+              <span className="info-bold">
                 {orderItems.reduce(
                   (total, item) =>
                     total + item.quantity * item.stockItemId.pricePerUnit,
@@ -44,7 +49,7 @@ const DashboardOrder = ({
             </p>
             <p>
               Quantité :{' '}
-              <span>
+              <span className="info-bold">
                 {(orderItems.reduce((total, item) => total + item.quantity, 0) *
                   450) /
                   1000}{' '}
@@ -55,12 +60,21 @@ const DashboardOrder = ({
         </div>
 
         <div className="order-delivery-info">
+          <p className="info-bold">
+            {firstName} {lastName}, {mobilePhone}
+          </p>
           <p>Statut : {statusTranslations[status] || 'Statut inconnu'}</p>
           <p>
             Mode de livraison :{' '}
             {deliveryTranslations[deliveryOption] || 'Option inconnue'}
           </p>
-          <p>Adresse de livraison : 22 Victor Hugo, Nice , 06000</p>
+          {deliveryOption === 'delivery' && (
+            <p>
+              Adresse de livraison :{' '}
+              <span className="info-bold">{deliveryAddress}</span>
+            </p>
+          )}
+          <p>Commantaire: {comment}</p>
         </div>
       </div>
     </div>
