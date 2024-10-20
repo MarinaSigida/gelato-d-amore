@@ -19,6 +19,7 @@ const DashboardOrder = ({
   orderItems,
 }) => {
   const navigate = useNavigate();
+
   const handleOrderClick = (e) => {
     e.preventDefault();
     navigate(`/dashboard/orders/${id}`);

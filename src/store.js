@@ -4,6 +4,7 @@ import ordersReducer from './features/ordersSlice';
 import userReducer from './features/userSlice';
 import basketReducer from './features/basketSlice';
 import orderItemsReducer from './features/orderItemsSlice';
+import userOrderDataReducer from './features/userOrderSlice';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     user: userReducer,
     basket: basketReducer,
     orderItems: orderItemsReducer,
+    userOrderData: userOrderDataReducer,
   },
 });
 

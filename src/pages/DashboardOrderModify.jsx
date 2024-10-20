@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { fetchUserEmailById } from '../features/userOrderSlice';
 import { fetchOrderById } from '../features/ordersSlice';
 import OrderItem from '../components/OrderDetailPage/OrderItem';
 import Banner from '../components/Shared/Banner';
@@ -15,6 +16,7 @@ const DashboardOrderModify = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
   const [selectedOrderNumber, setSelectedOrderNumber] = useState('');
+  const [userEmail, setUserEmail] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams(); // Extract the order ID from the URL
   const dispatch = useDispatch();
@@ -23,9 +25,21 @@ const DashboardOrderModify = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchOrderById(id)); // Fetch the order using the order ID
+      dispatch(fetchOrderById(id));
     }
   }, [id, dispatch]);
+
+  useEffect(() => {
+    if (selectedOrder && selectedOrder.order.userId) {
+      dispatch(fetchUserEmailById(selectedOrder.order.userId)).then(
+        (action) => {
+          if (fetchUserEmailById.fulfilled.match(action)) {
+            setUserEmail(action.payload);
+          }
+        }
+      );
+    }
+  }, [selectedOrder, dispatch]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,6 +57,10 @@ const DashboardOrderModify = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleGoBackClick = () => {
+    navigate('/dashboard/orders');
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -57,7 +75,7 @@ const DashboardOrderModify = () => {
   };
 
   const handleCancelOrderClick = () => {
-    setSelectedOrderNumber(order.number); // Ensure selectedOrder has a 'number' field
+    setSelectedOrderNumber(order.number);
     toggleCancelOrderPopup();
   };
 
@@ -70,11 +88,10 @@ const DashboardOrderModify = () => {
       />
       <section className="order-detail">
         <div className="order-container">
-          <a href="/dashboard/orders">
-            <div className="icon-open">
-              <img src={cross} alt="open" />
-            </div>
-          </a>
+          <div className="icon-open" onClick={handleGoBackClick}>
+            <img src={cross} alt="open" />
+          </div>
+
           <div className="order-number">
             <h3>#{order.number}</h3>
             <p>Date : {new Date(order.createdAt).toLocaleDateString()}</p>
@@ -110,6 +127,15 @@ const DashboardOrderModify = () => {
               </div>
             </div>
             <div className="order-delivery-info">
+              <p className="info-bold">
+                {order.firstName} {order.lastName}, {order.mobilePhone}
+              </p>
+              <p>
+                Email :{' '}
+                <span className="info-bold">
+                  {userEmail || 'Email non disponible'}
+                </span>
+              </p>
               <p>
                 Statut : {statusTranslations[order.status] || 'Statut inconnu'}
               </p>
@@ -118,8 +144,13 @@ const DashboardOrderModify = () => {
                 {deliveryTranslations[order.deliveryOption] ||
                   'Option inconnue'}
               </p>
-              {/* remake due to user unfo */}
-              <p>Adresse de livraison : 22 Victor Hugo, Nice , 06000</p>
+              {order.deliveryOption === 'delivery' && (
+                <p>
+                  Adresse de livraison :{' '}
+                  <span className="info-bold">{order.deliveryAddress}</span>
+                </p>
+              )}
+              {order.comment && <p>Commantaire: {order.comment}</p>}
             </div>
           </div>
           <div className="dashboard-order-modify-buttons">
