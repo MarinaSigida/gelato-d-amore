@@ -109,7 +109,7 @@ const Login = () => {
             )}
           </Formik>
           <div className="signup-link">
-            <a href="signup">Créer un compte</a>
+            <a href="register">Créer un compte</a>
           </div>
         </div>
       </div>

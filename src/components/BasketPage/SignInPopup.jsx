@@ -16,30 +16,28 @@ const SignInPopup = ({ isPopupOpen, closePopup }) => {
             <img src={cross} alt="close" />
           </div>
           <div className="signin-popup-content">
-            <h2>Comment souhaitez-vous poursuivre ?</h2>
+            <h2>Connexion ou inscription requise</h2>
             <ul className="signin-popup-benefits">
               <li>
-                Profitez immédiatement des avantages du club de fidélité Gelato
-                D'Amore
+                Pour passer une commande, vous devez être connecté ou créer un
+                compte.
               </li>
-              <li>Bénéficiez d'offres exclusives</li>
-              <li>Gagnez du temps pour passer votre commande</li>
             </ul>
             <div className="signin-buttons">
-              <button>
-                <a href="/login">S'inscrire ou se connecter</a>
-              </button>
+              <div className="signin-button">
+                <button>
+                  <a href="/login">Se connecter</a>
+                </button>
+              </div>
               <div className="divider">
                 <span>OU</span>
               </div>
-              <button>
-                <a href="/place-order"> Continuer en tant qu'invité</a>
-              </button>
+              <div className="signin-button">
+                <button>
+                  <a href="/register">S'inscrire</a>
+                </button>
+              </div>
             </div>
-            <p className="guest-note">
-              En poursuivant en tant qu'invité, vous ne pourrez pas profiter des
-              offres éventuelles accordées aux membres Gelato D'Amore Club.
-            </p>
           </div>
         </div>
       </OverlayPopup>

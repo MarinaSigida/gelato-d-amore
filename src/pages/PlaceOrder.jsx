@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { clearBasket } from '../features/basketSlice';
 import OrderPlacedPopup from '../components/BasketPage/OrderPlacedPopup';
 import Banner from '../components/Shared/Banner';
@@ -14,6 +15,7 @@ const PlaceOrder = () => {
   const { items, totalQuantity, totalAmount } = useSelector(
     (state) => state.basket
   );
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,6 +37,7 @@ const PlaceOrder = () => {
 
   const openPopup = () => {
     setIsPopupOpen(true);
+    navigate('/');
   };
 
   const closePopup = () => {

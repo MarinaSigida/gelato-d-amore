@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearBasket } from '../features/basketSlice';
 import SignInPopup from '../components/BasketPage/SignInPopup';
@@ -13,6 +14,8 @@ const Basket = () => {
   const { items, totalQuantity, totalAmount } = useSelector(
     (state) => state.basket
   );
+  const user = useSelector((state) => state.user.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,7 +36,12 @@ const Basket = () => {
   };
 
   const handlePlaceOrder = () => {
-    setIsPopupOpen(true);
+    console.log(user);
+    if (!user) {
+      setIsPopupOpen(true);
+    } else {
+      navigate('/place-order');
+    }
   };
 
   const handleClosePopup = () => {

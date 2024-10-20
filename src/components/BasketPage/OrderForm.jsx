@@ -1,5 +1,4 @@
 import { Formik, Form, Field } from 'formik';
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserByEmail } from '../../features/userSlice';
@@ -16,7 +15,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
     navigate(`/catalog`);
   };
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { resetForm }) => {
     try {
       console.log('handleSubmit called', values);
 
@@ -48,8 +47,6 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
       console.log('orderResponse:', orderData);
       const orderId = orderResponse._id;
 
-      //34 rue  Victor Hugo, Nice, 06000
-      // Fetch items from basket state (you can pass them as props)
       const orderItems = basketItems.map((item) => ({
         orderId,
         stockItemId: item.id,
@@ -78,7 +75,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
           email: user.email,
           mobilePhone: '',
           comment: '',
-          deliveryOption: 'takeAway',
+          deliveryOption: 'pickup',
           deliveryAddress: '',
         }}
         onSubmit={handleSubmit}
@@ -176,7 +173,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
                   Je souhaite recuperer ma commande:
                 </label>
                 <Field as="select" name="deliveryOption" id="option" required>
-                  <option value="takeAway" label="Sur place" />
+                  <option value="pickup" label="A emporter" />
                   <option value="delivery" label="Par une livraison" />
                 </Field>
               </div>
@@ -191,7 +188,6 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
                       type="text"
                       name="deliveryAddress"
                       placeholder="Adresse de livraison"
-                      required
                     />
                   </div>
                   {errors.deliveryAddress && touched.deliveryAddress && (

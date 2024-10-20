@@ -7,7 +7,7 @@ const statusTranslations = {
 
 const deliveryTranslations = {
   delivery: 'Livraison',
-  pickup: 'Retrait',
+  pickup: 'A emporter',
 };
 
 export { statusTranslations, deliveryTranslations };

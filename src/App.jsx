@@ -75,9 +75,19 @@ function App() {
             <Route path="orders/:id" element={<DashboardOrderModify />} />
           </Route>
           <Route path="basket" element={<Basket />} />
-          <Route path="place-order" element={<PlaceOrder />} />
+          <Route
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                userRole={user?.role}
+                requiredRole="client"
+              />
+            }
+          >
+            <Route path="place-order" element={<PlaceOrder />} />
+          </Route>
           <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
+          <Route path="register" element={<Signup />} />
         </Route>
       </Routes>
     </>
