@@ -16,6 +16,14 @@ export const fetchOrderById = createAsyncThunk(
   }
 );
 
+export const fetchOrdersByUserId = createAsyncThunk(
+  'orders/fetchOrdersByUserId',
+  async (userId) => {
+    const response = await axios.get(`${apiKey}/orders/userId/${userId}`);
+    return response.data;
+  }
+);
+
 export const createOrder = createAsyncThunk(
   'orders/createOrder',
   async (orderData, { rejectWithValue }) => {
@@ -70,6 +78,18 @@ const ordersSlice = createSlice({
         };
       })
       .addCase(fetchOrderById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(fetchOrdersByUserId.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchOrdersByUserId.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orders = action.payload;
+      })
+      .addCase(fetchOrdersByUserId.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
