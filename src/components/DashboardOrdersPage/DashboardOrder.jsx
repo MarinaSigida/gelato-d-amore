@@ -74,7 +74,7 @@ const DashboardOrder = ({
               <span className="info-bold">{deliveryAddress}</span>
             </p>
           )}
-          <p>Commantaire: {comment}</p>
+          {comment && <p>Commantaire: {comment}</p>}
         </div>
       </div>
     </div>

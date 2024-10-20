@@ -22,6 +22,7 @@
 }
 
 .order-container {
+  width: 335px;
   position: relative;
   padding: 30px;
   text-align: left;
@@ -32,8 +33,15 @@
   margin-bottom: 20px;
   cursor: pointer;
   transition: scale 0.3s ease;
+  @include mx.media-query('md') {
+    width: 600px;
+  }
   @include mx.media-query('lg') {
     padding: 30px 100px;
+    width: 800px;
+  }
+  @include mx.media-query('xl') {
+    width: 980px;
   }
   &:hover,
   &:focus {

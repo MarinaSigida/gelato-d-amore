@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserByEmail } from '../../features/userSlice';
 import { createOrder } from '../../features/ordersSlice';
 import { createOrderItem } from '../../features/orderItemsSlice';
+import {
+  updateStockItemQuantity,
+  fetchStockItemById,
+} from '../../features/stockItemsSlice';
 
 const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
   const user = useSelector((state) => state.user.user);
@@ -56,6 +60,23 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
 
       await Promise.all(
         orderItems.map((item) => dispatch(createOrderItem(item)).unwrap())
+      );
+
+      await Promise.all(
+        basketItems.map(async (item) => {
+          const stockItem = await dispatch(
+            fetchStockItemById(item.id)
+          ).unwrap();
+          const currentStockQuantity = stockItem.quantity;
+          const newQuantity = currentStockQuantity - item.quantity;
+
+          return dispatch(
+            updateStockItemQuantity({
+              id: item.id,
+              updatedItem: { quantity: newQuantity },
+            })
+          ).unwrap();
+        })
       );
 
       handleClearBasket();

@@ -9,6 +9,7 @@ import bannerDashboardTablet from '/assets/images/banner-dashboard-orders-tablet
 import bannerDashboardMobile from '/assets/images/banner-dashboard-orders-mobile.png';
 import CancelOrderPopup from '../components/DashboardOrdersPage/CancelOrderPopup';
 import { statusTranslations, deliveryTranslations } from '../utils/orderUtils';
+import cross from '../assets/images/close.png';
 
 const DashboardOrderModify = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
@@ -69,6 +70,11 @@ const DashboardOrderModify = () => {
       />
       <section className="order-detail">
         <div className="order-container">
+          <a href="/dashboard/orders">
+            <div className="icon-open">
+              <img src={cross} alt="open" />
+            </div>
+          </a>
           <div className="order-number">
             <h3>#{order.number}</h3>
             <p>Date : {new Date(order.createdAt).toLocaleDateString()}</p>
@@ -118,7 +124,9 @@ const DashboardOrderModify = () => {
           </div>
           <div className="dashboard-order-modify-buttons">
             {/* enabled only when the status is pending */}
-            <button id="confirm-btn">Confirmer</button>
+            <button id="confirm-btn">
+              <a href="/dashboard/orders">Confirmer</a>
+            </button>
             {/* to change the items in the order */}
             <button id="modify-btn">Modifier</button>
             {/* to cancel the order */}

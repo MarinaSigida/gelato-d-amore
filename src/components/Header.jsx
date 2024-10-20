@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../features/userSlice';
+import { clearBasket } from '../features/basketSlice';
 import logo from '../assets/images/logo.png';
 import logoutIcon from '../assets/images/logout.png';
 import BurgerMenuBtn from './BurgerMenu/BurgerMenuBtn';
@@ -24,6 +25,7 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(clearBasket());
     navigate('/');
   };
 
