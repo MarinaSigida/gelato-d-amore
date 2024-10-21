@@ -21,8 +21,6 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      console.log('handleSubmit called', values);
-
       const {
         email,
         firstName,
@@ -34,7 +32,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
       } = values;
 
       const userResponse = await dispatch(fetchUserByEmail(email)).unwrap();
-      console.log('User response:', userResponse);
+
       const userId = userResponse._id;
 
       const orderData = {
@@ -46,9 +44,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
         firstName,
         lastName,
       };
-      console.log('order data:', orderData);
       const orderResponse = await dispatch(createOrder(orderData)).unwrap();
-      console.log('orderResponse:', orderData);
       const orderId = orderResponse._id;
 
       const orderItems = basketItems.map((item) => ({
@@ -56,7 +52,6 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
         stockItemId: item.id,
         quantity: item.quantity,
       }));
-      console.log('order Items:', orderItems);
 
       await Promise.all(
         orderItems.map((item) => dispatch(createOrderItem(item)).unwrap())

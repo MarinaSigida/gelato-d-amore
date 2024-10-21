@@ -37,11 +37,11 @@ const PlaceOrder = () => {
 
   const openPopup = () => {
     setIsPopupOpen(true);
-    navigate('/');
   };
 
   const closePopup = () => {
     setIsPopupOpen(false);
+    navigate('/');
   };
 
   return (

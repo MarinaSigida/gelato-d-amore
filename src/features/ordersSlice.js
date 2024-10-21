@@ -18,17 +18,29 @@ export const fetchOrderById = createAsyncThunk(
 
 export const fetchOrdersByUserId = createAsyncThunk(
   'orders/fetchOrdersByUserId',
-  async (userId) => {
-    const response = await axios.get(`${apiKey}/orders/userId/${userId}`);
-    return response.data;
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${apiKey}/orders/userId/${userId}`);
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        return [];
+      }
+      return rejectWithValue(error.message);
+    }
   }
 );
 
 export const createOrder = createAsyncThunk(
   'orders/createOrder',
-  async (orderData, { rejectWithValue }) => {
+  async (orderData, { rejectWithValue, dispatch, getState }) => {
     try {
       const response = await axios.post(`${apiKey}/order`, orderData);
+      console.log('User after order creation:', getState().user);
+      const { user } = getState().user; // Get the current user
+      if (user && user._id) {
+        dispatch(fetchOrdersByUserId(user._id));
+      }
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -87,6 +99,7 @@ const ordersSlice = createSlice({
       })
       .addCase(fetchOrdersByUserId.fulfilled, (state, action) => {
         state.loading = false;
+        console.log('Orders fetched:', action.payload);
         state.orders = action.payload;
       })
       .addCase(fetchOrdersByUserId.rejected, (state, action) => {

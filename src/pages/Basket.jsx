@@ -36,7 +36,6 @@ const Basket = () => {
   };
 
   const handlePlaceOrder = () => {
-    console.log(user);
     if (!user) {
       setIsPopupOpen(true);
     } else {

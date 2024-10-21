@@ -29,7 +29,11 @@ export const registerUser = createAsyncThunk(
     try {
       const response = await axios.post(`${apiKey}/register`, userData);
       localStorage.setItem('jwtToken', response.data.token);
-      return response.data.user;
+      return {
+        id: response.data.user._id,
+        email: response.data.user.email,
+        role: response.data.user.role,
+      };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -42,7 +46,11 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await axios.post(`${apiKey}/login`, credentials);
       localStorage.setItem('jwtToken', response.data.token);
-      return response.data.user;
+      return {
+        id: response.data.user._id,
+        email: response.data.user.email,
+        role: response.data.user.role,
+      };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }

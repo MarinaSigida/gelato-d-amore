@@ -11,10 +11,10 @@ const Orders = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
+    console.log('user:', user);
     if (user && user.id) {
       dispatch(fetchOrdersByUserId(user.id));
     }
-    console.log('orders:', orders);
   }, [dispatch, user]);
 
   return (
@@ -27,24 +27,32 @@ const Orders = () => {
         textColor={'white'}
       />
       <section className="orders">
-        {orders.map((order) => (
-          <Order
-            key={order.order._id}
-            id={order.order._id}
-            number={order.order.number}
-            userId={order.order.userId}
-            status={order.order.status}
-            deliveryOption={order.order.deliveryOption}
-            deliveryAddress={order.order.deliveryAddress}
-            createdAt={order.order.createdAt}
-            updatedAt={order.order.updatedAt}
-            orderItems={order.orderItems}
-            firstName={order.order.firstName}
-            lastName={order.order.lastName}
-            mobilePhone={order.order.mobilePhone}
-            comment={order.order.comment}
-          />
-        ))}
+        {loading ? (
+          <p>Loading...</p>
+        ) : orders.length > 0 ? (
+          orders.map((order) =>
+            order && order.order && order.order._id ? (
+              <Order
+                key={order.order._id}
+                id={order.order._id}
+                number={order.order.number}
+                userId={order.order.userId}
+                status={order.order.status}
+                deliveryOption={order.order.deliveryOption}
+                deliveryAddress={order.order.deliveryAddress}
+                createdAt={order.order.createdAt}
+                updatedAt={order.order.updatedAt}
+                orderItems={order.orderItems}
+                firstName={order.order.firstName}
+                lastName={order.order.lastName}
+                mobilePhone={order.order.mobilePhone}
+                comment={order.order.comment}
+              />
+            ) : null
+          )
+        ) : (
+          <p>Vous n'avez pas encore de commandes</p>
+        )}
       </section>
     </div>
   );
