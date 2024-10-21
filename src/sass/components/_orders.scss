@@ -41,7 +41,7 @@
     width: 800px;
   }
   @include mx.media-query('xl') {
-    width: 980px;
+    width: 900px;
   }
   &:hover,
   &:focus {
@@ -58,7 +58,11 @@
   gap: 30px;
   @include mx.media-query('lg') {
     flex-direction: row;
-    gap: 160px;
+    gap: 60px;
+  }
+  @include mx.media-query('xl') {
+    flex-direction: row;
+    gap: 80px;
   }
 }
 

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAllUsers } from '../features/usersDataSlice';
 import Banner from '../components/Shared/Banner';
 import bannerDashboardUsers from '/assets/images/banner-dashboard-users.png';
 import bannerDashboardUsersMobile from '/assets/images/banner-dashboard-users-mobile.png';
 import bannerDashboardUsersTablet from '/assets/images/banner-dashboard-users-tablet.png';
 import UserCard from '../components/DashboardUsersPage/UserCard';
 import DeleteUserPopup from '../components/DashboardUsersPage/DeleteUserPopup';
-import users from '../resources/users.json';
 import AddUserForm from '../components/DashboardUsersPage/AddUserForm';
 
 const DashboardUsers = () => {
@@ -13,8 +14,13 @@ const DashboardUsers = () => {
   const [isUsersListOpen, setIsUsersListOpen] = useState(true);
   const [isAddUserOpen, setIsAddUserOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
-  const [selectedUserFirstName, setSelectedUserFirstName] = useState('');
-  const [selectedUserLastName, setSelectedUserLastName] = useState('');
+  const [selectedUserEmail, setSelectedUserEmail] = useState('');
+  const dispatch = useDispatch();
+  const { users, loading, error } = useSelector((state) => state.usersData);
+
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+  }, [dispatch]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,9 +54,8 @@ const DashboardUsers = () => {
     setIsDeletePopupOpen(!isDeletePopupOpen);
   };
 
-  const handleDeleteClick = (firstName, lastName) => {
-    setSelectedUserFirstName(firstName);
-    setSelectedUserLastName(lastName);
+  const handleDeleteClick = (email) => {
+    setSelectedUserEmail(email);
     toggleDeleteStockItemPopup();
   };
 
@@ -71,19 +76,11 @@ const DashboardUsers = () => {
           <div className="users-list">
             {users.map((user) => (
               <UserCard
-                key={user.id}
-                id={user.id}
-                firstName={user.firstName}
-                lastName={user.lastName}
+                key={user._id}
+                id={user._id}
                 email={user.email}
-                mobilePhone={user.mobilePhone}
-                address={user.address}
-                createdAt={user.createdAt}
-                updatedAt={user.updatedAt}
                 role={user.role}
-                onDeleteClick={() =>
-                  handleDeleteClick(user.firstName, user.lastName)
-                }
+                onDeleteClick={() => handleDeleteClick(user.email)}
               />
             ))}
           </div>
@@ -93,8 +90,7 @@ const DashboardUsers = () => {
       <DeleteUserPopup
         isPopupOpen={isDeletePopupOpen}
         closePopup={toggleDeleteStockItemPopup}
-        firstName={selectedUserFirstName}
-        lastName={selectedUserLastName}
+        email={selectedUserEmail}
       />
     </div>
   );

@@ -2,18 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import placeholderUser from '../../assets/images/placeholder-user.png';
 import placeholderAdmin from '../../assets/images/userNew.png';
 
-const UserCard = ({
-  id,
-  firstName,
-  lastName,
-  email,
-  mobilePhone,
-  address,
-  createdAt,
-  updatedAt,
-  role,
-  onDeleteClick,
-}) => {
+const UserCard = ({ id, email, role, onDeleteClick }) => {
   const navigate = useNavigate();
   const handleUserClick = (e) => {
     e.preventDefault();
@@ -29,19 +18,15 @@ const UserCard = ({
           />
         </div>
         <div className="user-card-content">
-          <h3>
-            {firstName} {lastName}
-          </h3>
           <p>{email}</p>
-          <p>{mobilePhone}</p>
-          <p>{address}</p>
+          <p>
+            Rôle :<span className="info-bold"> {role}</span>
+          </p>
         </div>
       </div>
       <div className="user-card-buttons">
         <button onClick={handleUserClick}>Modifier</button>
-        <button onClick={() => onDeleteClick(firstName, lastName)}>
-          Supprimer
-        </button>
+        <button onClick={() => onDeleteClick(email)}>Supprimer</button>
       </div>
     </div>
   );

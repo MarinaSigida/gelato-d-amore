@@ -11,7 +11,6 @@ const Orders = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    console.log('user:', user);
     if (user && user.id) {
       dispatch(fetchOrdersByUserId(user.id));
     }

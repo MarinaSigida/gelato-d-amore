@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchOrderById } from '../features/ordersSlice';
-import { fetchUserEmailById } from '../features/userOrderSlice';
+import { fetchUserEmailById } from '../features/usersDataSlice';
 import OrderItem from '../components/OrderDetailPage/OrderItem';
 import Banner from '../components/Shared/Banner';
 import bannerOrders from '/assets/images/banner-orders.png';

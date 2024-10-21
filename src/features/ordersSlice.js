@@ -36,7 +36,6 @@ export const createOrder = createAsyncThunk(
   async (orderData, { rejectWithValue, dispatch, getState }) => {
     try {
       const response = await axios.post(`${apiKey}/order`, orderData);
-      console.log('User after order creation:', getState().user);
       const { user } = getState().user; // Get the current user
       if (user && user._id) {
         dispatch(fetchOrdersByUserId(user._id));
@@ -99,7 +98,6 @@ const ordersSlice = createSlice({
       })
       .addCase(fetchOrdersByUserId.fulfilled, (state, action) => {
         state.loading = false;
-        console.log('Orders fetched:', action.payload);
         state.orders = action.payload;
       })
       .addCase(fetchOrdersByUserId.rejected, (state, action) => {

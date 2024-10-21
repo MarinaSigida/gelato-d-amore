@@ -4,7 +4,7 @@ import axios from 'axios';
 const apiKey = import.meta.env.VITE_API_KEY;
 
 export const fetchUserEmailById = createAsyncThunk(
-  'userOrderData/fetchUserEmailById',
+  'usersData/fetchUserEmailById',
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${apiKey}/user/${id}`);
@@ -15,9 +15,18 @@ export const fetchUserEmailById = createAsyncThunk(
   }
 );
 
-const userOrderSlice = createSlice({
-  name: 'userOrderData',
+export const fetchAllUsers = createAsyncThunk(
+  'usersData/fetchAllUsers',
+  async () => {
+    const response = await axios.get(`${apiKey}/users`);
+    return response.data;
+  }
+);
+
+const usersDataSlice = createSlice({
+  name: 'usersData',
   initialState: {
+    users: [],
     email: null,
     loading: false,
     error: null,
@@ -36,8 +45,20 @@ const userOrderSlice = createSlice({
       .addCase(fetchUserEmailById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(fetchAllUsers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.users = action.payload;
+      })
+      .addCase(fetchAllUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });
 
-export default userOrderSlice.reducer;
+export default usersDataSlice.reducer;

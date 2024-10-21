@@ -1,7 +1,7 @@
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import cross from '../../assets/images/close.png';
 
-const DeleteUserPopup = ({ isPopupOpen, closePopup, firstName, lastName }) => {
+const DeleteUserPopup = ({ isPopupOpen, closePopup, email }) => {
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closePopup();
@@ -19,10 +19,7 @@ const DeleteUserPopup = ({ isPopupOpen, closePopup, firstName, lastName }) => {
         <div className="popup-content">
           <h3>
             Etes-vous sûr de vouloir supprimer l'utilisateur{' '}
-            <span>
-              {firstName} {lastName}
-            </span>
-            ?
+            <span>{email}</span>?
           </h3>
           <div className="popup-buttons">
             <button type="submit">Oui</button>
