@@ -49,13 +49,7 @@ const DashboardUserModify = () => {
           <Formik
             initialValues={{
               id: { id },
-              firstName: '',
-              lastName: '',
               email: '',
-              mobilePhone: '',
-              address: '',
-              createdAt: '',
-              updatedAt: '',
               role: '',
             }}
             onSubmit={(values) => {
@@ -64,20 +58,6 @@ const DashboardUserModify = () => {
           >
             {() => (
               <Form className="modify-user-form">
-                <label htmlFor="firstName">Prénom</label>
-                <div className="modify-user-input">
-                  <Field name="firstName" type="text" placeholder="Prénom" />
-                </div>
-
-                <label htmlFor="lastName">Nom de famille</label>
-                <div className="modify-user-input">
-                  <Field
-                    name="lastName"
-                    type="text"
-                    placeholder="Nom de famille"
-                  />
-                </div>
-
                 <label htmlFor="email">Email</label>
                 <div className="modify-user-input">
                   <Field
@@ -85,20 +65,6 @@ const DashboardUserModify = () => {
                     type="email"
                     placeholder="Adresse email"
                   />
-                </div>
-
-                <label htmlFor="mobilePhone">Téléphone mobile</label>
-                <div className="modify-user-input">
-                  <Field
-                    name="mobilePhone"
-                    type="text"
-                    placeholder="Numéro de téléphone"
-                  />
-                </div>
-
-                <label htmlFor="address">Adresse</label>
-                <div className="modify-user-input">
-                  <Field name="address" type="text" placeholder="Adresse" />
                 </div>
 
                 <div>

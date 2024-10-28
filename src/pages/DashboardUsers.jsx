@@ -7,12 +7,9 @@ import bannerDashboardUsersMobile from '/assets/images/banner-dashboard-users-mo
 import bannerDashboardUsersTablet from '/assets/images/banner-dashboard-users-tablet.png';
 import UserCard from '../components/DashboardUsersPage/UserCard';
 import DeleteUserPopup from '../components/DashboardUsersPage/DeleteUserPopup';
-import AddUserForm from '../components/DashboardUsersPage/AddUserForm';
 
 const DashboardUsers = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardUsersMobile);
-  const [isUsersListOpen, setIsUsersListOpen] = useState(true);
-  const [isAddUserOpen, setIsAddUserOpen] = useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [selectedUserEmail, setSelectedUserEmail] = useState('');
   const dispatch = useDispatch();
@@ -38,25 +35,13 @@ const DashboardUsers = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const toggleOpenUserList = (e) => {
-    e.preventDefault();
-    setIsUsersListOpen(true);
-    setIsAddUserOpen(false);
-  };
-
-  const toggleOpenAddUser = (e) => {
-    e.preventDefault();
-    setIsUsersListOpen(false);
-    setIsAddUserOpen(true);
-  };
-
-  const toggleDeleteStockItemPopup = () => {
+  const toggleDeleteUserPopup = () => {
     setIsDeletePopupOpen(!isDeletePopupOpen);
   };
 
   const handleDeleteClick = (email) => {
     setSelectedUserEmail(email);
-    toggleDeleteStockItemPopup();
+    toggleDeleteUserPopup();
   };
 
   return (
@@ -68,28 +53,21 @@ const DashboardUsers = () => {
         textPosition="left"
       />
       <section className="users">
-        <div className="stock-buttons">
-          <button onClick={toggleOpenUserList}>Liste des utilisateurs</button>
-          <button onClick={toggleOpenAddUser}>Ajouter un utilisateur</button>
+        <div className="users-list">
+          {users.map((user) => (
+            <UserCard
+              key={user._id}
+              id={user._id}
+              email={user.email}
+              role={user.role}
+              onDeleteClick={() => handleDeleteClick(user.email)}
+            />
+          ))}
         </div>
-        {isUsersListOpen && !isAddUserOpen && (
-          <div className="users-list">
-            {users.map((user) => (
-              <UserCard
-                key={user._id}
-                id={user._id}
-                email={user.email}
-                role={user.role}
-                onDeleteClick={() => handleDeleteClick(user.email)}
-              />
-            ))}
-          </div>
-        )}
-        {!isUsersListOpen && isAddUserOpen && <AddUserForm />}
       </section>
       <DeleteUserPopup
         isPopupOpen={isDeletePopupOpen}
-        closePopup={toggleDeleteStockItemPopup}
+        closePopup={toggleDeleteUserPopup}
         email={selectedUserEmail}
       />
     </div>

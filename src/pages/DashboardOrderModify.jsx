@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserEmailById } from '../features/usersDataSlice';
+import { fetchUserById } from '../features/usersDataSlice';
 import { fetchOrderById } from '../features/ordersSlice';
 import OrderItem from '../components/OrderDetailPage/OrderItem';
 import Banner from '../components/Shared/Banner';
@@ -16,12 +16,12 @@ const DashboardOrderModify = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
   const [selectedOrderNumber, setSelectedOrderNumber] = useState('');
-  const [userEmail, setUserEmail] = useState(null);
   const navigate = useNavigate();
-  const { id } = useParams(); // Extract the order ID from the URL
+  const { id } = useParams();
   const dispatch = useDispatch();
   const selectedOrder = useSelector((state) => state.orders.selectedOrder);
   const loading = useSelector((state) => state.orders.loading);
+  const user = useSelector((state) => state.usersData.user);
 
   useEffect(() => {
     if (id) {
@@ -31,13 +31,7 @@ const DashboardOrderModify = () => {
 
   useEffect(() => {
     if (selectedOrder && selectedOrder.order.userId) {
-      dispatch(fetchUserEmailById(selectedOrder.order.userId)).then(
-        (action) => {
-          if (fetchUserEmailById.fulfilled.match(action)) {
-            setUserEmail(action.payload);
-          }
-        }
-      );
+      dispatch(fetchUserById(selectedOrder.order.userId));
     }
   }, [selectedOrder, dispatch]);
 
@@ -133,7 +127,7 @@ const DashboardOrderModify = () => {
               <p>
                 Email :{' '}
                 <span className="info-bold">
-                  {userEmail || 'Email non disponible'}
+                  {user && user.email ? user.email : 'Email non disponible'}
                 </span>
               </p>
               <p>

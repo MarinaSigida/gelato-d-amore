@@ -1,20 +1,31 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { clearOrders } from './ordersSlice';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 
 const apiKey = import.meta.env.VITE_API_KEY;
+
+const isTokenValid = (expiration) => {
+  const currentTime = Math.floor(Date.now() / 1000);
+  return expiration > currentTime;
+};
 
 export const setUserFromToken = () => {
   const token = localStorage.getItem('jwtToken');
   if (token) {
     try {
       const decoded = jwtDecode(token);
-      return {
-        id: decoded.userId,
-        email: decoded.email,
-        role: decoded.role,
-        token,
-      };
+      if (isTokenValid(decoded.exp)) {
+        return {
+          id: decoded.userId,
+          email: decoded.email,
+          role: decoded.role,
+          token,
+        };
+      } else {
+        console.error('Token has expired');
+        return null;
+      }
     } catch (error) {
       console.error('Token is invalid', error);
       return null;
@@ -47,9 +58,10 @@ export const loginUser = createAsyncThunk(
       const response = await axios.post(`${apiKey}/login`, credentials);
       localStorage.setItem('jwtToken', response.data.token);
       return {
-        id: response.data.user._id,
+        id: response.data.user.id,
         email: response.data.user.email,
         role: response.data.user.role,
+        token: response.data.token,
       };
     } catch (error) {
       return rejectWithValue(error.response.data.message);

@@ -20,7 +20,9 @@ export const fetchOrdersByUserId = createAsyncThunk(
   'orders/fetchOrdersByUserId',
   async (userId, { rejectWithValue }) => {
     try {
+      console.log('Fetching orders for user:', userId);
       const response = await axios.get(`${apiKey}/orders/userId/${userId}`);
+      console.log('Fetched orders:', response.data);
       return response.data;
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -61,6 +63,9 @@ const ordersSlice = createSlice({
     },
     clearSelectedOrder: (state) => {
       state.selectedOrder = null;
+    },
+    clearOrders: (state) => {
+      state.orders = [];
     },
   },
   extraReducers: (builder) => {
@@ -119,5 +124,6 @@ const ordersSlice = createSlice({
   },
 });
 
-export const { selectOrder, clearSelectedOrder } = ordersSlice.actions;
+export const { selectOrder, clearSelectedOrder, clearOrders } =
+  ordersSlice.actions;
 export default ordersSlice.reducer;

@@ -3,12 +3,12 @@ import axios from 'axios';
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
-export const fetchUserEmailById = createAsyncThunk(
-  'usersData/fetchUserEmailById',
+export const fetchUserById = createAsyncThunk(
+  'usersData/fetchUserById',
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${apiKey}/user/${id}`);
-      return response.data.email;
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -27,22 +27,22 @@ const usersDataSlice = createSlice({
   name: 'usersData',
   initialState: {
     users: [],
-    email: null,
+    user: null,
     loading: false,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserEmailById.pending, (state) => {
+      .addCase(fetchUserById.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchUserEmailById.fulfilled, (state, action) => {
+      .addCase(fetchUserById.fulfilled, (state, action) => {
         state.loading = false;
-        state.email = action.payload;
+        state.user = action.payload;
       })
-      .addCase(fetchUserEmailById.rejected, (state, action) => {
+      .addCase(fetchUserById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

@@ -9,7 +9,7 @@ const HowItsMade = () => {
           <iframe
             width="100%"
             height="100%"
-            src="https://www.youtube.com/embed/MmHK2ntzT6o"
+            src="https://www.youtube-nocookie.com/embed/MmHK2ntzT6o"
             title="Gelato D'Amore"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

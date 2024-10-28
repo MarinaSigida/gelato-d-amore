@@ -2,6 +2,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { OverlayBurgerMenu } from './OverlayBurgerMenu';
 import { logout } from '../../features/userSlice';
+import { clearOrders } from '../../features/ordersSlice';
+import { clearBasket } from '../../features/basketSlice';
 import logoutIcon from '../../assets/images/logout.png';
 import cross from '../../assets/images/close.png';
 
@@ -22,6 +24,8 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(clearBasket());
+    dispatch(clearOrders());
     navigate('/');
   };
   return (

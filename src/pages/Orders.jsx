@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Order from '../components/OrdersPage/Order';
 import Banner from '../components/Shared/Banner';
@@ -8,13 +8,13 @@ import { fetchOrdersByUserId } from '../features/ordersSlice';
 const Orders = () => {
   const dispatch = useDispatch();
   const { orders, loading, error } = useSelector((state) => state.orders);
-  const { user } = useSelector((state) => state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    if (user && user.id) {
+  useLayoutEffect(() => {
+    if (isAuthenticated && user && user.id) {
       dispatch(fetchOrdersByUserId(user.id));
     }
-  }, [dispatch, user]);
+  }, [dispatch, isAuthenticated, user]);
 
   return (
     <div className="main">
