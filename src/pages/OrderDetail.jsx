@@ -16,6 +16,7 @@ const OrderDetail = () => {
   const navigate = useNavigate();
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
   const [selectedOrderNumber, setSelectedOrderNumber] = useState('');
+  const [selectedOrderId, setSelectedOrderId] = useState('');
   const selectedOrder = useSelector((state) => state.orders.selectedOrder);
   const loading = useSelector((state) => state.orders.loading);
   const user = useSelector((state) => state.usersData.user);
@@ -65,6 +66,7 @@ const OrderDetail = () => {
 
   const handleCancelOrderClick = () => {
     setSelectedOrderNumber(order.number);
+    setSelectedOrderId(order._id);
     toggleCancelOrderPopup();
   };
 
@@ -144,18 +146,13 @@ const OrderDetail = () => {
               {order.comment && <p>Commantaire: {order.comment}</p>}
             </div>
           </div>
-          <div className="dashboard-order-modify-buttons">
-            {/* enabled only when the status is pending */}
-            <button id="confirm-btn">
-              <a href="/dashboard/orders">Confirmer</a>
-            </button>
-            {/* to change the items in the order */}
-            <button id="modify-btn">Modifier</button>
-            {/* to cancel the order */}
-            <button onClick={handleCancelOrderClick} id="cancel-btn">
-              Annuler
-            </button>
-          </div>
+          {order.status == 'pending' && (
+            <div className="dashboard-order-modify-buttons">
+              <button onClick={handleCancelOrderClick} id="cancel-btn">
+                Annuler
+              </button>
+            </div>
+          )}
         </div>
         <div className="order-items-container">
           {orderItems && orderItems.length > 0 ? (
@@ -174,6 +171,12 @@ const OrderDetail = () => {
           )}
         </div>
       </section>
+      <CancelOrderPopup
+        orderId={selectedOrderId}
+        orderNumber={selectedOrderNumber}
+        isPopupOpen={isCancelPopupOpen}
+        closePopup={toggleCancelOrderPopup}
+      />
     </div>
   );
 };

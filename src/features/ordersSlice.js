@@ -20,9 +20,7 @@ export const fetchOrdersByUserId = createAsyncThunk(
   'orders/fetchOrdersByUserId',
   async (userId, { rejectWithValue }) => {
     try {
-      console.log('Fetching orders for user:', userId);
       const response = await axios.get(`${apiKey}/orders/userId/${userId}`);
-      console.log('Fetched orders:', response.data);
       return response.data;
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -45,6 +43,18 @@ export const createOrder = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const cancelOrder = createAsyncThunk(
+  'orders/cancelOrder',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(`${apiKey}/orders/cancel/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || 'Failed to cancel order');
     }
   }
 );
@@ -118,6 +128,23 @@ const ordersSlice = createSlice({
         state.orders.push(action.payload);
       })
       .addCase(createOrder.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(cancelOrder.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(cancelOrder.fulfilled, (state, action) => {
+        state.loading = false;
+        const order = state.orders.find(
+          (order) => order._id === action.meta.arg
+        );
+        if (order) {
+          order.status = 'canceled';
+        }
+      })
+      .addCase(cancelOrder.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

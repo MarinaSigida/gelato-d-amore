@@ -22,7 +22,12 @@ import './sass/main.scss';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { setUserFromToken, setUser } from './features/userSlice';
+import {
+  setUserFromToken,
+  setUser,
+  monitorTokenExpiration,
+  logout,
+} from './features/userSlice';
 
 function App() {
   const { user, isAuthenticated } = useSelector((state) => state.user);
@@ -32,6 +37,9 @@ function App() {
     const user = setUserFromToken();
     if (user) {
       dispatch(setUser(user));
+      monitorTokenExpiration(dispatch);
+    } else {
+      dispatch(logout());
     }
   }, [dispatch]);
 

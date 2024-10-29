@@ -24,10 +24,12 @@ export const setUserFromToken = () => {
         };
       } else {
         console.error('Token has expired');
+        localStorage.removeItem('jwtToken');
         return null;
       }
     } catch (error) {
       console.error('Token is invalid', error);
+      localStorage.removeItem('jwtToken');
       return null;
     }
   }
@@ -94,6 +96,7 @@ const userSlice = createSlice({
       state.user = null;
       state.isAuthenticated = false;
       localStorage.removeItem('jwtToken');
+      clearOrders();
     },
     setUser: (state, action) => {
       state.user = action.payload;
@@ -134,6 +137,22 @@ const userSlice = createSlice({
       });
   },
 });
+
+export const monitorTokenExpiration = (dispatch) => {
+  const token = localStorage.getItem('jwtToken');
+  if (token) {
+    const decoded = jwtDecode(token);
+    const expirationTime = decoded.exp * 1000;
+    const currentTime = Date.now();
+
+    if (expirationTime <= currentTime) {
+      dispatch(logout());
+    } else {
+      const timeout = expirationTime - currentTime;
+      setTimeout(() => dispatch(logout()), timeout);
+    }
+  }
+};
 
 export const { setUser, logout } = userSlice.actions;
 
