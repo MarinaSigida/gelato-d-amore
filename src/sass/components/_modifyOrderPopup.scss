@@ -1,0 +1,86 @@
+@use '../utils/functions' as fn;
+@use '../utils/mixins' as mx;
+
+.modify-order-form {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  font-size: 12px;
+  width: 80%;
+  @include mx.media-query('lg') {
+    font-size: 14px;
+  }
+
+  select {
+    font-size: 12px;
+    margin-bottom: 10px;
+
+    option {
+      padding: 5px 16px;
+    }
+  }
+}
+.popup-content-modify-order-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  h3 {
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 30px;
+    span {
+      color: fn.get-color('dark-red');
+    }
+  }
+}
+
+.modify-order-form-input {
+  text-align: left;
+  margin-bottom: 10px;
+  color: fn.get-color('dark');
+  background-color: fn.get-color('light');
+  border-radius: 20px;
+  border: 1px solid rgba(fn.get-color('grey'), 0.5);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+  input,
+  textarea {
+    padding: 5px 16px;
+    width: 100%;
+    font-size: 12px;
+    @include mx.media-query('lg') {
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: fn.get-color('grey');
+  }
+
+  &:hover,
+  &:focus {
+    border: 1px solid rgba(fn.get-color('dark-red'), 0.5);
+    box-shadow: 0px 2px 5px rgba(fn.get-color('dark-red'), 0.4);
+  }
+}
+
+.modify-order-form-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  button {
+    font-size: 12px;
+    padding: 5px 10px;
+    @include mx.media-query('md') {
+      padding: 10px 16px;
+      font-size: 16px;
+    }
+  }
+}
+
+.modify-order-form-other-info {
+  margin-top: 10px;
+}

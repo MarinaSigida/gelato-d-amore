@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { cancelOrder } from '../../features/ordersSlice';
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
@@ -12,13 +12,19 @@ const CancelOrderPopup = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user, isAuthenticated } = useSelector((state) => state.user);
 
   const handleCancelOrder = async () => {
-    console.log(orderId);
     try {
       await dispatch(cancelOrder(orderId)).unwrap();
       closePopup();
-      navigate('/orders');
+      if (user?.role === 'admin') {
+        navigate('/dashboard/orders');
+      } else if (user?.role === 'client') {
+        navigate('/orders');
+      } else {
+        navigate('/');
+      }
     } catch (err) {
       console.error('Failed to delete order:', err);
     }

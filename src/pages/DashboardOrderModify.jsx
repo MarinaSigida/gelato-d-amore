@@ -9,13 +9,16 @@ import bannerDashboardOrders from '/assets/images/banner-dashboard-orders.png';
 import bannerDashboardTablet from '/assets/images/banner-dashboard-orders-tablet.png';
 import bannerDashboardMobile from '/assets/images/banner-dashboard-orders-mobile.png';
 import CancelOrderPopup from '../components/DashboardOrdersPage/CancelOrderPopup';
+import ModifyOrderPopup from '../components/DashboardOrdersPage/ModifyOrderPopup';
 import { statusTranslations, deliveryTranslations } from '../utils/orderUtils';
 import cross from '../assets/images/close.png';
 
 const DashboardOrderModify = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
+  const [isModifyPopupOpen, setIsModifyPopupOpen] = useState(false);
   const [selectedOrderNumber, setSelectedOrderNumber] = useState('');
+  const [selectedOrderId, setSelectedOrderId] = useState('');
   const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -30,6 +33,8 @@ const DashboardOrderModify = () => {
   }, [id, dispatch]);
 
   useEffect(() => {
+    console.log('selectedOrder', selectedOrder);
+
     if (selectedOrder && selectedOrder.order.userId) {
       dispatch(fetchUserById(selectedOrder.order.userId));
     }
@@ -67,10 +72,17 @@ const DashboardOrderModify = () => {
   const toggleCancelOrderPopup = () => {
     setIsCancelPopupOpen(!isCancelPopupOpen);
   };
+  const toggleModifyOrderPopup = () => {
+    setIsModifyPopupOpen(!isModifyPopupOpen);
+  };
 
   const handleCancelOrderClick = () => {
     setSelectedOrderNumber(order.number);
+    setSelectedOrderId(order._id);
     toggleCancelOrderPopup();
+  };
+  const handleModifyOrderClick = () => {
+    toggleModifyOrderPopup();
   };
 
   return (
@@ -97,7 +109,7 @@ const DashboardOrderModify = () => {
                   Coût total :{' '}
                   <span>
                     {' '}
-                    {orderItems.reduce(
+                    {orderItems?.reduce(
                       (total, item) =>
                         total + item.quantity * item.stockItemId.pricePerUnit,
                       0
@@ -109,7 +121,7 @@ const DashboardOrderModify = () => {
                   Quantité :{' '}
                   <span>
                     {' '}
-                    {(orderItems.reduce(
+                    {(orderItems?.reduce(
                       (total, item) => total + item.quantity,
                       0
                     ) *
@@ -131,7 +143,10 @@ const DashboardOrderModify = () => {
                 </span>
               </p>
               <p>
-                Statut : {statusTranslations[order.status] || 'Statut inconnu'}
+                Statut :{' '}
+                <span className="info-bold">
+                  {statusTranslations[order.status] || 'Statut inconnu'}
+                </span>
               </p>
               <p>
                 Mode de livraison :{' '}
@@ -148,16 +163,16 @@ const DashboardOrderModify = () => {
             </div>
           </div>
           <div className="dashboard-order-modify-buttons">
-            {/* enabled only when the status is pending */}
-            <button id="confirm-btn">
-              <a href="/dashboard/orders">Confirmer</a>
-            </button>
-            {/* to change the items in the order */}
-            <button id="modify-btn">Modifier</button>
-            {/* to cancel the order */}
-            <button onClick={handleCancelOrderClick} id="cancel-btn">
-              Annuler
-            </button>
+            {order.status != 'canceled' && (
+              <button onClick={handleModifyOrderClick} id="modify-btn">
+                Modifier
+              </button>
+            )}
+            {order.status !== 'canceled' && (
+              <button onClick={handleCancelOrderClick} id="cancel-btn">
+                Annuler
+              </button>
+            )}
           </div>
         </div>
         <div className="order-items-container">
@@ -177,8 +192,13 @@ const DashboardOrderModify = () => {
           )}
         </div>
       </section>
+      <ModifyOrderPopup
+        isPopupOpen={isModifyPopupOpen}
+        closePopup={toggleModifyOrderPopup}
+      />
       <CancelOrderPopup
         orderNumber={selectedOrderNumber}
+        orderId={selectedOrderId}
         isPopupOpen={isCancelPopupOpen}
         closePopup={toggleCancelOrderPopup}
       />

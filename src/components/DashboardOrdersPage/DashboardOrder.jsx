@@ -64,7 +64,13 @@ const DashboardOrder = ({
           <p className="info-bold">
             {firstName} {lastName}, {mobilePhone}
           </p>
-          <p>Statut : {statusTranslations[status] || 'Statut inconnu'}</p>
+          <p>
+            Statut :{' '}
+            <span className="info-bold">
+              {' '}
+              {statusTranslations[status] || 'Statut inconnu'}
+            </span>{' '}
+          </p>
           <p>
             Mode de livraison :{' '}
             {deliveryTranslations[deliveryOption] || 'Option inconnue'}
