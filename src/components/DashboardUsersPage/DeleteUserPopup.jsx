@@ -1,7 +1,19 @@
+import { useDispatch } from 'react-redux';
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
+import { deleteUser } from '../../features/usersDataSlice';
 import cross from '../../assets/images/close.png';
 
-const DeleteUserPopup = ({ isPopupOpen, closePopup, email }) => {
+const DeleteUserPopup = ({ isPopupOpen, closePopup, email, userId }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = async () => {
+    try {
+      await dispatch(deleteUser(userId)).unwrap();
+      closePopup();
+    } catch (err) {
+      console.error('Failed to delete user:', err);
+    }
+  };
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closePopup();
@@ -22,7 +34,7 @@ const DeleteUserPopup = ({ isPopupOpen, closePopup, email }) => {
             <span>{email}</span>?
           </h3>
           <div className="popup-buttons">
-            <button type="submit">Oui</button>
+            <button onClick={handleDelete}>Oui</button>
             <button onClick={closePopup}>Non</button>
           </div>
         </div>

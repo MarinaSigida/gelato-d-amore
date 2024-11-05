@@ -12,6 +12,7 @@ const DashboardUsers = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardUsersMobile);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [selectedUserEmail, setSelectedUserEmail] = useState('');
+  const [selectedUserId, setSelectedUserId] = useState('');
   const dispatch = useDispatch();
   const { users, loading, error } = useSelector((state) => state.usersData);
 
@@ -39,7 +40,8 @@ const DashboardUsers = () => {
     setIsDeletePopupOpen(!isDeletePopupOpen);
   };
 
-  const handleDeleteClick = (email) => {
+  const handleDeleteClick = (id, email) => {
+    setSelectedUserId(id);
     setSelectedUserEmail(email);
     toggleDeleteUserPopup();
   };
@@ -60,7 +62,7 @@ const DashboardUsers = () => {
               id={user._id}
               email={user.email}
               role={user.role}
-              onDeleteClick={() => handleDeleteClick(user.email)}
+              onDeleteClick={() => handleDeleteClick(user._id, user.email)}
             />
           ))}
         </div>
@@ -69,6 +71,7 @@ const DashboardUsers = () => {
         isPopupOpen={isDeletePopupOpen}
         closePopup={toggleDeleteUserPopup}
         email={selectedUserEmail}
+        userId={selectedUserId}
       />
     </div>
   );
