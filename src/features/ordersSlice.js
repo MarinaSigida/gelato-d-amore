@@ -3,10 +3,16 @@ import axios from 'axios';
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
-export const fetchOrders = createAsyncThunk('orders/fetchOrders', async () => {
-  const response = await axios.get(`${apiKey}/orders`);
-  return response.data;
-});
+export const fetchOrders = createAsyncThunk(
+  'orders/fetchOrders',
+  async ({ page, limit }) => {
+    const response = await axios.get(`${apiKey}/orders`, {
+      params: { page, limit },
+    });
+    console.log('response', response);
+    return response.data;
+  }
+);
 
 export const fetchOrderById = createAsyncThunk(
   'orders/fetchOrderById',
@@ -82,6 +88,9 @@ const ordersSlice = createSlice({
     loading: false,
     selectedOrder: null,
     error: null,
+    currentPage: 1,
+    totalPages: 1,
+    totalOrders: 0,
   },
   reducers: {
     selectOrder: (state, action) => {
@@ -102,7 +111,10 @@ const ordersSlice = createSlice({
       })
       .addCase(fetchOrders.fulfilled, (state, action) => {
         state.loading = false;
-        state.orders = action.payload;
+        state.orders = action.payload.orders;
+        state.totalOrders = action.payload.totalOrders;
+        state.currentPage = action.payload.currentPage;
+        state.totalPages = action.payload.totalPages;
       })
       .addCase(fetchOrders.rejected, (state, action) => {
         state.loading = false;

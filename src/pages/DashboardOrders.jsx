@@ -9,12 +9,15 @@ import DashboardOrder from '../components/DashboardOrdersPage/DashboardOrder';
 
 const DashboardOrders = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
+  const [page, setPage] = useState(1);
+  const [limit] = useState(6);
   const dispatch = useDispatch();
-  const { orders, loading, error } = useSelector((state) => state.orders);
+  const { orders, loading, error, currentPage, totalPages, totalOrders } =
+    useSelector((state) => state.orders);
 
   useEffect(() => {
-    dispatch(fetchOrders());
-  }, [dispatch]);
+    dispatch(fetchOrders({ page, limit }));
+  }, [dispatch, page, limit]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,6 +35,14 @@ const DashboardOrders = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleNextPage = () => {
+    if (page < totalPages) setPage(page + 1);
+  };
+
+  const handlePrevPage = () => {
+    if (page > 1) setPage(page - 1);
+  };
+
   return (
     <div className="main">
       <Banner
@@ -40,6 +51,7 @@ const DashboardOrders = () => {
         textPosition="right"
       />
       <section className="orders">
+        <p className="orders-number">Nombre de commandes: {totalOrders}</p>
         {orders.map((order) => (
           <DashboardOrder
             key={order._id}
@@ -58,6 +70,38 @@ const DashboardOrders = () => {
             comment={order.comment}
           />
         ))}
+        <div className="pagination">
+          <button onClick={handlePrevPage} disabled={page === 1}>
+            <svg
+              fill="#fff"
+              height="24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 330 330"
+              xmlSpace="preserve"
+              transform="scale(-1 1)"
+            >
+              <path d="m250.606 154.389-150-149.996c-5.857-5.858-15.355-5.858-21.213.001-5.857 5.858-5.857 15.355.001 21.213l139.393 139.39L79.393 304.394c-5.857 5.858-5.857 15.355.001 21.213C82.322 328.536 86.161 330 90 330s7.678-1.464 10.607-4.394l149.999-150.004a14.996 14.996 0 0 0 0-21.213z" />
+            </svg>
+          </button>
+          <div className="pagination-text">
+            <p>
+              Page {currentPage} sur {totalPages}
+            </p>
+          </div>
+          <button onClick={handleNextPage} disabled={page === totalPages}>
+            <svg
+              fill="#fff"
+              height="24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 330 330"
+              xmlSpace="preserve"
+            >
+              <path d="m250.606 154.389-150-149.996c-5.857-5.858-15.355-5.858-21.213.001-5.857 5.858-5.857 15.355.001 21.213l139.393 139.39L79.393 304.394c-5.857 5.858-5.857 15.355.001 21.213C82.322 328.536 86.161 330 90 330s7.678-1.464 10.607-4.394l149.999-150.004a14.996 14.996 0 0 0 0-21.213z" />
+            </svg>
+          </button>
+        </div>
       </section>
     </div>
   );

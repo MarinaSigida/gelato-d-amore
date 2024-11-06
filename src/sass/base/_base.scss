@@ -201,3 +201,30 @@ input:-webkit-autofill {
 .error-message {
   margin: 20px 0;
 }
+
+.pagination {
+  display: flex;
+  gap: 20px;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      margin: auto 0;
+    }
+
+    &:hover,
+    &:focus {
+      svg {
+        fill: fn.get-color('dark-red');
+      }
+    }
+  }
+}
+
+.pagination-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
