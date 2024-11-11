@@ -46,10 +46,13 @@ const Flavor = ({
       <h3 className="flavor-title" onClick={onClick}>
         {title}
       </h3>
-      <p className="flavor-category">{category}</p>
-      <div className="flavor-size">
+      <p className="flavor-category" onClick={onClick}>
+        {category}
+      </p>
+      <div className="flavor-size" onClick={onClick}>
         <p>Poids : 450 g</p>
       </div>
+
       <div className="price-and-quantity">
         <div className="price">
           <p>{pricePerUnit * quantity} €</p>

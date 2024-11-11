@@ -9,7 +9,6 @@ export const fetchOrders = createAsyncThunk(
     const response = await axios.get(`${apiKey}/orders`, {
       params: { page, limit },
     });
-    console.log('response', response);
     return response.data;
   }
 );

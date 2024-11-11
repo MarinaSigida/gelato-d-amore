@@ -29,6 +29,10 @@ const Flavors = ({ onAddToBasket }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleButtonClick = (e) => {
+    e.currentTarget.blur();
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -77,7 +81,7 @@ const Flavors = ({ onAddToBasket }) => {
         </swiper-container>
       </div>
       <div className="slider"></div>
-      <button style={{ marginTop: '30px' }}>
+      <button onClick={handleButtonClick} style={{ marginTop: '30px' }}>
         <a href="catalog">Сonsulter le catalogue</a>
       </button>
     </section>

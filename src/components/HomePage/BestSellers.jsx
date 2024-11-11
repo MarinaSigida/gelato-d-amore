@@ -3,6 +3,9 @@ import bestSeller2 from '../../assets/images/bestSeller2.png';
 import bestSeller3 from '../../assets/images/bestSeller3.png';
 
 const BestSellers = () => {
+  const handleButtonClick = (e) => {
+    e.currentTarget.blur();
+  };
   return (
     <section className="bestSellers">
       <h1>
@@ -19,7 +22,7 @@ const BestSellers = () => {
           <img src={bestSeller3} alt="best seller 3" />
         </div>
       </div>
-      <button>
+      <button onClick={handleButtonClick}>
         <a href="catalog">Acheter maintenant</a>
       </button>
     </section>
