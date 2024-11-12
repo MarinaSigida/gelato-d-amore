@@ -120,28 +120,45 @@
       padding: 8px 16px;
       font-size: 14px;
     }
+  }
+}
 
-    .go-to-basket-btn {
-      a {
-        display: flex;
-        gap: 4px;
-      }
+.go-to-basket-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  width: auto;
+  padding: 10px 16px;
+  color: fn.get-color('white');
+  background-color: fn.get-color('dark-red');
+  border: 2px solid transparent;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-sizing: border-box;
 
-      .icon {
-        width: 24px;
-        height: 24px;
-        background: none;
-        margin: auto 0;
-        stroke: fn.get-color('white');
-        fill: none;
-        transition: stroke 0.3s ease, fill 0.3s ease;
-      }
-      &:hover,
-      &:focus {
-        .icon {
-          stroke: fn.get-color('dark-red');
-        }
-      }
+  &:hover,
+  &:focus {
+    background-color: fn.get-color('white');
+    color: fn.get-color('dark-red');
+    border: 2px solid fn.get-color('dark-red');
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    background: none;
+    margin: auto 0;
+    stroke: fn.get-color('white');
+    fill: none;
+    transition: stroke 0.3s ease, fill 0.3s ease;
+  }
+  &:hover,
+  &:focus {
+    .icon {
+      stroke: fn.get-color('dark-red');
     }
   }
 }

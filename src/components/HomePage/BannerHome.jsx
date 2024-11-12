@@ -1,7 +1,4 @@
 const BannerHome = () => {
-  const handleButtonClick = (e) => {
-    e.currentTarget.blur();
-  };
   return (
     <section className="banner-home">
       <div className="banner-home-text">
@@ -10,9 +7,10 @@ const BannerHome = () => {
           <br />
           Et ça se voit dans tout ce qu'on fait!
         </h1>
-        <button onClick={handleButtonClick}>
-          <a href="catalog">Acheter maintenant</a>
-        </button>
+
+        <a href="catalog" className="link-button">
+          Acheter maintenant
+        </a>
       </div>
       <div className="banner-home-background-image"></div>
     </section>

@@ -39,18 +39,17 @@ const ItemAddedToBasketNotification = ({ isPopupOpen, closePopup, item }) => {
                 </div>
                 <div className="go-to-basket-btn-container">
                   <button onClick={closePopup}>Fermer</button>
-                  <button className="go-to-basket-btn">
-                    <a href="/basket">
-                      <svg className="icon" alt="basket">
-                        <use
-                          xlinkHref={`${
-                            import.meta.env.BASE_URL
-                          }sprite.svg#basket`}
-                        ></use>
-                      </svg>
-                      <p>Panier</p>
-                    </a>
-                  </button>
+
+                  <a href="/basket" className="go-to-basket-btn">
+                    <svg className="icon" alt="basket">
+                      <use
+                        xlinkHref={`${
+                          import.meta.env.BASE_URL
+                        }sprite.svg#basket`}
+                      ></use>
+                    </svg>
+                    <p>Panier</p>
+                  </a>
                 </div>
               </div>
             </div>

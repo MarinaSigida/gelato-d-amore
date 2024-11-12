@@ -8,7 +8,7 @@ import Banner from '../components/Shared/Banner';
 import bannerOrders from '/assets/images/banner-orders.png';
 import CancelOrderPopup from '../components/DashboardOrdersPage/CancelOrderPopup';
 import { statusTranslations, deliveryTranslations } from '../utils/orderUtils';
-import cross from '../assets/images/close.png';
+import goBack from '../assets/images/turn-back.png';
 
 const OrderDetail = () => {
   const { id } = useParams();
@@ -82,7 +82,7 @@ const OrderDetail = () => {
       <section className="order-detail">
         <div className="order-container">
           <div className="icon-open" onClick={handleGoBackClick}>
-            <img src={cross} alt="open" />
+            <img src={goBack} alt="close" />
           </div>
 
           <div className="order-number">

@@ -11,7 +11,7 @@ import bannerDashboardMobile from '/assets/images/banner-dashboard-orders-mobile
 import CancelOrderPopup from '../components/DashboardOrdersPage/CancelOrderPopup';
 import ModifyOrderPopup from '../components/DashboardOrdersPage/ModifyOrderPopup';
 import { statusTranslations, deliveryTranslations } from '../utils/orderUtils';
-import cross from '../assets/images/close.png';
+import goBack from '../assets/images/turn-back.png';
 
 const DashboardOrderModify = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
@@ -95,7 +95,7 @@ const DashboardOrderModify = () => {
       <section className="order-detail">
         <div className="order-container">
           <div className="icon-open" onClick={handleGoBackClick}>
-            <img src={cross} alt="open" />
+            <img src={goBack} alt="close" />
           </div>
 
           <div className="order-number">
