@@ -33,8 +33,6 @@ const DashboardOrderModify = () => {
   }, [id, dispatch]);
 
   useEffect(() => {
-    console.log('selectedOrder', selectedOrder);
-
     if (selectedOrder && selectedOrder.order.userId) {
       dispatch(fetchUserById(selectedOrder.order.userId));
     }

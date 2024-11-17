@@ -71,9 +71,9 @@ const Catalog = () => {
     setNotificationData(item);
     setIsNotificationOpen(true);
   };
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
   if (error) {
     return <div>Error: {error}</div>;

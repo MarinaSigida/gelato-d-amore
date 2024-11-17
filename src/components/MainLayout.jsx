@@ -1,14 +1,19 @@
 import { Outlet } from 'react-router-dom';
-import Footer from './Footer';
-import Header from './Header';
+import { useState, useEffect } from 'react';
+import { Suspense } from 'react';
+import Loader from './Loader';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="page-container">
       <Header />
-      <div>
-        <Outlet />
-      </div>
+      <Suspense fallback={<Loader />}>
+        <div className="content">
+          <Outlet />
+        </div>
+      </Suspense>
       <Footer />
     </div>
   );
