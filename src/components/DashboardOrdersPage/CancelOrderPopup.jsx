@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { cancelOrder } from '../../features/ordersSlice';
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import cross from '../../assets/images/close.png';
+import { toast } from 'sonner';
 
 const CancelOrderPopup = ({
   isPopupOpen,
@@ -19,13 +20,17 @@ const CancelOrderPopup = ({
       await dispatch(cancelOrder(orderId)).unwrap();
       closePopup();
       if (user?.role === 'admin') {
+        toast.success('Commande annulée avec succés.');
         navigate('/dashboard/orders');
       } else if (user?.role === 'client') {
+        toast.success('Commande annulée avec succés.');
         navigate('/orders');
       } else {
+        toast.success('Commande annulée avec succés.');
         navigate('/');
       }
     } catch (err) {
+      toast.error("Échec d'annulation de la commande.");
       console.error('Failed to delete order:', err);
     }
   };

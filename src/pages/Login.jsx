@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { loginUser, setUser } from '../features/userSlice';
 import loginImage from '/assets/images/login-background.png';
 import loginImageMobile from '/assets/images/login-background-mobile.png';
+import { toast } from 'sonner';
 
 const Login = () => {
   const [backgroundImage, setBackgroundImage] = useState(loginImageMobile);
@@ -38,9 +39,13 @@ const Login = () => {
       const user = await dispatch(
         loginUser({ email: values.email, password: values.password })
       ).unwrap();
+      toast.success('Connexion réussie ! Bienvenue à bord.');
       dispatch(setUser(user));
     } catch (error) {
       console.error('Échec de la connexion :', error);
+      toast.error(
+        'Échec de la connexion. Veuillez vérifier vos identifiants et réessayer.'
+      );
     }
   };
 

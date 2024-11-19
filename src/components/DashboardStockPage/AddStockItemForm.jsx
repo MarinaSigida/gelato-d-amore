@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { addStockItem } from '../../features/stockItemsSlice';
 import iceCreamPlaceholder from '../../assets/images/placeholder-ice-cream.png';
+import { toast } from 'sonner';
 
 const AddStockItemForm = () => {
   const dispatch = useDispatch();
@@ -29,10 +30,12 @@ const AddStockItemForm = () => {
     formData.append('image', values.image);
     try {
       await dispatch(addStockItem(formData)).unwrap();
+      toast.success('Article ajouté avec succès !');
       resetForm();
       setPreviewImage(iceCreamPlaceholder);
     } catch (error) {
       console.error('Failed to add item:', error);
+      toast.error(`Échec d'ajout de l'article.`);
     }
   };
 

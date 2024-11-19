@@ -4,6 +4,7 @@ import { updateOrder } from '../../features/ordersSlice';
 import { Formik, Form, Field } from 'formik';
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import cross from '../../assets/images/close.png';
+import { toast } from 'sonner';
 
 const ModifyOrderPopup = ({ isPopupOpen, closePopup }) => {
   const dispatch = useDispatch();
@@ -31,9 +32,16 @@ const ModifyOrderPopup = ({ isPopupOpen, closePopup }) => {
       await dispatch(
         updateOrder({ id: selectedOrder._id, updatedOrder })
       ).unwrap();
+      toast.success('Commande modifiée avec succès !');
+
       closePopup();
     } catch (err) {
       console.error('Failed to update order:', err);
+      toast.error(
+        `Échec de modification de commande. ${
+          error.message || 'Veuillez réessayer plus tard.'
+        }`
+      );
     }
   };
 

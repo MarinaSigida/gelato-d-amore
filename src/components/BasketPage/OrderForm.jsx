@@ -8,6 +8,7 @@ import {
   updateStockItemQuantity,
   fetchStockItemById,
 } from '../../features/stockItemsSlice';
+import { toast } from 'sonner';
 
 const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
   const user = useSelector((state) => state.user.user);
@@ -79,6 +80,11 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
       openPopup();
     } catch (error) {
       console.error('Error in handleSubmit:', error);
+      toast.error(
+        `Échec de la commande. ${
+          error.message || 'Veuillez réessayer plus tard.'
+        }`
+      );
     }
   };
 
@@ -198,7 +204,9 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
               )}
               {values.deliveryOption === 'delivery' && (
                 <div>
-                  <label htmlFor="deliveryAddress">Adresse de livraison</label>
+                  <label htmlFor="deliveryAddress">
+                    Adresse de livraison <span className="info-bold">*</span>
+                  </label>
                   <div className="order-input">
                     <Field
                       type="text"
@@ -209,6 +217,10 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
                   {errors.deliveryAddress && touched.deliveryAddress && (
                     <p className="order-form-error">{errors.deliveryAddress}</p>
                   )}
+                  <div style={{ fontSize: 12 }}>
+                    <span className="info-bold">* </span>
+                    La livraison peut être réalisée uniquement à Nice (06000)
+                  </div>
                 </div>
               )}
             </div>

@@ -6,6 +6,8 @@ import bannerDashboardUsers from '/assets/images/banner-dashboard-users.png';
 import bannerDashboardUsersMobile from '/assets/images/banner-dashboard-users-mobile.png';
 import bannerDashboardUsersTablet from '/assets/images/banner-dashboard-users-tablet.png';
 import placeholderUser from '../assets/images/placeholder-user.png';
+import { toast } from 'sonner';
+
 
 const DashboardUserModify = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardUsersMobile);

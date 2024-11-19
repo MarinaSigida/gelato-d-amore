@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { registerUser, setUser } from '../features/userSlice';
 import signupImage from '/assets/images/signup-background.jpg';
 import signupImageMobile from '/assets/images/signup-background-mobile.png';
+import { toast } from 'sonner';
 
 const Signup = () => {
   const [backgroundImage, setBackgroundImage] = useState(signupImageMobile);
@@ -38,9 +39,15 @@ const Signup = () => {
       const user = await dispatch(
         registerUser({ email: values.email, password: values.password })
       ).unwrap();
+      toast.success(
+        'Inscription réussie ! Vous pouvez maintenant vous connecter.'
+      );
       dispatch(setUser(user));
     } catch (error) {
       console.error('Registration failed:', error);
+      toast.error(
+        "Une erreur est survenue lors de l'inscription. Veuillez réessayer plus tard."
+      );
     }
   };
   if (isAuthenticated) {

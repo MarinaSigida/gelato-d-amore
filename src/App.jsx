@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
 import MainLayout from './components/MainLayout';
 import ProtectedRoute from './components/ProtectedRoute';
-//import NotFound from './pages/NotFound';
+
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));

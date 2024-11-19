@@ -7,6 +7,7 @@ import Banner from '../components/Shared/Banner';
 import bannerDashboardProducts from '/assets/images/banner-dashboard-products.png';
 import bannerDashboardProductsMobile from '/assets/images/banner-dashboard-products-mobile.png';
 import iceCreamPlaceholder from '../assets/images/placeholder-ice-cream.png';
+import { toast } from 'sonner';
 
 const imageKey = import.meta.env.VITE_IMAGE_KEY;
 const DashboardStockModifyItem = () => {
@@ -71,9 +72,11 @@ const DashboardStockModifyItem = () => {
       await dispatch(
         updateStockItem({ id: stockItem._id, updatedItem: formData })
       ).unwrap();
+      toast.success('Article modifié avec succès !');
       navigate('/dashboard/stock');
     } catch (error) {
       console.error('Failed to update item:', error);
+      toast.error(`Échec de modification de l'article.`);
     }
   };
 
