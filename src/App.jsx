@@ -1,24 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
-// import Home from './pages/Home';
-// import About from './pages/About';
-// import Catalog from './pages/Catalog';
-// import Orders from './pages/Orders';
-// import OrderDetail from './pages/OrderDetail';
-// import Contact from './pages/Contact';
 import MainLayout from './components/MainLayout';
-// import Login from './pages/Login';
-// import Basket from './pages/Basket';
-// import DashboardUsers from './pages/DashboardUsers';
-// import DashboardStock from './pages/DashboardStock.jsx';
-// import DashboardOrders from './pages/DashboardOrders';
-// import DashboardStockModifyItem from './pages/DashboardStockModifyItem';
-// import DashboardUserModify from './pages/DashboardUserModify';
-// import DashboardOrderModify from './pages/DashboardOrderModify';
-// import DashboardControlPanel from './components/Dashboard/DashboardControlPanel';
-// import Signup from './pages/Signup';
 import ProtectedRoute from './components/ProtectedRoute';
-// import PlaceOrder from './pages/PlaceOrder';
+//import NotFound from './pages/NotFound';
+const NotFound = lazy(() => import('./pages/NotFound'));
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Catalog = lazy(() => import('./pages/Catalog'));
@@ -118,6 +103,7 @@ function App() {
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Signup />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </>
