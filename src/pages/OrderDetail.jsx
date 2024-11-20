@@ -177,6 +177,7 @@ const OrderDetail = () => {
         isPopupOpen={isCancelPopupOpen}
         closePopup={toggleCancelOrderPopup}
       />
+      <ScrollUpButton />
     </div>
   );
 };

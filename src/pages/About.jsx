@@ -1,6 +1,7 @@
 import Banner from '../components/Shared/Banner';
 import bannerAbout from '/assets/images/banner-about.png';
 import Story from '../components/AboutPage/Story';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const About = () => {
   return (
@@ -13,6 +14,7 @@ const About = () => {
         textPosition="right"
       />
       <Story />
+      <ScrollUpButton />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { deleteStockItem } from '../../features/stockItemsSlice';
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import cross from '../../assets/images/close.png';
+import { toast } from 'sonner';
 
 const DeleteStockItemPopup = ({
   isPopupOpen,
@@ -14,9 +15,11 @@ const DeleteStockItemPopup = ({
   const handleDelete = async () => {
     try {
       await dispatch(deleteStockItem(itemId)).unwrap();
+      toast.success('Article supprimé avec succés.');
       closePopup();
     } catch (err) {
       console.error('Failed to delete item:', err);
+      toast.error("Échec de suppression de l'article.");
     }
   };
 

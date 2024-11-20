@@ -7,6 +7,7 @@ import bannerDashboardUsersMobile from '/assets/images/banner-dashboard-users-mo
 import bannerDashboardUsersTablet from '/assets/images/banner-dashboard-users-tablet.png';
 import UserCard from '../components/DashboardUsersPage/UserCard';
 import DeleteUserPopup from '../components/DashboardUsersPage/DeleteUserPopup';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const DashboardUsers = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardUsersMobile);
@@ -73,6 +74,7 @@ const DashboardUsers = () => {
         email={selectedUserEmail}
         userId={selectedUserId}
       />
+      <ScrollUpButton />
     </div>
   );
 };

@@ -7,6 +7,7 @@ import Flavors from '../components/HomePage/Flavors';
 import BestSellers from '../components/HomePage/BestSellers';
 import Reviews from '../components/HomePage/Reviews';
 import ItemAddedToBasketNotification from '../components/Notifications/ItemAddedToBasketNotification';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const Home = () => {
   const [notificationData, setNotificationData] = useState(null);
@@ -36,6 +37,7 @@ const Home = () => {
           item={notificationData}
         />
       )}
+      <ScrollUpButton />
     </div>
   );
 };

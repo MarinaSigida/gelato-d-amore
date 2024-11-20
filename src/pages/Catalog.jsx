@@ -12,6 +12,7 @@ import CatalogFilter from '../components/CatalogPage/CatalogFilter';
 import Flavor from '../components/HomePage/Flavor';
 import bannerCatalog from '/assets/images/banner-catalog.png';
 import bannerCatalogMobile from '/assets/images/banner-catalog-mobile.png';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const Catalog = () => {
   const [bannerImage, setBannerImage] = useState(bannerCatalogMobile);
@@ -153,6 +154,7 @@ const Catalog = () => {
           />
         )}
       </section>
+      <ScrollUpButton />
     </div>
   );
 };

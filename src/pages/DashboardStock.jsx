@@ -8,6 +8,7 @@ import DeleteStockItemPopup from '../components/DashboardStockPage/DeleteStockIt
 import bannerDashboardProducts from '/assets/images/banner-dashboard-products.png';
 import bannerDashboardProductsMobile from '/assets/images/banner-dashboard-products-mobile.png';
 import searchIcon from '../assets/images/search.png';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const DashboardStock = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardProductsMobile);
@@ -130,6 +131,7 @@ const DashboardStock = () => {
           itemId={selectedItemId}
         />
       </section>
+      <ScrollUpButton />
     </div>
   );
 };

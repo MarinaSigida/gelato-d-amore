@@ -3,6 +3,7 @@ import Banner from '../components/Shared/Banner';
 import Map from '../components/ContactPage/Map';
 import bannerContact from '/assets/images/banner-contact.png';
 import bannerContactMobile from '/assets/images/banner-contact-mobile.png';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const Contact = () => {
   const [bannerImage, setBannerImage] = useState(bannerContactMobile);
@@ -54,6 +55,7 @@ const Contact = () => {
         </h2>
         <Map />
       </section>
+      <ScrollUpButton />
     </div>
   );
 };

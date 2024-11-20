@@ -4,6 +4,7 @@ import Order from '../components/OrdersPage/Order';
 import Banner from '../components/Shared/Banner';
 import bannerOrders from '/assets/images/banner-orders.png';
 import { fetchOrdersByUserId } from '../features/ordersSlice';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const Orders = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const Orders = () => {
           <p>Vous n'avez pas encore de commandes</p>
         )}
       </section>
+      <ScrollUpButton />
     </div>
   );
 };

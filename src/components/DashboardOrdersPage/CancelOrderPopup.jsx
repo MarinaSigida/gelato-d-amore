@@ -30,8 +30,8 @@ const CancelOrderPopup = ({
         navigate('/');
       }
     } catch (err) {
-      toast.error("Échec d'annulation de la commande.");
       console.error('Failed to delete order:', err);
+      toast.error("Échec d'annulation de la commande.");
     }
   };
 

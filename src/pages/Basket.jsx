@@ -7,6 +7,7 @@ import Banner from '../components/Shared/Banner';
 import BasketItem from '../components/BasketPage/BasketItem';
 import bannerBasket from '/assets/images/banner-basket.png';
 import bannerBasketMobile from '/assets/images/banner-basket-mobile.png';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const Basket = () => {
   const [bannerImage, setBannerImage] = useState(bannerBasketMobile);
@@ -100,6 +101,7 @@ const Basket = () => {
       {isPopupOpen && (
         <SignInPopup isPopupOpen={isPopupOpen} closePopup={handleClosePopup} />
       )}
+      <ScrollUpButton />
     </div>
   );
 };

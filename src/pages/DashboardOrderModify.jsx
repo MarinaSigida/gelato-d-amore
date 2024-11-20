@@ -200,6 +200,7 @@ const DashboardOrderModify = () => {
         isPopupOpen={isCancelPopupOpen}
         closePopup={toggleCancelOrderPopup}
       />
+      <ScrollUpButton />
     </div>
   );
 };

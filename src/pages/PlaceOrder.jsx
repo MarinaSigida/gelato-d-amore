@@ -8,6 +8,7 @@ import BasketItem from '../components/BasketPage/BasketItem';
 import OrderForm from '../components/BasketPage/OrderForm';
 import bannerBasket from '/assets/images/banner-basket.png';
 import bannerBasketMobile from '/assets/images/banner-basket-mobile.png';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const PlaceOrder = () => {
   const [bannerImage, setBannerImage] = useState(bannerBasketMobile);
@@ -99,6 +100,7 @@ const PlaceOrder = () => {
       {isPopupOpen && (
         <OrderPlacedPopup isPopupOpen={isPopupOpen} closePopup={closePopup} />
       )}
+      <ScrollUpButton />
     </div>
   );
 };

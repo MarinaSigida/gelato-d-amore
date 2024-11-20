@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import { deleteUser } from '../../features/usersDataSlice';
 import cross from '../../assets/images/close.png';
+import { toast } from 'sonner';
 
 const DeleteUserPopup = ({ isPopupOpen, closePopup, email, userId }) => {
   const dispatch = useDispatch();
@@ -9,9 +10,11 @@ const DeleteUserPopup = ({ isPopupOpen, closePopup, email, userId }) => {
   const handleDelete = async () => {
     try {
       await dispatch(deleteUser(userId)).unwrap();
+      toast.success('Utilisateur supprimé avec succés.');
       closePopup();
     } catch (err) {
       console.error('Failed to delete user:', err);
+      toast.error("Échec de suppression de l'utilisateur.");
     }
   };
   const handleBackdropClick = (e) => {

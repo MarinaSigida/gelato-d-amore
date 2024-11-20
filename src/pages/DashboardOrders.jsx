@@ -6,6 +6,7 @@ import bannerDashboardOrders from '/assets/images/banner-dashboard-orders.png';
 import bannerDashboardTablet from '/assets/images/banner-dashboard-orders-tablet.png';
 import bannerDashboardMobile from '/assets/images/banner-dashboard-orders-mobile.png';
 import DashboardOrder from '../components/DashboardOrdersPage/DashboardOrder';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const DashboardOrders = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
@@ -103,6 +104,7 @@ const DashboardOrders = () => {
           </button>
         </div>
       </section>
+      <ScrollUpButton />
     </div>
   );
 };
