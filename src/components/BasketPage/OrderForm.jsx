@@ -140,7 +140,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
                     />
                   </div>
                   {errors.lastName && touched.lastName && (
-                    <p className="order-form-error">{errors.lastName}</p>
+                    <p className="form-error">{errors.lastName}</p>
                   )}
                 </div>
                 <div>
@@ -153,7 +153,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
                     />
                   </div>
                   {errors.firstName && touched.firstName && (
-                    <p className="order-form-error">{errors.firstName}</p>
+                    <p className="form-error">{errors.firstName}</p>
                   )}
                 </div>
               </div>
@@ -168,7 +168,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
                 />
               </div>
               {errors.email && touched.email && (
-                <p className="order-form-error">{errors.email}</p>
+                <p className="form-error">{errors.email}</p>
               )}
               <label htmlFor="mobilePhone">Numéro de téléphone</label>
               <div className="order-input">
@@ -180,7 +180,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
                 />
               </div>
               {errors.mobilePhone && touched.mobilePhone && (
-                <p className="order-form-error">{errors.mobilePhone}</p>
+                <p className="form-error">{errors.mobilePhone}</p>
               )}
               <label htmlFor="comment">Commentaire</label>
               <div className="order-input">
@@ -200,7 +200,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
                 </Field>
               </div>
               {errors.deliveryOption && touched.deliveryOption && (
-                <p className="order-form-error">{errors.deliveryOption}</p>
+                <p className="form-error">{errors.deliveryOption}</p>
               )}
               {values.deliveryOption === 'delivery' && (
                 <div>
@@ -215,7 +215,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
                     />
                   </div>
                   {errors.deliveryAddress && touched.deliveryAddress && (
-                    <p className="order-form-error">{errors.deliveryAddress}</p>
+                    <p className="form-error">{errors.deliveryAddress}</p>
                   )}
                   <div style={{ fontSize: 12 }}>
                     <span className="info-bold">* </span>

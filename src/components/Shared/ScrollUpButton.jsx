@@ -30,7 +30,7 @@ const ScrollUpButton = () => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <g strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 22.42c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10Z" />
             <path d="m8 13.86 2.87-3.06a1.52 1.52 0 0 1 2.26 0L16 13.86" />
           </g>

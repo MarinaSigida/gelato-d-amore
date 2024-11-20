@@ -67,10 +67,6 @@ const DashboardStock = () => {
     item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   if (error) {
     console.log('error', error);
     return <div>Error: {error.message}</div>;
