@@ -14,7 +14,6 @@ const ModifyOrderPopup = ({ isPopupOpen, closePopup }) => {
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
 
   const handleSubmit = async (values) => {
-    console.log('selectedOrder popup', selectedOrder);
     const updatedOrder = {
       number: selectedOrder.number,
       userId: selectedOrder.userId,
@@ -37,11 +36,7 @@ const ModifyOrderPopup = ({ isPopupOpen, closePopup }) => {
       closePopup();
     } catch (err) {
       console.error('Failed to update order:', err);
-      toast.error(
-        `Échec de modification de commande. ${
-          error.message || 'Veuillez réessayer plus tard.'
-        }`
-      );
+      toast.error(`Échec de modification de commande.`);
     }
   };
 

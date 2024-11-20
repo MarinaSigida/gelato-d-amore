@@ -35,6 +35,21 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
+export const updateUser = createAsyncThunk(
+  'usersData/updateUser',
+  async ({ id, updatedUser }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(
+        `${apiKey}/users/update/${id}`,
+        updatedUser
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const usersDataSlice = createSlice({
   name: 'usersData',
   initialState: {
@@ -43,7 +58,11 @@ const usersDataSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    resetUser: (state) => {
+      state.user = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserById.pending, (state) => {
@@ -82,8 +101,27 @@ const usersDataSlice = createSlice({
       .addCase(deleteUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message || action.error.message;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.users.findIndex(
+          (user) => user._id === action.payload._id
+        );
+        if (index !== -1) {
+          state.users[index] = action.payload;
+        }
+        state.user = action.payload;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
+
+export const { resetUser } = usersDataSlice.actions;
 
 export default usersDataSlice.reducer;

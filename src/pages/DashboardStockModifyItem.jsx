@@ -80,10 +80,6 @@ const DashboardStockModifyItem = () => {
     }
   };
 
-  if (!stockItemData) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="main">
       <Banner

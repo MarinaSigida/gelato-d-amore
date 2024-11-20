@@ -1,18 +1,31 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import Banner from '../components/Shared/Banner';
 import bannerDashboardUsers from '/assets/images/banner-dashboard-users.png';
 import bannerDashboardUsersMobile from '/assets/images/banner-dashboard-users-mobile.png';
 import bannerDashboardUsersTablet from '/assets/images/banner-dashboard-users-tablet.png';
 import placeholderUser from '../assets/images/placeholder-user.png';
+import {
+  fetchUserById,
+  updateUser,
+  resetUser,
+} from '../features/usersDataSlice';
 import { toast } from 'sonner';
-
 
 const DashboardUserModify = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardUsersMobile);
+  const { user, loading, error } = useSelector((state) => state.usersData);
+
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetUser());
+    dispatch(fetchUserById(id));
+  }, [dispatch, id]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,6 +48,31 @@ const DashboardUserModify = () => {
     navigate(`/dashboard/users`);
   };
 
+  const handleSubmit = async (values) => {
+    const updatedUser = {
+      email: values.email,
+      role: values.role,
+    };
+    console.log('Updated User:', updatedUser);
+
+    try {
+      await dispatch(updateUser({ id: user._id, updatedUser })).unwrap();
+      toast.success('Utilisateur modifiée avec succès !');
+      navigate(`/dashboard/users`);
+    } catch (err) {
+      console.error('Failed to update user:', err);
+      toast.error(`Échec de modification de d'utilisateur`);
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>; // Display loading indicator while fetching user data
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>; // Display error if there is any
+  }
+
   return (
     <div className="main">
       <Banner
@@ -50,15 +88,22 @@ const DashboardUserModify = () => {
           </div>
           <Formik
             initialValues={{
-              id: { id },
-              email: '',
-              role: '',
+              email: user?.email || '',
+              role: user?.role || '',
             }}
-            onSubmit={(values) => {
-              console.log(values);
+            onSubmit={handleSubmit}
+            validate={(values) => {
+              const errors = {};
+              if (!values.email) {
+                errors.email = "L'email est requis";
+              }
+              if (!values.role) {
+                errors.role = 'Le rôle est requis';
+              }
+              return errors;
             }}
           >
-            {() => (
+            {({ errors, touched }) => (
               <Form className="modify-user-form">
                 <label htmlFor="email">Email</label>
                 <div className="modify-user-input">
@@ -68,6 +113,9 @@ const DashboardUserModify = () => {
                     placeholder="Adresse email"
                   />
                 </div>
+                {errors.email && touched.email && (
+                  <p className="form-error">{errors.email}</p>
+                )}
 
                 <div>
                   <label htmlFor="role">Rôle</label>
@@ -76,6 +124,9 @@ const DashboardUserModify = () => {
                     <option value="admin" label="Admin" />
                   </Field>
                 </div>
+                {errors.role && touched.role && (
+                  <p className="form-error">{errors.role}</p>
+                )}
 
                 <div className="modify-user-form-buttons">
                   <button onClick={handleCancelClick}>Annuler</button>
