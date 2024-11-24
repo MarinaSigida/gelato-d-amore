@@ -9,6 +9,7 @@ import bannerOrders from '/assets/images/banner-orders.png';
 import CancelOrderPopup from '../components/DashboardOrdersPage/CancelOrderPopup';
 import { statusTranslations, deliveryTranslations } from '../utils/orderUtils';
 import goBack from '../assets/images/turn-back.png';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const OrderDetail = () => {
   const { id } = useParams();

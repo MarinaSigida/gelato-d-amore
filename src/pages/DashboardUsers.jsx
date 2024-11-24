@@ -47,6 +47,8 @@ const DashboardUsers = () => {
     toggleDeleteUserPopup();
   };
 
+  const activeUsers = users.filter((user) => user.active);
+
   return (
     <div className="main">
       <Banner
@@ -57,7 +59,7 @@ const DashboardUsers = () => {
       />
       <section className="users">
         <div className="users-list">
-          {users.map((user) => (
+          {activeUsers.map((user) => (
             <UserCard
               key={user._id}
               id={user._id}

@@ -98,6 +98,7 @@ const ordersSlice = createSlice({
     clearSelectedOrder: (state) => {
       state.selectedOrder = null;
     },
+
     clearOrders: (state) => {
       state.orders = [];
     },

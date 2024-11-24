@@ -39,9 +39,7 @@ const Signup = () => {
       const user = await dispatch(
         registerUser({ email: values.email, password: values.password })
       ).unwrap();
-      toast.success(
-        'Inscription réussie ! Vous pouvez maintenant vous connecter.'
-      );
+      toast.success('Inscription réussie ! Vous êtes connecté.');
       dispatch(setUser(user));
     } catch (error) {
       console.error('Registration failed:', error);

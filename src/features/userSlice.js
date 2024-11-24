@@ -20,6 +20,7 @@ export const setUserFromToken = () => {
           id: decoded.userId,
           email: decoded.email,
           role: decoded.role,
+          active: decoded.active,
           token,
         };
       } else {
@@ -46,8 +47,12 @@ export const registerUser = createAsyncThunk(
         id: response.data.user._id,
         email: response.data.user.email,
         role: response.data.user.role,
+        active: response.data.user.active,
       };
     } catch (error) {
+      if (error.response && error.response.data.errors) {
+        return rejectWithValue(error.response.data.errors);
+      }
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -63,9 +68,13 @@ export const loginUser = createAsyncThunk(
         id: response.data.user.id,
         email: response.data.user.email,
         role: response.data.user.role,
+        active: response.data.user.active,
         token: response.data.token,
       };
     } catch (error) {
+      if (error.response && error.response.data.errors) {
+        return rejectWithValue(error.response.data.errors);
+      }
       return rejectWithValue(error.response.data.message);
     }
   }

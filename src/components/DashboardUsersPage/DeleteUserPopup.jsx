@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import { deleteUser } from '../../features/usersDataSlice';
+import { fetchAllUsers } from '../../features/usersDataSlice';
 import cross from '../../assets/images/close.png';
 import { toast } from 'sonner';
 
@@ -11,6 +12,7 @@ const DeleteUserPopup = ({ isPopupOpen, closePopup, email, userId }) => {
     try {
       await dispatch(deleteUser(userId)).unwrap();
       toast.success('Utilisateur supprimé avec succés.');
+      dispatch(fetchAllUsers());
       closePopup();
     } catch (err) {
       console.error('Failed to delete user:', err);

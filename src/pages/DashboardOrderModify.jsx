@@ -12,6 +12,7 @@ import CancelOrderPopup from '../components/DashboardOrdersPage/CancelOrderPopup
 import ModifyOrderPopup from '../components/DashboardOrdersPage/ModifyOrderPopup';
 import { statusTranslations, deliveryTranslations } from '../utils/orderUtils';
 import goBack from '../assets/images/turn-back.png';
+import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const DashboardOrderModify = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
