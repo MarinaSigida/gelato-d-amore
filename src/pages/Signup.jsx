@@ -5,10 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { registerUser, setUser } from '../features/userSlice';
 import signupImage from '/assets/images/signup-background.jpg';
 import signupImageMobile from '/assets/images/signup-background-mobile.png';
+import showPassword from '../assets/images/view.png';
+import hidePassword from '../assets/images/hide.png';
 import { toast } from 'sonner';
 
 const Signup = () => {
   const [backgroundImage, setBackgroundImage] = useState(signupImageMobile);
+  const [showPasswordToggle, setShowPasswordToggle] = useState(false);
+  const [showConfirmPasswordToggle, setShowConfirmPasswordToggle] =
+    useState(false);
   const dispatch = useDispatch();
   const { loading, error, isAuthenticated } = useSelector(
     (state) => state.user
@@ -42,15 +47,28 @@ const Signup = () => {
       toast.success('Inscription réussie ! Vous êtes connecté.');
       dispatch(setUser(user));
     } catch (error) {
-      console.error('Registration failed:', error);
-      toast.error(
-        "Une erreur est survenue lors de l'inscription. Veuillez réessayer plus tard."
-      );
+      if (error) {
+        toast.error(error);
+      } else {
+        toast.error(
+          "Une erreur est survenue lors de l'inscription. Veuillez réessayer plus tard."
+        );
+      }
     }
   };
   if (isAuthenticated) {
     return <div>You are logged in!</div>;
   }
+
+  const validatePassword = (value) => {
+    const passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+    if (!value) {
+      return 'Le mot de passe est requis';
+    } else if (!passwordPattern.test(value)) {
+      return 'Le mot de passe doit contenir au moins 8 caractères, un chiffre, et un symbole';
+    }
+    return null;
+  };
 
   return (
     <div className="main">
@@ -72,9 +90,6 @@ const Signup = () => {
               if (!values.email) {
                 errors.email = "L'email est requis";
               }
-              if (!values.password) {
-                errors.password = 'Le mot de passe est requis';
-              }
               if (values.password !== values.confirmPassword) {
                 errors.confirmPassword =
                   'Les mots de passe ne correspondent pas';
@@ -94,33 +109,57 @@ const Signup = () => {
                       required
                     />
                   </div>
-                  {errors.email && touched.email && <p>{errors.email}</p>}
-                  <div className="login-input">
+                  {errors.email && touched.email && (
+                    <p className="form-error">{errors.email}</p>
+                  )}
+                  <div className="login-input password-input-wrapper">
                     <Field
-                      type="password"
+                      type={showPasswordToggle ? 'text' : 'password'}
                       name="password"
                       placeholder="Votre mot de passe"
+                      validate={validatePassword}
                       required
+                    />
+                    <img
+                      src={showPasswordToggle ? hidePassword : showPassword}
+                      className="show-hide-password-icon"
+                      alt="Toggle Password"
+                      onClick={() => setShowPasswordToggle(!showPasswordToggle)}
                     />
                   </div>
                   {errors.password && touched.password && (
-                    <p>{errors.password}</p>
+                    <p className="form-error">{errors.password}</p>
                   )}
-                  <div className="login-input">
+                  {!errors.password && touched.password && (
+                    <p style={{ color: 'green', fontSize: '14px' }}>
+                      Mot de passe valide ✅
+                    </p>
+                  )}
+                  <div className="login-input password-input-wrapper">
                     <Field
-                      type="password"
+                      type={showConfirmPasswordToggle ? 'text' : 'password'}
                       name="confirmPassword"
                       placeholder="Confirmez votre mot de passe"
                       required
                     />
+                    <img
+                      src={
+                        showConfirmPasswordToggle ? hidePassword : showPassword
+                      }
+                      className="show-hide-password-icon"
+                      alt="Toggle Password"
+                      onClick={() =>
+                        setShowConfirmPasswordToggle(!showConfirmPasswordToggle)
+                      }
+                    />
                   </div>
                   {errors.confirmPassword && touched.confirmPassword && (
-                    <p>{errors.confirmPassword}</p>
+                    <p className="form-error">{errors.confirmPassword}</p>
                   )}
                 </div>
                 {error && (
-                  <p className="error-message">
-                    L'utilisateur avec cette adresse e-mail existe déjà
+                  <p className="form-error" style={{ marginBottom: '40px' }}>
+                    {error}
                   </p>
                 )}
                 <button type="submit">

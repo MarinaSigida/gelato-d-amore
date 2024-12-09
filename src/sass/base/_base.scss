@@ -230,6 +230,11 @@ input:-webkit-autofill {
 .error-message {
   margin: 20px 0;
 }
+.form-error {
+  font-size: 14px;
+  color: fn.get-color('light-red');
+  padding: 0;
+}
 
 .pagination {
   display: flex;
@@ -279,4 +284,12 @@ input:-webkit-autofill {
       stroke: fn.get-color('dark-red');
     }
   }
+}
+
+.show-hide-password-icon {
+  cursor: pointer;
+  width: 20px;
+  margin-left: -30px;
+  position: absolute;
+  right: 16px;
 }

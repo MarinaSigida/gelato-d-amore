@@ -5,10 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { loginUser, setUser } from '../features/userSlice';
 import loginImage from '/assets/images/login-background.png';
 import loginImageMobile from '/assets/images/login-background-mobile.png';
+import showPassword from '../assets/images/view.png';
+import hidePassword from '../assets/images/hide.png';
 import { toast } from 'sonner';
 
 const Login = () => {
   const [backgroundImage, setBackgroundImage] = useState(loginImageMobile);
+  const [showPasswordToggle, setShowPasswordToggle] = useState(false);
+
   const dispatch = useDispatch();
   const { loading, error, isAuthenticated } = useSelector(
     (state) => state.user
@@ -87,21 +91,29 @@ const Login = () => {
                       required
                     />
                   </div>
-                  {errors.email && touched.email && <p>{errors.email}</p>}
-                  <div className="login-input">
+                  {errors.email && touched.email && (
+                    <p className="form-error">{errors.email}</p>
+                  )}
+                  <div className="login-input password-input-wrapper">
                     <Field
-                      type="password"
+                      type={showPasswordToggle ? 'text' : 'password'}
                       name="password"
                       placeholder="Votre mot de passe"
                       required
                     />
+                    <img
+                      src={showPasswordToggle ? hidePassword : showPassword}
+                      className="show-hide-password-icon"
+                      alt="Toggle Password"
+                      onClick={() => setShowPasswordToggle(!showPasswordToggle)}
+                    />
                   </div>
                   {errors.password && touched.password && (
-                    <p>{errors.password}</p>
+                    <p className="form-error">{errors.password}</p>
                   )}
                 </div>
                 {error && (
-                  <p className="error-message">
+                  <p className="form-error" style={{ marginBottom: '40px' }}>
                     Utilisateur non trouvé. Veuillez vérifier votre email et mot
                     de passe.
                   </p>
