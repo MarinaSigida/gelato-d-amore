@@ -142,9 +142,7 @@ const DashboardStockModifyItem = () => {
               if (!values.image || !(values.image instanceof File)) {
                 errors.image = 'Veuillez télécharger une image.';
               }
-              if (!values.quantity || values.quantity === 0) {
-                errors.quantity = 'La quantité est requise';
-              } else if (values.quantity < 0) {
+              if (values.quantity < 0) {
                 errors.quantity = 'La quantité ne peut pas être négative';
               }
               if (!values.pricePerUnit || values.pricePerUnit === 0) {

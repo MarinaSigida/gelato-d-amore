@@ -1,5 +1,5 @@
 import iceCreamPlaceholder from '../../assets/images/placeholder-ice-cream.png';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToBasket } from '../../features/basketSlice';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -17,11 +17,16 @@ const Flavor = ({
   onAddToBasket,
 }) => {
   const [quantityToBuy, setQuantityToBuy] = useState(1);
+  const basket = useSelector((state) => state.basket.items);
   const dispatch = useDispatch();
+
+  const basketItem = basket.find((item) => item.id === id);
+  const basketQuantity = basketItem ? basketItem.quantity : 0;
+  const maxAvailableQuantity = quantity - basketQuantity;
 
   const handleIncrement = () => {
     setQuantityToBuy((prevQuantity) => {
-      if (prevQuantity < quantity) {
+      if (prevQuantity < maxAvailableQuantity) {
         return prevQuantity + 1;
       } else {
         toast.error(
@@ -39,7 +44,19 @@ const Flavor = ({
   };
 
   const handleAddToBasket = () => {
-    const item = { id, title, image, price: pricePerUnit, quantityToBuy };
+    if (quantityToBuy > maxAvailableQuantity) {
+      toast.error(
+        `La quantité demandée dépasse la limite de stock. Disponible: ${maxAvailableQuantity}.`
+      );
+      return;
+    }
+    const item = {
+      id,
+      title,
+      image,
+      price: pricePerUnit,
+      quantity: quantityToBuy,
+    };
     dispatch(addToBasket(item));
     onAddToBasket(item);
     setQuantityToBuy(1);

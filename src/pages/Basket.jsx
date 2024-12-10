@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearBasket } from '../features/basketSlice';
+import { fetchStockItems } from '../features/stockItemsSlice';
+
 import SignInPopup from '../components/BasketPage/SignInPopup';
 import Banner from '../components/Shared/Banner';
 import BasketItem from '../components/BasketPage/BasketItem';
@@ -15,9 +17,16 @@ const Basket = () => {
   const { items, totalQuantity, totalAmount } = useSelector(
     (state) => state.basket
   );
+  const stockItems = useSelector((state) => state.stockItems.items);
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!stockItems.length) {
+      dispatch(fetchStockItems());
+    }
+  }, [dispatch, stockItems.length]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -83,7 +92,18 @@ const Basket = () => {
             </div>
             <div className="basket-items">
               {items.length > 0 ? (
-                items.map((item) => <BasketItem key={item.id} item={item} />)
+                items.map((item) => {
+                  const stockItem = stockItems.find(
+                    (stock) => stock._id === item.id
+                  );
+                  return (
+                    <BasketItem
+                      key={item.id}
+                      item={item}
+                      stockItem={stockItem}
+                    />
+                  );
+                })
               ) : (
                 <div className="empty-basket-message">
                   <p>Votre panier est vide.</p>

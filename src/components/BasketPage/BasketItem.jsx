@@ -5,15 +5,23 @@ import {
 } from '../../features/basketSlice';
 import iceCreamPlaceholder from '../../assets/images/placeholder-ice-cream.png';
 import trashBin from '../../assets/images/trash-bin.png';
+import { toast } from 'sonner';
 
 const imageKey = import.meta.env.VITE_IMAGE_KEY;
 
-const BasketItem = ({ item }) => {
+const BasketItem = ({ item, stockItem }) => {
   const dispatch = useDispatch();
+
   const handleIncrement = () => {
-    dispatch(
-      updateBasketQuantity({ id: item.id, quantity: item.quantity + 1 })
-    );
+    if (stockItem && item.quantity < stockItem.quantity) {
+      dispatch(
+        updateBasketQuantity({ id: item.id, quantity: item.quantity + 1 })
+      );
+    } else {
+      toast.error(
+        `Vous ne pouvez pas ajouter plus de ${item.quantity} glaces ${item.title} à votre panier`
+      );
+    }
   };
 
   const handleDecrement = () => {
@@ -27,6 +35,7 @@ const BasketItem = ({ item }) => {
   const handleRemoveItem = () => {
     dispatch(removeFromBasket(item.id));
   };
+
   return (
     <div
       className="flavor-card basket-item-card"

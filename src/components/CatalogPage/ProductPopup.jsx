@@ -1,44 +1,65 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToBasket } from '../../features/basketSlice';
 import { useState } from 'react';
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import cross from '../../assets/images/close.png';
 import iceCreamPlaceholder from '../../assets/images/placeholder-ice-cream.png';
+import { toast } from 'sonner';
 
 const imageKey = import.meta.env.VITE_IMAGE_KEY;
 
 const ProductPopup = ({ isPopupOpen, closePopup, product, onAddToBasket }) => {
+  const basket = useSelector((state) => state.basket.items);
+  const [quantityToBuy, setQuantityToBuy] = useState(1);
+  const dispatch = useDispatch();
+
+  const basketItem = basket.find((item) => item.id === product._id);
+  const basketQuantity = basketItem ? basketItem.quantity : 0;
+  const maxAvailableQuantity = product.quantity - basketQuantity;
+
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closePopup();
     }
   };
 
-  const [quantity, setQuantity] = useState(1);
-  const dispatch = useDispatch();
-
   const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    setQuantityToBuy((prevQuantity) => {
+      if (prevQuantity < maxAvailableQuantity) {
+        return prevQuantity + 1;
+      } else {
+        toast.error(
+          `Vous ne pouvez pas ajouter plus de ${product.quantity} glaces ${product.title} à votre panier`
+        );
+        return prevQuantity;
+      }
+    });
   };
 
   const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
+    if (quantityToBuy > 1) {
+      setQuantityToBuy((prevQuantity) => prevQuantity - 1);
     }
   };
 
-  const handdleAddToBasket = () => {
+  const handleAddToBasket = () => {
+    if (quantityToBuy > maxAvailableQuantity) {
+      toast.error(
+        `La quantité demandée dépasse la limite de stock. Disponible: ${maxAvailableQuantity}.`
+      );
+      return;
+    }
     const item = {
       id: product._id,
       title: product.title,
       image: product.image,
       price: product.pricePerUnit,
-      quantity,
+      quantity: quantityToBuy,
     };
     dispatch(addToBasket(item));
     onAddToBasket(item);
     closePopup();
-    setQuantity(1);
+    setQuantityToBuy(1);
   };
 
   return (
@@ -71,10 +92,10 @@ const ProductPopup = ({ isPopupOpen, closePopup, product, onAddToBasket }) => {
             </div>
             <div className="price-and-quantity">
               <div className="price">
-                <p>{product.pricePerUnit * quantity} €</p>
+                <p>{product.pricePerUnit * quantityToBuy} €</p>
               </div>
               <div className="quantity">
-                <p>{quantity}</p>
+                <p>{quantityToBuy}</p>
               </div>
               <div className="quantity-btn-container">
                 <button className="quantity-btn" onClick={handleIncrement}>
@@ -87,7 +108,7 @@ const ProductPopup = ({ isPopupOpen, closePopup, product, onAddToBasket }) => {
             </div>
             <button
               className="buy-btn"
-              onClick={handdleAddToBasket}
+              onClick={handleAddToBasket}
               style={{ padding: '8px 14px' }}
             >
               Ajouter au panier

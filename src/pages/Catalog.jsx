@@ -117,23 +117,25 @@ const Catalog = () => {
           />
         </div>
         <div className="catalog-list">
-          {filteredItems.map((item) => (
-            <Flavor
-              key={item._id}
-              id={item._id}
-              image={item.image}
-              title={item.title}
-              description={item.description}
-              pricePerUnit={item.pricePerUnit}
-              quantity={item.quantity}
-              category={item.category}
-              createdAt={item.createdAt}
-              updatedAt={item.updatedAt}
-              status={item.status}
-              onClick={() => handleItemClick(item)}
-              onAddToBasket={handleAddToBasket}
-            />
-          ))}
+          {filteredItems
+            .filter((item) => item.quantity > 0)
+            .map((item) => (
+              <Flavor
+                key={item._id}
+                id={item._id}
+                image={item.image}
+                title={item.title}
+                description={item.description}
+                pricePerUnit={item.pricePerUnit}
+                quantity={item.quantity}
+                category={item.category}
+                createdAt={item.createdAt}
+                updatedAt={item.updatedAt}
+                status={item.status}
+                onClick={() => handleItemClick(item)}
+                onAddToBasket={handleAddToBasket}
+              />
+            ))}
         </div>
         {selectedItem && (
           <ProductPopup
