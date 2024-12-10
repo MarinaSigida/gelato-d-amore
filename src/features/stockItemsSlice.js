@@ -12,9 +12,14 @@ export const fetchStockItems = createAsyncThunk(
 );
 export const fetchStockItemById = createAsyncThunk(
   'stockItems/fetchStockItemById',
-  async (id) => {
-    const response = await axios.get(`${apiKey}/stockItems/${id}`);
-    return response.data;
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${apiKey}/stockItems/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching stock item:', error); // Debug log
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 

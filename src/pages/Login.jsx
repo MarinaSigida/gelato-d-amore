@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { loginUser, setUser } from '../features/userSlice';
 import loginImage from '/assets/images/login-background.png';
 import loginImageMobile from '/assets/images/login-background-mobile.png';
@@ -12,7 +12,8 @@ import { toast } from 'sonner';
 const Login = () => {
   const [backgroundImage, setBackgroundImage] = useState(loginImageMobile);
   const [showPasswordToggle, setShowPasswordToggle] = useState(false);
-
+  const location = useLocation();
+  const from = location.state?.from || '/';
   const dispatch = useDispatch();
   const { loading, error, isAuthenticated } = useSelector(
     (state) => state.user
@@ -34,7 +35,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/');
+      navigate(from);
     }
   }, [isAuthenticated, navigate]);
 

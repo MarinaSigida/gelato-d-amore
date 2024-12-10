@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { registerUser, setUser } from '../features/userSlice';
 import signupImage from '/assets/images/signup-background.jpg';
 import signupImageMobile from '/assets/images/signup-background-mobile.png';
@@ -15,6 +15,8 @@ const Signup = () => {
   const [showConfirmPasswordToggle, setShowConfirmPasswordToggle] =
     useState(false);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const from = location.state?.from || '/';
   const { loading, error, isAuthenticated } = useSelector(
     (state) => state.user
   );
@@ -35,7 +37,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/');
+      navigate(from);
     }
   }, [isAuthenticated, navigate]);
 

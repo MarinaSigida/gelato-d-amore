@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
-import { updateStockItem } from '../features/stockItemsSlice';
+import {
+  updateStockItem,
+  clearSelectedItem,
+  fetchStockItemById,
+} from '../features/stockItemsSlice';
 import Banner from '../components/Shared/Banner';
 import bannerDashboardProducts from '/assets/images/banner-dashboard-products.png';
 import bannerDashboardProductsMobile from '/assets/images/banner-dashboard-products-mobile.png';
@@ -10,22 +14,38 @@ import iceCreamPlaceholder from '../assets/images/placeholder-ice-cream.png';
 import { toast } from 'sonner';
 
 const imageKey = import.meta.env.VITE_IMAGE_KEY;
+
 const DashboardStockModifyItem = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardProductsMobile);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const stockItem = useSelector((state) => state.stockItems.selectedItem);
+  const { selectedItem, loading, error } = useSelector(
+    (state) => state.stockItems
+  );
   const [stockItemData, setStockItemData] = useState(null);
   const [previewImage, setPreviewImage] = useState(iceCreamPlaceholder);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
   useEffect(() => {
-    if (stockItem) {
-      setStockItemData(stockItem);
+    if (id) {
+      dispatch(fetchStockItemById(id));
+    }
+    return () => {
+      dispatch(clearSelectedItem());
+    };
+  }, [id, dispatch]);
+
+  useEffect(() => {
+    if (selectedItem) {
+      setStockItemData(selectedItem);
       setPreviewImage(
-        stockItem.image ? `${imageKey}/${stockItem.image}` : iceCreamPlaceholder
+        selectedItem.image
+          ? `${imageKey}/${selectedItem.image}`
+          : iceCreamPlaceholder
       );
     }
-  }, [stockItem]);
+  }, [selectedItem]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,6 +62,7 @@ const DashboardStockModifyItem = () => {
 
   const handleCancelClick = (e) => {
     e.preventDefault();
+    dispatch(clearSelectedItem());
     navigate(`/dashboard/stock`);
   };
 
@@ -70,22 +91,25 @@ const DashboardStockModifyItem = () => {
     formData.append('image', values.image);
     try {
       await dispatch(
-        updateStockItem({ id: stockItem._id, updatedItem: formData })
+        updateStockItem({ id: selectedItem._id, updatedItem: formData })
       ).unwrap();
       toast.success('Article modifié avec succès !');
       navigate('/dashboard/stock');
     } catch (error) {
-      console.error('Failed to update item:', error);
       toast.error(`Échec de modification de l'article.`);
     }
   };
+
+  if (loading || !stockItemData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="main">
       <Banner
         image={bannerImage}
-        titleSpan="Modifiez l'article"
-        textColorExtra="white"
+        title="Modifiez l'article"
+        textColor="white"
         textPosition="left"
       />
       <section className="modify-stock-item">
@@ -95,13 +119,13 @@ const DashboardStockModifyItem = () => {
           </div>
           <Formik
             initialValues={{
-              title: stockItemData.title || '',
-              category: stockItemData.category || '',
-              description: stockItemData.description || '',
-              quantity: stockItemData.quantity || 0,
-              pricePerUnit: stockItemData.pricePerUnit || 0,
-              status: stockItemData.status || '',
-              image: stockItemData.image || '',
+              title: stockItemData?.title || '',
+              category: stockItemData?.category || '',
+              description: stockItemData?.description || '',
+              quantity: stockItemData?.quantity || 0,
+              pricePerUnit: stockItemData?.pricePerUnit || 0,
+              status: stockItemData?.status || '',
+              image: stockItemData?.image || '',
             }}
             onSubmit={handleSubmit}
             validate={(values) => {

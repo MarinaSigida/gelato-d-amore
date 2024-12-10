@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchStockItems } from '../features/stockItemsSlice';
+import {
+  fetchStockItems,
+  selectItem,
+  clearSelectedItem,
+} from '../features/stockItemsSlice';
 import Banner from '../components/Shared/Banner';
 import StockItem from '../components/DashboardStockPage/StockItem';
 import AddStockItemForm from '../components/DashboardStockPage/AddStockItemForm';
 import DeleteStockItemPopup from '../components/DashboardStockPage/DeleteStockItemPopup';
+import StockItemPopup from '../components/DashboardStockPage/StocItemPopup';
 import bannerDashboardProducts from '/assets/images/banner-dashboard-products.png';
 import bannerDashboardProductsMobile from '/assets/images/banner-dashboard-products-mobile.png';
 import searchIcon from '../assets/images/search.png';
@@ -19,9 +24,12 @@ const DashboardStock = () => {
   const [selectedItemId, setSelectedItemId] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const dispatch = useDispatch();
-  const { items, loading, error } = useSelector((state) => state.stockItems);
+  const { items, loading, error, selectedItem } = useSelector(
+    (state) => state.stockItems
+  );
 
   useEffect(() => {
+    dispatch(clearSelectedItem());
     dispatch(fetchStockItems());
   }, [dispatch]);
 
@@ -67,6 +75,12 @@ const DashboardStock = () => {
     item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const handleItemClick = (item) => {
+    dispatch(selectItem(item));
+  };
+  const handleClosePopup = () => {
+    dispatch(clearSelectedItem());
+  };
   if (error) {
     console.log('error', error);
     return <div>Error: {error.message}</div>;
@@ -113,6 +127,7 @@ const DashboardStock = () => {
                   category={item.category}
                   status={item.status}
                   onDeleteClick={() => handleDeleteClick(item._id, item.title)}
+                  onClick={() => handleItemClick(item)}
                 />
               ))}
             </div>
@@ -126,6 +141,13 @@ const DashboardStock = () => {
           itemTitle={selectedItemTitle}
           itemId={selectedItemId}
         />
+        {selectedItem && (
+          <StockItemPopup
+            isPopupOpen={!!selectedItem}
+            closePopup={handleClosePopup}
+            product={selectedItem}
+          />
+        )}
       </section>
       <ScrollUpButton />
     </div>

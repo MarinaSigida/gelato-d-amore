@@ -3,11 +3,23 @@ import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import cross from '../../assets/images/close.png';
 
 const SignInPopup = ({ isPopupOpen, closePopup }) => {
+  const navigate = useNavigate();
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closePopup();
     }
   };
+
+  const handleSignupRedirection = () => {
+    navigate('/register', { state: { from: '/basket' } });
+    closePopup();
+  };
+
+  const handleLoginRedirection = () => {
+    navigate('/login', { state: { from: '/basket' } });
+    closePopup();
+  };
+
   return (
     <>
       <OverlayPopup onClick={handleBackdropClick}>
@@ -25,17 +37,13 @@ const SignInPopup = ({ isPopupOpen, closePopup }) => {
             </ul>
             <div className="signin-buttons">
               <div className="signin-button">
-                <button>
-                  <a href="/login">Se connecter</a>
-                </button>
+                <button onClick={handleLoginRedirection}>Se connecter</button>
               </div>
               <div className="divider">
                 <span>OU</span>
               </div>
               <div className="signin-button">
-                <button>
-                  <a href="/register">S'inscrire</a>
-                </button>
+                <button onClick={handleSignupRedirection}>S'inscrire</button>
               </div>
             </div>
           </div>
