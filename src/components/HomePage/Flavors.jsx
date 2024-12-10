@@ -57,23 +57,25 @@ const Flavors = ({ onAddToBasket }) => {
             '--swiper-navigation-top-offset': '30%',
           }}
         >
-          {firstItems.map((item) => (
-            <swiper-slide key={item._id}>
-              <Flavor
-                id={item._id}
-                image={item.image}
-                title={item.title}
-                description={item.description}
-                pricePerUnit={item.pricePerUnit}
-                quantity={item.quantity}
-                category={item.category}
-                createdAt={item.createdAt}
-                updatedAt={item.updatedAt}
-                status={item.status}
-                onAddToBasket={onAddToBasket}
-              />
-            </swiper-slide>
-          ))}
+          {firstItems
+            .filter((item) => item.quantity > 0)
+            .map((item) => (
+              <swiper-slide key={item._id}>
+                <Flavor
+                  id={item._id}
+                  image={item.image}
+                  title={item.title}
+                  description={item.description}
+                  pricePerUnit={item.pricePerUnit}
+                  quantity={item.quantity}
+                  category={item.category}
+                  createdAt={item.createdAt}
+                  updatedAt={item.updatedAt}
+                  status={item.status}
+                  onAddToBasket={onAddToBasket}
+                />
+              </swiper-slide>
+            ))}
         </swiper-container>
       </div>
       <div className="slider"></div>

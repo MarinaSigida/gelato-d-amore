@@ -33,6 +33,7 @@ const AddStockItemForm = () => {
       toast.success('Article ajouté avec succès !');
       resetForm();
       setPreviewImage(iceCreamPlaceholder);
+      window.location.reload(); //refresh the page
     } catch (error) {
       console.error('Failed to add item:', error);
       toast.error(`Échec d'ajout de l'article.`);
