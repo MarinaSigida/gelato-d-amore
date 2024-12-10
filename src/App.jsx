@@ -25,6 +25,9 @@ const DashboardControlPanel = lazy(() =>
 );
 const Signup = lazy(() => import('./pages/Signup'));
 const PlaceOrder = lazy(() => import('./pages/PlaceOrder'));
+const RGPD = lazy(() => import('./pages/RGPD'));
+const TermsOfSales = lazy(() => import('./pages/TermsOfSales'));
+
 import './sass/main.scss';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -103,6 +106,8 @@ function App() {
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Signup />} />
+          <Route path="rgpd" element={<RGPD />} />
+          <Route path="terms" element={<TermsOfSales />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

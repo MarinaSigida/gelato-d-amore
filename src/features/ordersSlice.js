@@ -28,7 +28,6 @@ export const fetchOrdersByUserId = createAsyncThunk(
       const response = await axios.get(`${apiKey}/orders/userId/${userId}`, {
         params: { page, limit },
       });
-      console.log('response', response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -72,7 +71,6 @@ export const updateOrder = createAsyncThunk(
         `${apiKey}/orders/update/${id}`,
         updatedOrder
       );
-      console.log('response', response);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

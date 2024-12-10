@@ -15,6 +15,12 @@
   display: revert;
 }
 
+input[type='checkbox'] {
+  all: revert; /* Reset to browser defaults */
+  display: inline-block;
+  margin-right: 10px;
+}
+
 /* Preferred box-sizing value */
 *,
 *::before,

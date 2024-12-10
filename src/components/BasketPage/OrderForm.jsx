@@ -99,6 +99,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
           comment: '',
           deliveryOption: 'pickup',
           deliveryAddress: '',
+          agreeToTerms: false,
         }}
         onSubmit={handleSubmit}
         validate={(values) => {
@@ -120,6 +121,10 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
           }
           if (values.deliveryOption === 'delivery' && !values.deliveryAddress) {
             errors.deliveryAddress = "L'adresse de livraison est requise";
+          }
+          if (!values.agreeToTerms) {
+            errors.agreeToTerms =
+              'Vous devez accepter les conditions générales de vente.';
           }
           return errors;
         }}
@@ -223,7 +228,25 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
                   </div>
                 </div>
               )}
+              <div className="rgpd-consent">
+                <label>
+                  <Field type="checkbox" name="agreeToTerms" required />
+                  J'accepte les{' '}
+                  <a href="/rgpd" target="_blank" rel="noopener noreferrer">
+                    règles RGPD
+                  </a>{' '}
+                  et les
+                  <a href="/terms" target="_blank" rel="noopener noreferrer">
+                    {' '}
+                    conditions générales de vente
+                  </a>
+                </label>
+              </div>
+              {errors.agreeToTerms && touched.agreeToTerms && (
+                <p className="form-error">{errors.agreeToTerms}</p>
+              )}
             </div>
+
             <div className="order-buttons">
               <button onClick={handleCancelClick}>Annuler</button>
               <button type="submit">Commander</button>

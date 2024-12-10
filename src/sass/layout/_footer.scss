@@ -4,12 +4,12 @@
 @use '../utils/mixins' as mx;
 
 .footer {
-  padding: 40px 20px;
+  padding: 40px 20px 20px;
   background-color: fn.get-color('very-dark-red');
   color: fn.get-color('white');
   @include mx.media-query('lg') {
     grid-area: footer;
-    padding: 50px 32px;
+    padding: 50px 60px 20px;
   }
 }
 
@@ -26,6 +26,7 @@
 .social-media {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   gap: 18px;
   .icon {
     width: 24px;
@@ -39,18 +40,29 @@
       fill: fn.get-color('light-red');
     }
   }
+  @include mx.media-query('lg') {
+    justify-content: start;
+  }
 }
 
 .footer-text {
   font-size: 28px;
   margin: 10px 0;
+  display: flex;
+  justify-content: center;
   @include mx.media-query('lg') {
     font-size: 34px;
     margin: 28px 0;
+    justify-content: start;
   }
 }
 
 .footer-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
   address a {
     color: fn.get-color('white');
   }
@@ -61,6 +73,8 @@
     margin-bottom: 14px;
   }
   @include mx.media-query('lg') {
+    align-items: flex-start;
+    text-align: left;
     h3 {
       margin-top: 0;
     }
@@ -76,7 +90,8 @@
 .footer-navigation {
   font-size: 16px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
   a {
     color: fn.get-color('white');
@@ -89,7 +104,7 @@
   }
 
   @include mx.media-query('lg') {
-    flex-direction: row;
     gap: 24px;
+    justify-content: start;
   }
 }
