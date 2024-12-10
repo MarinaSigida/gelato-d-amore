@@ -11,7 +11,7 @@ import ScrollUpButton from '../components/Shared/ScrollUpButton';
 const DashboardOrders = () => {
   const [bannerImage, setBannerImage] = useState(bannerDashboardMobile);
   const [page, setPage] = useState(1);
-  const [limit] = useState(6);
+  const [limit] = useState(5);
   const dispatch = useDispatch();
   const { orders, loading, error, currentPage, totalPages, totalOrders } =
     useSelector((state) => state.orders);
