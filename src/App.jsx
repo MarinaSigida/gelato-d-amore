@@ -10,7 +10,6 @@ const Catalog = lazy(() => import('./pages/Catalog'));
 const Orders = lazy(() => import('./pages/Orders'));
 const OrderDetail = lazy(() => import('./pages/OrderDetail'));
 const Contact = lazy(() => import('./pages/Contact'));
-const Login = lazy(() => import('./pages/Login'));
 const Basket = lazy(() => import('./pages/Basket'));
 const DashboardUsers = lazy(() => import('./pages/DashboardUsers'));
 const DashboardStock = lazy(() => import('./pages/DashboardStock.jsx'));
@@ -23,7 +22,10 @@ const DashboardOrderModify = lazy(() => import('./pages/DashboardOrderModify'));
 const DashboardControlPanel = lazy(() =>
   import('./components/Dashboard/DashboardControlPanel')
 );
+const Login = lazy(() => import('./pages/Login'));
 const Signup = lazy(() => import('./pages/Signup'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const ResetPassword = lazy(() => import('./pages/ResetPassword'));
 const PlaceOrder = lazy(() => import('./pages/PlaceOrder'));
 const RGPD = lazy(() => import('./pages/RGPD'));
 const TermsOfSales = lazy(() => import('./pages/TermsOfSales'));
@@ -106,6 +108,11 @@ function App() {
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Signup />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="reset-password/:resetToken"
+            element={<ResetPassword />}
+          />
           <Route path="rgpd" element={<RGPD />} />
           <Route path="terms" element={<TermsOfSales />} />
           <Route path="*" element={<NotFound />} />

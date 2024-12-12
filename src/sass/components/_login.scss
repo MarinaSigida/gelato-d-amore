@@ -111,3 +111,10 @@
   align-items: center;
   position: relative;
 }
+
+.form-header {
+  font-size: 20px;
+  font-weight: 500;
+  color: fn.get-color('dark-red');
+  margin-bottom: 20px;
+}

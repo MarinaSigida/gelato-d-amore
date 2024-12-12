@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { loginUser, setUser } from '../features/userSlice';
-import loginImage from '/assets/images/login-background.png';
+import { useNavigate } from 'react-router-dom';
+import { sendResetPasswordEmail } from '../features/userSlice';
+
+import forgotPasswordImage from '/assets/images/banner-forgot-password.png';
 import loginImageMobile from '/assets/images/login-background-mobile.png';
-import showPassword from '../assets/images/view.png';
-import hidePassword from '../assets/images/hide.png';
+
 import { toast } from 'sonner';
 
-const Login = () => {
+const ForgotPassword = () => {
   const [backgroundImage, setBackgroundImage] = useState(loginImageMobile);
-  const [showPasswordToggle, setShowPasswordToggle] = useState(false);
-  const location = useLocation();
-  const from = location.state?.from || '/';
+
   const dispatch = useDispatch();
   const { loading, error, isAuthenticated } = useSelector(
     (state) => state.user
@@ -25,7 +23,7 @@ const Login = () => {
       if (window.innerWidth <= 430) {
         setBackgroundImage(loginImageMobile);
       } else {
-        setBackgroundImage(loginImage);
+        setBackgroundImage(forgotPasswordImage);
       }
     };
     handleResize();
@@ -35,28 +33,22 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(from);
+      navigate('/');
     }
   }, [isAuthenticated, navigate]);
 
-  const handleLogin = async (values) => {
+  const handleSubmit = async (values) => {
     try {
-      const user = await dispatch(
-        loginUser({ email: values.email, password: values.password })
-      ).unwrap();
-      toast.success('Connexion réussie ! Bienvenue à bord.');
-      dispatch(setUser(user));
+      await dispatch(sendResetPasswordEmail(values.email)).unwrap();
+      toast.success(
+        'E-mail de réinitialisation envoyé avec succès. Vérifiez votre boîte de réception.'
+      );
     } catch (error) {
-      console.error('Échec de la connexion :', error);
       toast.error(
-        'Échec de la connexion. Veuillez vérifier vos identifiants et réessayer.'
+        "Échec de l'envoi de l'e-mail de réinitialisation. Veuillez réessayer plus tard ou contacter le support."
       );
     }
   };
-
-  if (isAuthenticated) {
-    return <div>Vous êtes connecté !</div>;
-  }
 
   return (
     <div className="main">
@@ -67,22 +59,22 @@ const Login = () => {
         ></div>
         <div className="login-form-wrapper">
           <Formik
-            initialValues={{ email: '', password: '' }}
-            onSubmit={handleLogin}
+            initialValues={{ email: '' }}
+            onSubmit={handleSubmit}
             validate={(values) => {
               const errors = {};
               if (!values.email) {
                 errors.email = "L'email est requis";
-              }
-              if (!values.password) {
-                errors.password = 'Le mot de passe est requis';
               }
               return errors;
             }}
           >
             {({ errors, touched }) => (
               <Form className="login-form">
-                <h2>BIENVENUE</h2>
+                <h3 className="form-header">
+                  Veuillez entrer votre adresse e-mail pour réinitialiser votre
+                  mot de passe
+                </h3>
                 <div className="login-inputs">
                   <div className="login-input">
                     <Field
@@ -95,42 +87,21 @@ const Login = () => {
                   {errors.email && touched.email && (
                     <p className="form-error">{errors.email}</p>
                   )}
-                  <div className="login-input password-input-wrapper">
-                    <Field
-                      type={showPasswordToggle ? 'text' : 'password'}
-                      name="password"
-                      placeholder="Votre mot de passe"
-                      required
-                    />
-                    <img
-                      src={showPasswordToggle ? hidePassword : showPassword}
-                      className="show-hide-password-icon"
-                      alt="Toggle Password"
-                      onClick={() => setShowPasswordToggle(!showPasswordToggle)}
-                    />
-                  </div>
-                  {errors.password && touched.password && (
-                    <p className="form-error">{errors.password}</p>
-                  )}
                 </div>
                 {error && (
                   <p className="form-error" style={{ marginBottom: '40px' }}>
-                    Utilisateur non trouvé. Veuillez vérifier votre email et mot
-                    de passe.
+                    Utilisateur non trouvé. Veuillez vérifier votre email.
                   </p>
                 )}
                 <button type="submit">
                   {' '}
-                  {loading ? 'Connexion en cours...' : 'Connexion'}
+                  {loading ? 'Envoi en cours...' : 'Confirmer'}
                 </button>
               </Form>
             )}
           </Formik>
           <div className="signup-link">
-            <a href="forgot-password">Mot de passe oublié</a>
-          </div>
-          <div className="signup-link">
-            <a href="register">Créer un compte</a>
+            <a href="login">Retourner à la connexion</a>
           </div>
         </div>
       </div>
@@ -138,4 +109,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;
