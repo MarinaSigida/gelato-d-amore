@@ -451,3 +451,17 @@
     }
   }
 }
+
+.testimonial-stars {
+  display: flex;
+  gap: 5px;
+}
+
+.star-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.testimonial-text {
+  font-style: italic;
+}

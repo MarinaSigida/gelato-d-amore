@@ -5,6 +5,7 @@ import userReducer from './features/userSlice';
 import basketReducer from './features/basketSlice';
 import orderItemsReducer from './features/orderItemsSlice';
 import usersDataReducer from './features/usersDataSlice';
+import reviewsReducer from './features/reviewsSlice';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     basket: basketReducer,
     orderItems: orderItemsReducer,
     usersData: usersDataReducer,
+    reviews: reviewsReducer,
   },
 });
 
