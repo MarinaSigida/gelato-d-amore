@@ -5,12 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { sendResetPasswordEmail } from '../features/userSlice';
 
 import forgotPasswordImage from '/assets/images/banner-forgot-password.png';
-import loginImageMobile from '/assets/images/login-background-mobile.png';
+import forgotPasswordImageMobile from '/assets/images/banner-mobile-forgot-password.png';
 
 import { toast } from 'sonner';
 
 const ForgotPassword = () => {
-  const [backgroundImage, setBackgroundImage] = useState(loginImageMobile);
+  const [backgroundImage, setBackgroundImage] = useState(
+    forgotPasswordImageMobile
+  );
 
   const dispatch = useDispatch();
   const { loading, error, isAuthenticated } = useSelector(
@@ -21,7 +23,7 @@ const ForgotPassword = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 430) {
-        setBackgroundImage(loginImageMobile);
+        setBackgroundImage(forgotPasswordImageMobile);
       } else {
         setBackgroundImage(forgotPasswordImage);
       }

@@ -105,7 +105,6 @@ export const resetPassword = createAsyncThunk(
           password,
         }
       );
-      console.log('resetToken slice', resetToken);
       return response.data;
     } catch (error) {
       if (error.response && error.response.data.errors) {

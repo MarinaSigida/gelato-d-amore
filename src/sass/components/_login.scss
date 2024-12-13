@@ -38,9 +38,9 @@
   //left: 20%;
   min-width: 300px;
   padding: 40px 30px;
-  background-color: rgba(fn.get-color('white'), 0.3);
+  background-color: rgba(fn.get-color('white'), 0.5);
   border-radius: 30px;
-  @include mx.media-query('lg') {
+  @include mx.media-query('md') {
     width: 500px;
   }
 }
@@ -83,6 +83,10 @@
 
     input::placeholder {
       color: fn.get-color('grey');
+      font-size: 11px;
+      @include mx.media-query('md') {
+        font-size: inherit;
+      }
     }
 
     &:hover,
@@ -113,8 +117,15 @@
 }
 
 .form-header {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
   color: fn.get-color('dark-red');
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  line-height: normal;
+  text-align: center;
+  width: 230px;
+  @include mx.media-query('md') {
+    font-size: 20px;
+    width: auto;
+  }
 }

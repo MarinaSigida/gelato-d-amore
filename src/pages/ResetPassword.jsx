@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { resetPassword } from '../features/userSlice';
 import resetPasswordImage from '/assets/images/banner-reset-password.jpg';
-import signupImageMobile from '/assets/images/signup-background-mobile.png';
+import resetPasswordImageMobile from '/assets/images/banner-mobile-reset-password.png';
 import showPassword from '../assets/images/view.png';
 import hidePassword from '../assets/images/hide.png';
 import { toast } from 'sonner';
 
 const ResetPassword = () => {
-  const [backgroundImage, setBackgroundImage] = useState(signupImageMobile);
+  const [backgroundImage, setBackgroundImage] = useState(
+    resetPasswordImageMobile
+  );
   const [showPasswordToggle, setShowPasswordToggle] = useState(false);
   const [showConfirmPasswordToggle, setShowConfirmPasswordToggle] =
     useState(false);
@@ -25,7 +27,7 @@ const ResetPassword = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 430) {
-        setBackgroundImage(signupImageMobile);
+        setBackgroundImage(resetPasswordImageMobile);
       } else {
         setBackgroundImage(resetPasswordImage);
       }
@@ -46,11 +48,9 @@ const ResetPassword = () => {
       await dispatch(
         resetPassword({ resetToken, password: values.password })
       ).unwrap();
-      console.log('resetToken', resetToken);
       toast.success('Votre mot de passe a été réinitialisé avec succès !');
       navigate('/login');
     } catch (error) {
-      console.log(error);
       toast.error(
         'Une erreur est survenue lors de la réinitialisation du mot de passe.'
       );
