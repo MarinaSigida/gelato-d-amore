@@ -1,17 +1,16 @@
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { OverlayBurgerMenu } from './OverlayBurgerMenu';
-import { logout } from '../../features/userSlice';
-import { clearOrders } from '../../features/ordersSlice';
-import { clearBasket } from '../../features/basketSlice';
+import { useState } from 'react';
 import logoutIcon from '../../assets/images/logout.png';
 import cross from '../../assets/images/close.png';
+import LogoutPopup from '../Shared/LogoutPopup';
 
 const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
   const user = useSelector((state) => state.user.user);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { items, totalQuantity } = useSelector((state) => state.basket);
+  const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState(false);
+
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
@@ -22,12 +21,10 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
     return email ? email.split('@')[0] : '';
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
-    dispatch(clearBasket());
-    dispatch(clearOrders());
-    navigate('/');
+  const toggleLogoutPopup = () => {
+    setIsLogoutPopupOpen(!isLogoutPopupOpen);
   };
+
   return (
     <>
       <OverlayBurgerMenu onClick={handleBackdropClick}>
@@ -97,13 +94,17 @@ const ModalBurgerMenu = ({ isModalOpen, closeModal }) => {
               </NavLink>
             )}
             {user && (
-              <button onClick={handleLogout} className="logout-button">
+              <button onClick={toggleLogoutPopup} className="logout-button">
                 <img src={logoutIcon} className="icon" alt="logout-icon" />
               </button>
             )}
           </div>
         </div>
       </OverlayBurgerMenu>
+      <LogoutPopup
+        isPopupOpen={isLogoutPopupOpen}
+        closePopup={toggleLogoutPopup}
+      />
     </>
   );
 };

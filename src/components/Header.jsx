@@ -1,18 +1,15 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../features/userSlice';
-import { clearBasket } from '../features/basketSlice';
-import { clearOrders } from '../features/ordersSlice';
+import { useSelector } from 'react-redux';
 import logo from '../assets/images/logo.png';
 import logoutIcon from '../assets/images/logout.png';
 import BurgerMenuBtn from './BurgerMenu/BurgerMenuBtn';
 import ModalBurgerMenu from './BurgerMenu/ModalBurgerMenu';
+import LogoutPopup from './Shared/LogoutPopup';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [isLogoutPopupOpen, setIsLogoutPopupOpen] = useState(false);
   const user = useSelector((state) => state.user.user);
   const { items, totalQuantity } = useSelector((state) => state.basket);
 
@@ -24,11 +21,8 @@ const Header = () => {
     return email ? email.split('@')[0] : '';
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
-    dispatch(clearBasket());
-    dispatch(clearOrders());
-    navigate('/');
+  const toggleLogoutPopup = () => {
+    setIsLogoutPopupOpen(!isLogoutPopupOpen);
   };
 
   return (
@@ -93,7 +87,7 @@ const Header = () => {
               </NavLink>
             )}
             {user && (
-              <button onClick={handleLogout} className="logout-button">
+              <button onClick={toggleLogoutPopup} className="logout-button">
                 <img src={logoutIcon} className="icon" alt="logout-icon" />
               </button>
             )}
@@ -104,6 +98,10 @@ const Header = () => {
       {isModalOpen && (
         <ModalBurgerMenu isModalOpen={isModalOpen} closeModal={toggleModal} />
       )}
+      <LogoutPopup
+        isPopupOpen={isLogoutPopupOpen}
+        closePopup={toggleLogoutPopup}
+      />
     </div>
   );
 };
