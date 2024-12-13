@@ -1,51 +1,138 @@
-# React + Vite
+# Gelato d'Amore Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the **Gelato d'Amore** frontend repository! This is the client-side of our web application built with **React** and **Vite**, providing a delightful user experience for exploring our gelato products and placing orders.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-<!-- For svg sprite:
-1) delete everywhere "fill" and "stroke" properties to color the svg how you want in css
-2) put sprite.svg directly to /public and inject them in your component like this (no import is needed):
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Environment Variables](#environment-variables)
+- [Technologies Used](#technologies-used)
+- [Assets](#assets)
+- [Backend](#backend)
 
-<svg className="icon" alt="basket">
-                <use
-                  xlinkHref={`${import.meta.env.BASE_URL}sprite.svg#basket`}
-                ></use>
-              </svg>
+---
 
--->
+## Getting Started
 
-<!-- For background-images :
-- put them in public/assets/images
+To get started with this project, clone the repository and install the required dependencies:
 
- --->
+```bash
+# Clone the repository
+git clone https://github.com/MarinaSigida/gelato-d-amore
 
- <!-- For autofilled inputs : 
- - remove styles:
-input:-webkit-autofill {
-  background-color: transparent !important;
-  color: inherit !important;
-  -webkit-box-shadow: 0 0 0px 1000px fn.get-color('light') inset !important;
-  border-radius: 30px;
-}
+# Navigate to the project directory
+cd gelato-d-amore-frontend
 
-BACKEND
-express: A minimal web framework for Node.js.
-mongoose: A MongoDB object modeling tool.
-dotenv: To manage environment variables (for storing MongoDB connection URI).
-cors: To allow cross-origin requests from your React frontend.
+# Install dependencies
+npm install
+```
 
-backend deployment:
-Small backend API or serverless functions: Use Vercel (doesn't support WebSockets).
-Simple app, minimal traffic: Use Render.com or Heroku.
+Once dependencies are installed, you can start the development server or build the project for production.
 
-app.js: Focuses on setting up the Express application, including middleware, routes, and any other configurations.
-Acts as a module that exports the configured Express app for use elsewhere.
-server.js: Responsible for starting the server, connecting to the database, and handling server-level configurations (like port settings).
+---
 
-to test connection to mongoDB: node server.js
- -->
+## Available Scripts
+
+### `npm run dev`
+
+Runs the app in development mode.
+
+- Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+- The page reloads when you make changes.
+- You may also see any lint errors in the console.
+
+### `npm run build`
+
+Builds the app for production to the `dist` folder.
+
+- The build is optimized for the best performance.
+- The filenames include hashes for cache busting.
+
+### `npm run preview`
+
+Previews the production build locally.
+
+### `npm run lint`
+
+Runs ESLint to identify and fix code quality and style issues.
+
+### `npm run watch`
+
+Watches for changes and rebuilds the project incrementally for production.
+
+---
+
+## Environment Variables
+
+The following environment variables are required to configure the project. Create a `.env` file in the root directory and set the variables accordingly:
+
+```plaintext
+VITE_API_KEY: This variable is used to connect the frontend application to the backend services. Ensure that it points to the appropriate backend API key for seamless data interactions.
+
+VITE_IMAGE_KEY: This variable facilitates the handling of image uploads and retrievals, integrating with Multer to manage images effectively in the application.
+```
+
+---
+
+## Technologies Used
+
+This project leverages the following technologies and libraries:
+
+### Core Technologies:
+
+- **React**: For building the user interface.
+- **Vite**: For fast and optimized development and build processes.
+
+### State Management:
+
+- **@reduxjs/toolkit**: Simplified and efficient state management.
+
+### Routing:
+
+- **react-router-dom**: For declarative routing.
+
+### Forms:
+
+- **formik**: For form handling and validation.
+
+### Styling:
+
+- **styled-components**: For dynamic, scoped CSS styling.
+- **Sass**: For powerful CSS preprocessing.
+
+### Utilities:
+
+- **axios**: For HTTP requests.
+- **jwt-decode**: For decoding JWT tokens.
+- **sonner**: For notifications and alerts.
+
+### Maps:
+
+- **react-leaflet**: For interactive maps.
+
+### Carousels:
+
+- **swiper**: For touch-friendly carousels.
+
+---
+
+## Assets
+
+Background images and other static assets are stored in the `public/assets/images` directory. These assets can be directly accessed in the application as needed.
+
+---
+
+## Backend
+
+The backend for this application is built using **Node.js** and provides API endpoints for data fetching and processing. You can find the backend repository at:
+
+[Backend Repository](https://github.com/MarinaSigida/gelato-d-amore-backend)
+
+---
+
+We hope you enjoy working with **Gelato d'Amore**! If you encounter any issues or have questions, feel free to open an issue in this repository.
+
+Happy coding! 🍦
