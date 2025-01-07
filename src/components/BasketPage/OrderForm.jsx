@@ -231,14 +231,14 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
               <div className="rgpd-consent">
                 <label>
                   <Field type="checkbox" name="agreeToTerms" required />
-                  J'accepte les{' '}
+                  J'accepte la{' '}
                   <a href="/rgpd" target="_blank" rel="noopener noreferrer">
-                    règles RGPD
+                    Politique de Confidentialité
                   </a>{' '}
                   et les
                   <a href="/terms" target="_blank" rel="noopener noreferrer">
                     {' '}
-                    conditions générales de vente
+                    Conditions Générales d'Utilisation
                   </a>
                 </label>
               </div>

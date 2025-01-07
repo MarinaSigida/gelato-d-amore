@@ -40,8 +40,7 @@ const Order = ({
               Coût total :{' '}
               <span className="info-bold">
                 {orderItems.reduce(
-                  (total, item) =>
-                    total + item.quantity * item.stockItemId.pricePerUnit,
+                  (total, item) => total + item.quantity * item.pricePerUnit,
                   0
                 )}
                 €
