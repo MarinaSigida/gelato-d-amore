@@ -2,7 +2,7 @@ import { Formik, Form, Field } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserByEmail } from '../../features/userSlice';
-import { createOrder } from '../../features/ordersSlice';
+import { createOrder, fetchOrdersByUserId } from '../../features/ordersSlice';
 import { createOrderItem } from '../../features/orderItemsSlice';
 import {
   updateStockItemQuantity,
@@ -11,6 +11,7 @@ import {
 import { toast } from 'sonner';
 
 const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
+  const currentPage = useSelector((state) => state.orders.currentPage);
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
       const userResponse = await dispatch(fetchUserByEmail(email)).unwrap();
 
       const userId = userResponse._id;
+      console.log('User ID:', userId);
 
       const orderData = {
         userId,
@@ -74,7 +76,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
           ).unwrap();
         })
       );
-
+      dispatch(fetchOrdersByUserId({ userId, page: currentPage, limit: 5 }));
       handleClearBasket();
       resetForm();
       openPopup();

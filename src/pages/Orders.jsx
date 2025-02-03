@@ -1,31 +1,35 @@
-import { useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Order from '../components/OrdersPage/Order';
 import Banner from '../components/Shared/Banner';
 import bannerOrders from '/assets/images/banner-orders.png';
-import { fetchOrdersByUserId } from '../features/ordersSlice';
+import { fetchOrdersByUserId, setCurrentPage } from '../features/ordersSlice';
 import ScrollUpButton from '../components/Shared/ScrollUpButton';
 
 const Orders = () => {
   const { orders, loading, error, currentPage, totalPages, totalOrders } =
     useSelector((state) => state.orders);
   const { user, isAuthenticated } = useSelector((state) => state.user);
-  const [page, setPage] = useState(1);
   const [limit] = useState(5);
   const dispatch = useDispatch();
 
-  useLayoutEffect(() => {
-    if (isAuthenticated && user && user.id) {
-      dispatch(fetchOrdersByUserId({ userId: user.id, page, limit }));
+  useEffect(() => {
+    if (isAuthenticated && user && (user.id || user._id)) {
+      const userId = user.id ? user.id : user._id;
+      dispatch(fetchOrdersByUserId({ userId, page: currentPage, limit }));
     }
-  }, [dispatch, isAuthenticated, user, page, limit]);
+  }, [dispatch, isAuthenticated, user, currentPage, limit]);
 
   const handleNextPage = () => {
-    if (page < totalPages) setPage(page + 1);
+    if (currentPage < totalPages) {
+      dispatch(setCurrentPage(currentPage + 1));
+    }
   };
 
   const handlePrevPage = () => {
-    if (page > 1) setPage(page - 1);
+    if (currentPage > 1) {
+      dispatch(setCurrentPage(currentPage - 1));
+    }
   };
 
   return (
@@ -38,7 +42,7 @@ const Orders = () => {
         textColor={'white'}
       />
       <section className="orders">
-        {orders.length > 0 && (
+        {loading && orders.length > 0 && (
           <p className="orders-number">Nombre de commandes: {totalOrders}</p>
         )}
 
@@ -70,7 +74,7 @@ const Orders = () => {
         )}
         {totalOrders > limit && (
           <div className="pagination">
-            <button onClick={handlePrevPage} disabled={page === 1}>
+            <button onClick={handlePrevPage} disabled={currentPage === 1}>
               <svg
                 fill="#fff"
                 height="24"
@@ -88,7 +92,10 @@ const Orders = () => {
                 Page {currentPage} sur {totalPages}
               </p>
             </div>
-            <button onClick={handleNextPage} disabled={page === totalPages}>
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
               <svg
                 fill="#fff"
                 height="24"

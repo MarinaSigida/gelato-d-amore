@@ -30,6 +30,10 @@ export const fetchOrdersByUserId = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
+      console.error(
+        'Error fetching orders:',
+        error.response?.data || error.message
+      );
       return rejectWithValue(error.message);
     }
   }
@@ -40,7 +44,7 @@ export const createOrder = createAsyncThunk(
   async (orderData, { rejectWithValue, dispatch, getState }) => {
     try {
       const response = await axios.post(`${apiKey}/order`, orderData);
-      const { user } = getState().user; // Get the current user
+      const { user } = getState().user;
       if (user && user._id) {
         dispatch(fetchOrdersByUserId(user._id));
       }
@@ -100,6 +104,9 @@ const ordersSlice = createSlice({
     clearOrders: (state) => {
       state.orders = [];
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -139,7 +146,6 @@ const ordersSlice = createSlice({
       })
       .addCase(fetchOrdersByUserId.fulfilled, (state, action) => {
         state.loading = false;
-        //state.orders = action.payload;
         state.orders = action.payload.orders;
         state.totalOrders = action.payload.totalOrders;
         state.currentPage = action.payload.currentPage;
@@ -201,6 +207,6 @@ const ordersSlice = createSlice({
   },
 });
 
-export const { selectOrder, clearSelectedOrder, clearOrders } =
+export const { selectOrder, clearSelectedOrder, clearOrders, setCurrentPage } =
   ordersSlice.actions;
 export default ordersSlice.reducer;
