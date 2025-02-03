@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
 import MainLayout from './components/MainLayout';
 import ProtectedRoute from './components/ProtectedRoute';
+import ScrollToTop from './components/Shared/ScrollToTop';
 
 const NotFound = lazy(() => import('./pages/NotFound'));
 const Home = lazy(() => import('./pages/Home'));
@@ -57,6 +58,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />

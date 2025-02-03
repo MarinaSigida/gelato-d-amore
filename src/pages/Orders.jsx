@@ -38,7 +38,10 @@ const Orders = () => {
         textColor={'white'}
       />
       <section className="orders">
-        <p className="orders-number">Nombre de commandes: {totalOrders}</p>
+        {orders.length > 0 && (
+          <p className="orders-number">Nombre de commandes: {totalOrders}</p>
+        )}
+
         {loading ? (
           <p>Loading...</p>
         ) : orders.length > 0 ? (

@@ -9,7 +9,6 @@ const Reviews = () => {
 
   useEffect(() => {
     dispatch(fetchReviews());
-    console.log('reviews', reviews);
   }, [dispatch]);
 
   const [swiperThemeColor, setSwiperThemeColor] = useState(
@@ -51,9 +50,8 @@ const Reviews = () => {
         >
           {!loading && reviews.length > 0 ? (
             reviews.map((review) => (
-              <swiper-slide>
+              <swiper-slide key={review._id}>
                 <Review
-                  key={review._id}
                   author={review.author}
                   stars={review.stars}
                   text={review.text}

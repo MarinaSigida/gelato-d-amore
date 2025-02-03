@@ -25,7 +25,7 @@ const Review = ({ author, stars, text }) => {
         <img src={reviewImg} alt="Client photo" />
       </div>
       <h2>{author}</h2>
-      <div lassName="testimonial-stars">{renderStars(stars)}</div>
+      <div className="testimonial-stars">{renderStars(stars)}</div>
       <p className="testimonial-text">{text}</p>
     </div>
   );
