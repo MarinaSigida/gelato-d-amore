@@ -56,7 +56,15 @@
     display: none;
   }
 
-  @include mx.media-query('lg') {
+  @include mx.media-query('md', min) {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+  @media (width: 768px) {
+    display: none;
+  }
+  @include mx.media-query('lg', min) {
     display: flex;
     flex-direction: row;
     gap: 24px;
@@ -73,6 +81,12 @@
 
     &.active {
       color: fn.get-color('dark-red');
+    }
+    @include mx.media-query('md', min) {
+      font-size: 12px;
+    }
+    @include mx.media-query('lg', min) {
+      font-size: 16px;
     }
   }
 
@@ -130,9 +144,15 @@
   display: flex;
   flex-direction: row;
   gap: 18px;
+
   @include mx.media-query('md', max) {
     display: none;
   }
+  @include mx.media-query('md') {
+    width: 168px;
+    justify-content: end;
+  }
+
   .icon {
     width: 24px;
     height: 24px;

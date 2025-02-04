@@ -4,7 +4,12 @@ const BurgerMenuBtn = ({ onClick }) => {
   return (
     <>
       <div className="burger-menu-btn" onClick={onClick}>
-        <img className="icon" src={burgerMenu} alt="burger menu" />
+        <img
+          className="icon"
+          src={burgerMenu}
+          alt="burger menu"
+          style={{ marginBottom: 0 }}
+        />
       </div>
     </>
   );

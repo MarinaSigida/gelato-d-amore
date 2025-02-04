@@ -22,6 +22,13 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
   };
 
   const handleSubmit = async (values, { resetForm }) => {
+    if (basketItems.length === 0) {
+      toast.error(
+        'Votre panier est vide. Ajoutez au moins un article pour commander.'
+      );
+      return;
+    }
+
     try {
       const {
         email,

@@ -81,7 +81,7 @@ const DashboardOrder = ({
               <span className="info-bold">{deliveryAddress}</span>
             </p>
           )}
-          {comment && <p>Commantaire: {comment}</p>}
+          {comment && <p>Commentaire: {comment}</p>}
         </div>
       </div>
     </div>

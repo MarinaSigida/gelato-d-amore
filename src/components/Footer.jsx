@@ -37,8 +37,12 @@ const Footer = () => {
               <p>Bisous, I love you!</p>
             </div>
             <div className="footer-navigation" style={{ fontSize: '12px' }}>
-              <a href="/terms">Conditions Générales d'Utilisation</a>
-              <a href="/rgpd">Politique de confidentialité</a>
+              <a href="/terms" target="_blank">
+                Conditions Générales d'Utilisation
+              </a>
+              <a href="/rgpd" target="_blank">
+                Politique de confidentialité
+              </a>
             </div>
           </div>
 
