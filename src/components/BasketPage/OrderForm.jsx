@@ -43,8 +43,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
       const userResponse = await dispatch(fetchUserByEmail(email)).unwrap();
 
       const userId = userResponse._id;
-      console.log('User ID:', userId);
-
+      
       const orderData = {
         userId,
         comment,

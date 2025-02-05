@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import { Suspense } from 'react';
 import Loader from './Loader';
 import Footer from '../components/Footer';

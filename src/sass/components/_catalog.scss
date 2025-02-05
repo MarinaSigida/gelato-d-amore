@@ -30,7 +30,7 @@
   justify-content: center;
   gap: 20px;
   max-width: 300px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 
   @include mx.media-query('md') {
     max-width: none;

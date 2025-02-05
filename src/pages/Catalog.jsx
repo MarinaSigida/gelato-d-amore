@@ -13,6 +13,7 @@ import Flavor from '../components/HomePage/Flavor';
 import bannerCatalog from '/assets/images/banner-catalog.png';
 import bannerCatalogMobile from '/assets/images/banner-catalog-mobile.png';
 import ScrollUpButton from '../components/Shared/ScrollUpButton';
+import searchIcon from '../assets/images/search.png';
 
 const Catalog = () => {
   const [bannerImage, setBannerImage] = useState(bannerCatalogMobile);
@@ -20,6 +21,7 @@ const Catalog = () => {
   const [filteredItems, setFilteredItems] = useState([]);
   const [notificationData, setNotificationData] = useState(null);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const dispatch = useDispatch();
   const { items, loading, error, selectedItem } = useSelector(
@@ -44,18 +46,40 @@ const Catalog = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // useEffect(() => {
+  //   if (activeFilter === 'Tous') {
+  //     setFilteredItems(items);
+  //   } else {
+  //     const filtered = items.filter((item) => item.category === activeFilter);
+  //     setFilteredItems(filtered);
+  //   }
+  // }, [items, activeFilter]);
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   useEffect(() => {
-    if (activeFilter === 'Tous') {
-      setFilteredItems(items);
-    } else {
-      const filtered = items.filter((item) => item.category === activeFilter);
-      setFilteredItems(filtered);
+    let updatedItems = items;
+
+    if (activeFilter !== 'Tous') {
+      updatedItems = updatedItems.filter(
+        (item) => item.category === activeFilter
+      );
     }
-  }, [items, activeFilter]);
+
+    if (searchQuery.trim() !== '') {
+      updatedItems = updatedItems.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    setFilteredItems(updatedItems);
+  }, [items, activeFilter, searchQuery]);
 
   const handleFilterClick = (category) => {
     setActiveFilter(category);
   };
+
   const handleItemClick = (item) => {
     dispatch(selectItem(item));
   };
@@ -115,6 +139,16 @@ const Catalog = () => {
             isActive={activeFilter === 'Fruits rouges'}
             onClick={() => handleFilterClick('Fruits rouges')}
           />
+        </div>
+        <div className="search-bar">
+          <input
+            placeholder="Rechercher"
+            type="text"
+            name="title"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+          <img src={searchIcon} className="search-icon" alt="search icon" />
         </div>
         <div className="catalog-list">
           {filteredItems

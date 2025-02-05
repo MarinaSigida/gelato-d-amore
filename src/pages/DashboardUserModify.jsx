@@ -53,7 +53,6 @@ const DashboardUserModify = () => {
       email: values.email,
       role: values.role,
     };
-    console.log('Updated User:', updatedUser);
 
     try {
       await dispatch(updateUser({ id: user._id, updatedUser })).unwrap();

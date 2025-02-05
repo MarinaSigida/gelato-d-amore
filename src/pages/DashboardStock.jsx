@@ -82,7 +82,6 @@ const DashboardStock = () => {
     dispatch(clearSelectedItem());
   };
   if (error) {
-    console.log('error', error);
     return <div>Error: {error.message}</div>;
   }
 
