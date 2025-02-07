@@ -25,7 +25,6 @@ const ModifyOrderPopup = ({ isPopupOpen, closePopup }) => {
       deliveryAddress: values.deliveryAddress,
       mobilePhone: values.mobilePhone,
     };
-    
 
     try {
       await dispatch(
@@ -35,7 +34,6 @@ const ModifyOrderPopup = ({ isPopupOpen, closePopup }) => {
 
       closePopup();
     } catch (err) {
-      console.error('Failed to update order:', err);
       toast.error(`Échec de modification de commande.`);
     }
   };
@@ -117,15 +115,6 @@ const ModifyOrderPopup = ({ isPopupOpen, closePopup }) => {
                           placeholder="Prénom"
                         />
                       </div>
-
-                      {/* <label htmlFor="comment">Commentaire</label>
-                      <div className="modify-order-form-input">
-                        <Field
-                          name="comment"
-                          as="textarea"
-                          placeholder="Commentaire"
-                        />
-                      </div> */}
 
                       <label htmlFor="deliveryAddress">
                         Adresse de livraison

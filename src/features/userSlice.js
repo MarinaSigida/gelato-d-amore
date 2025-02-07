@@ -15,6 +15,7 @@ export const setUserFromToken = () => {
   if (token) {
     try {
       const decoded = jwtDecode(token);
+      //expiration time of jwt
       if (isTokenValid(decoded.exp)) {
         return {
           id: decoded.userId,
@@ -24,12 +25,12 @@ export const setUserFromToken = () => {
           token,
         };
       } else {
-        console.error('Token has expired');
+        // console.error('Token has expired');
         localStorage.removeItem('jwtToken');
         return null;
       }
     } catch (error) {
-      console.error('Token is invalid', error);
+      // console.error('Token is invalid', error);
       localStorage.removeItem('jwtToken');
       return null;
     }

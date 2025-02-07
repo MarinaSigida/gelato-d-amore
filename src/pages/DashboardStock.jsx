@@ -46,6 +46,7 @@ const DashboardStock = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  //switching between two parts of the page
   const toggleOpenStockList = (e) => {
     e.preventDefault();
     setIsStockListOpen(true);

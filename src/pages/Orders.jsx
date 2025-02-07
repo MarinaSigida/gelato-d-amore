@@ -42,7 +42,7 @@ const Orders = () => {
         textColor={'white'}
       />
       <section className="orders">
-        {loading && orders.length > 0 && (
+        {orders.length > 0 && (
           <p className="orders-number">Nombre de commandes: {totalOrders}</p>
         )}
 

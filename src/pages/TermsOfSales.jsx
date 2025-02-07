@@ -38,13 +38,14 @@ const TermsOfSales = () => {
           responsable de la confidentialité de vos identifiants.
         </li>
         <li>
-          <strong>Processus de commande :</strong> Une commande est confirmée
-          une fois le paiement effectué et un e-mail de confirmation envoyé.
+          <strong>Processus de commande :</strong> Une commande est prise en
+          compte dès sa validation.
         </li>
         <li>
           <strong>Annulation et modification :</strong> Les commandes peuvent
-          être modifiées ou annulées avant leur préparation. Veuillez nous
-          contacter rapidement.
+          être annulées uniquement si leur statut est "en attente", depuis
+          l'onglet <strong>Mes commandes</strong>. Pour modifier votre commande,
+          veuillez nous contacter rapidement.
         </li>
       </ul>
 

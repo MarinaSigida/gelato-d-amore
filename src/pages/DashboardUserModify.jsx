@@ -59,7 +59,6 @@ const DashboardUserModify = () => {
       toast.success('Utilisateur modifiée avec succès !');
       navigate(`/dashboard/users`);
     } catch (err) {
-      console.error('Failed to update user:', err);
       toast.error(`Échec de modification de d'utilisateur`);
     }
   };

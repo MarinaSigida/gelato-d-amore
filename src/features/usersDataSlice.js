@@ -30,7 +30,9 @@ export const deleteUser = createAsyncThunk(
       const response = await axios.patch(`${apiKey}/users/delete/${id}`);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Failed to delete user');
+      return rejectWithValue(
+        error.response?.data || "Échec de la suppression de l'utilisateur"
+      );
     }
   }
 );
@@ -95,6 +97,7 @@ const usersDataSlice = createSlice({
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.loading = false;
+        //action.meta.arg retrieves the argument passed to dispatch
         const user = state.users.find((user) => user._id === action.meta.arg);
         if (user) {
           user.active = false;
@@ -109,9 +112,11 @@ const usersDataSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.loading = false;
+        //search for the user in the users by id
         const index = state.users.findIndex(
           (user) => user._id === action.payload._id
         );
+        //replace it with the updated user data
         if (index !== -1) {
           state.users[index] = action.payload;
         }

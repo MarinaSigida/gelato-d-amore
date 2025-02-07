@@ -30,11 +30,7 @@ export const fetchOrdersByUserId = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      console.error(
-        'Error fetching orders:',
-        error.response?.data || error.message
-      );
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
@@ -44,6 +40,7 @@ export const createOrder = createAsyncThunk(
   async (orderData, { rejectWithValue, dispatch, getState }) => {
     try {
       const response = await axios.post(`${apiKey}/order`, orderData);
+      //retrieve the current user from Redux state
       const { user } = getState().user;
       if (user && user._id) {
         dispatch(fetchOrdersByUserId(user._id));
@@ -62,7 +59,9 @@ export const cancelOrder = createAsyncThunk(
       const response = await axios.patch(`${apiKey}/orders/cancel/${id}`);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || 'Failed to cancel order');
+      return rejectWithValue(
+        error.response?.data || "Échec de l'annulation de la commande"
+      );
     }
   }
 );

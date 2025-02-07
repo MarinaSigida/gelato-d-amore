@@ -30,7 +30,6 @@ const NotFound = () => {
         titleSpan="Page non trouvée"
         textColorExtra="white"
         textPosition="center"
-        // titleExtra="Désolé, la page que vous cherchez n'existe pas ou a été déplacée."
       />
     </div>
   );

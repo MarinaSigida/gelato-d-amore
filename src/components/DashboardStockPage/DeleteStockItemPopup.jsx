@@ -18,7 +18,6 @@ const DeleteStockItemPopup = ({
       toast.success('Article supprimé avec succés.');
       closePopup();
     } catch (err) {
-      console.error('Failed to delete item:', err);
       toast.error("Échec de suppression de l'article.");
     }
   };

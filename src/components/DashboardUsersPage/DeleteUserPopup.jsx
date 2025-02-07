@@ -15,7 +15,6 @@ const DeleteUserPopup = ({ isPopupOpen, closePopup, email, userId }) => {
       dispatch(fetchAllUsers());
       closePopup();
     } catch (err) {
-      console.error('Failed to delete user:', err);
       toast.error("Échec de suppression de l'utilisateur.");
     }
   };

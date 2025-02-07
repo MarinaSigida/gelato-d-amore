@@ -46,18 +46,11 @@ const Catalog = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // useEffect(() => {
-  //   if (activeFilter === 'Tous') {
-  //     setFilteredItems(items);
-  //   } else {
-  //     const filtered = items.filter((item) => item.category === activeFilter);
-  //     setFilteredItems(filtered);
-  //   }
-  // }, [items, activeFilter]);
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
+  //filter items by search and category
   useEffect(() => {
     let updatedItems = items;
 

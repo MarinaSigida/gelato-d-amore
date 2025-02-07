@@ -20,6 +20,7 @@ const Flavor = ({
   const basket = useSelector((state) => state.basket.items);
   const dispatch = useDispatch();
 
+  // search the same item in the basket to check the quantity that is already added to the basket
   const basketItem = basket.find((item) => item.id === id);
   const basketQuantity = basketItem ? basketItem.quantity : 0;
   const maxAvailableQuantity = quantity - basketQuantity;

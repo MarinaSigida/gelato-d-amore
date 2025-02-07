@@ -5,6 +5,7 @@ const position = [43.693661, 7.25169];
 
 const Map = () => {
   return (
+    //Leaflet map
     <MapContainer
       center={position}
       zoom={15}

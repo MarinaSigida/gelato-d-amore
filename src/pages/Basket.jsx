@@ -22,6 +22,7 @@ const Basket = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  
   useEffect(() => {
     if (!stockItems.length) {
       dispatch(fetchStockItems());

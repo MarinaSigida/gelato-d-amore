@@ -43,7 +43,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
       const userResponse = await dispatch(fetchUserByEmail(email)).unwrap();
 
       const userId = userResponse._id;
-      
+
       const orderData = {
         userId,
         comment,
@@ -66,6 +66,7 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
         orderItems.map((item) => dispatch(createOrderItem(item)).unwrap())
       );
 
+      //asynchronous updates for each item in the basket, all in parallel.
       await Promise.all(
         basketItems.map(async (item) => {
           const stockItem = await dispatch(
@@ -87,7 +88,6 @@ const OrderForm = ({ openPopup, basketItems, handleClearBasket }) => {
       resetForm();
       openPopup();
     } catch (error) {
-      console.error('Error in handleSubmit:', error);
       toast.error(
         `Échec de la commande. ${
           error.message || 'Veuillez réessayer plus tard.'

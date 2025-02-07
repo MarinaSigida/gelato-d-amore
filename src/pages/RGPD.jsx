@@ -56,7 +56,7 @@ const RGPD = () => {
         <li>
           <strong>Suppression à votre demande :</strong> Vous pouvez demander la
           suppression de vos données personnelles à tout moment en contactant
-          notre support ou via les paramètres de votre compte.
+          notre support.
         </li>
         <li>
           <strong>Suppression automatique :</strong> En cas de suppression de
@@ -64,13 +64,6 @@ const RGPD = () => {
           sauf obligation légale de les conserver.
         </li>
       </ul>
-
-      <h2>Suppression du Compte</h2>
-      <h3>À la Demande de l’Utilisateur</h3>
-      <p>
-        Vous pouvez supprimer votre compte à tout moment via les paramètres de
-        votre compte ou en nous contactant.
-      </p>
 
       <h2>Sécurité des Données</h2>
       <p>

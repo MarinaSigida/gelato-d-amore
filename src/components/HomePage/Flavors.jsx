@@ -16,6 +16,7 @@ const Flavors = ({ onAddToBasket }) => {
 
   const firstItems = items.slice(0, 12);
 
+  //hide arrows in swipper on mobile
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {

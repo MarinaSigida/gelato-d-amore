@@ -46,12 +46,15 @@ function App() {
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  //checks if the user is already authenticated
   useEffect(() => {
     const user = setUserFromToken();
     if (user) {
+      //loads the user information
       dispatch(setUser(user));
       monitorTokenExpiration(dispatch);
     } else {
+      //logs the user out if the token is invalid
       dispatch(logout());
     }
   }, [dispatch]);

@@ -47,7 +47,6 @@ const Login = () => {
       toast.success('Connexion réussie ! Bienvenue à bord.');
       dispatch(setUser(user));
     } catch (error) {
-      console.error('Échec de la connexion :', error);
       toast.error(
         'Échec de la connexion. Veuillez vérifier vos identifiants et réessayer.'
       );

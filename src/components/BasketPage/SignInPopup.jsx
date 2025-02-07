@@ -10,6 +10,7 @@ const SignInPopup = ({ isPopupOpen, closePopup }) => {
     }
   };
 
+  //go back to the same page after signin / login
   const handleSignupRedirection = () => {
     navigate('/register', { state: { from: '/basket' } });
     closePopup();

@@ -35,6 +35,7 @@ const Signup = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // navigation to the from page once the user is authenticated
   useEffect(() => {
     if (isAuthenticated) {
       navigate(from);

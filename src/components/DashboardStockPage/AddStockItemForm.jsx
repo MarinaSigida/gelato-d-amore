@@ -9,6 +9,7 @@ const AddStockItemForm = () => {
   const dispatch = useDispatch();
   const [previewImage, setPreviewImage] = useState(iceCreamPlaceholder);
 
+  //change image annd create a preview of the image
   const handleImageChange = (event, setFieldValue) => {
     const file = event.currentTarget.files[0];
     setFieldValue('image', file);
@@ -33,9 +34,9 @@ const AddStockItemForm = () => {
       toast.success('Article ajouté avec succès !');
       resetForm();
       setPreviewImage(iceCreamPlaceholder);
-      window.location.reload(); //refresh the page
+      //refresh the page to go back to the list of stock items
+      window.location.reload();
     } catch (error) {
-      console.error('Failed to add item:', error);
       toast.error(`Échec d'ajout de l'article.`);
     }
   };
