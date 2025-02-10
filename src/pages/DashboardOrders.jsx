@@ -53,24 +53,31 @@ const DashboardOrders = () => {
       />
       <section className="orders">
         <p className="orders-number">Nombre de commandes: {totalOrders}</p>
-        {orders.map((order) => (
-          <DashboardOrder
-            key={order._id}
-            id={order._id}
-            number={order.number}
-            userId={order.userId}
-            status={order.status}
-            deliveryOption={order.deliveryOption}
-            deliveryAddress={order.deliveryAddress}
-            createdAt={order.createdAt}
-            updatedAt={order.updatedAt}
-            orderItems={order.orderItems}
-            firstName={order.firstName}
-            lastName={order.lastName}
-            mobilePhone={order.mobilePhone}
-            comment={order.comment}
-          />
-        ))}
+
+        {loading ? (
+          <p>Loading...</p>
+        ) : orders.length > 0 ? (
+          orders.map((order) => (
+            <DashboardOrder
+              key={order._id}
+              id={order._id}
+              number={order.number}
+              userId={order.userId}
+              status={order.status}
+              deliveryOption={order.deliveryOption}
+              deliveryAddress={order.deliveryAddress}
+              createdAt={order.createdAt}
+              updatedAt={order.updatedAt}
+              orderItems={order.orderItems}
+              firstName={order.firstName}
+              lastName={order.lastName}
+              mobilePhone={order.mobilePhone}
+              comment={order.comment}
+            />
+          ))
+        ) : (
+          <p>Vous n'avez pas encore de commandes</p>
+        )}
         <div className="pagination">
           <button onClick={handlePrevPage} disabled={page === 1}>
             <svg

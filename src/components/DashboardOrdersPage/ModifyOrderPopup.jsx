@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-import { updateOrder } from '../../features/ordersSlice';
+import { useState } from 'react';
+import { updateOrder, fetchOrders } from '../../features/ordersSlice';
 import { Formik, Form, Field } from 'formik';
 import { OverlayPopup } from '../Shared/OverlayPopup.styled';
 import cross from '../../assets/images/close.png';
@@ -30,8 +30,8 @@ const ModifyOrderPopup = ({ isPopupOpen, closePopup }) => {
       await dispatch(
         updateOrder({ id: selectedOrder._id, updatedOrder })
       ).unwrap();
+      dispatch(fetchOrders({ page: 1, limit: 6 }));
       toast.success('Commande modifiée avec succès !');
-
       closePopup();
     } catch (err) {
       toast.error(`Échec de modification de commande.`);
